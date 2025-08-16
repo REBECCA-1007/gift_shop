@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Chặn các file/folder không cần index
+Disallow: /README
+Disallow: /LICENSE
+Disallow: /main_branch
+
+# Sitemap (nếu bạn có sitemap.xml, thêm link vào đây)
+Sitemap: https://<your-site-domain>/sitemap.xml
