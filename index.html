@@ -154,98 +154,118 @@
     <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
   </footer>
 
-  <!-- SCRIPTS -->
-  <script src="assets/products.js"></script>
-  <script>
-    /* ===== Tiny helpers ===== */
-    const $ = (s,ctx=document)=>ctx.querySelector(s);
-    const $$ = (s,ctx=document)=>Array.from(ctx.querySelectorAll(s));
+<!-- SCRIPTS -->
+<script src="assets/products.js"></script>
+<script>
+  /* ===== Helpers ===== */
+  const $ = (s,ctx=document)=>ctx.querySelector(s);
+  const $$ = (s,ctx=document)=>Array.from(ctx.querySelectorAll(s));
 
-    /* ===== Brand theme toggle (Romantic / Classic) ===== */
-    function setTheme(name){
-      document.documentElement.classList.remove('theme-romantic','theme-classic');
-      const theme = name || localStorage.getItem('gift_theme') || 'theme-classic';
-      document.documentElement.classList.add(theme);
-      localStorage.setItem('gift_theme', theme);
+  /* ===== Brand theme toggle (Romantic / Classic) ===== */
+  function setTheme(name){
+    document.documentElement.classList.remove('theme-romantic','theme-classic');
+    var theme = name || localStorage.getItem('gift_theme') || 'theme-classic';
+    document.documentElement.classList.add(theme);
+    localStorage.setItem('gift_theme', theme);
 
-      // update chip states + swatches
-      $$('.tools .chip[data-theme]').forEach(c=> c.classList.toggle('active', 'theme-'+c.dataset.theme===theme));
-      const styles = getComputedStyle(document.documentElement);
-      const gold = styles.getPropertyValue('--gold').trim();
-      const accent = styles.getPropertyValue('--accent').trim();
-      const secondary = styles.getPropertyValue('--secondary').trim();
-      if($('#sw1')) $('#sw1').style.background = gold;
-      if($('#sw2')) $('#sw2').style.background = accent;
-      if($('#sw3')) $('#sw3').style.background = secondary;
-    }
-
-    /* ===== Cart count (optional if bạn dùng cart.html) ===== */
-    function getCart(){ try{return JSON.parse(localStorage.getItem('cart')||'[]')}catch{return[]} }
-    function updateCartCount(){ const c = getCart().reduce((s,it)=>s+it.qty,0); const el=$('#cart-count'); if(el) el.textContent=c; }
-
-    /* ===== Render product grid ===== */
-    function renderProductsGrid(container, filterCat){
-      if(!container || !window.PRODUCTS) return;
-      const items = filterCat && filterCat!=='All' ? window.PRODUCTS.filter(p=>p.category===filterCat) : window.PRODUCTS;
-      container.innerHTML = items.map(p => `
-        <article class="card">
-          <a href="product.html?id=${encodeURIComponent(p.id)}">
-            <img src="${p.image}" alt="${p.title}">
-          </a>
-          <div class="info">
-            <div class="badge">${p.category}</div>
-            <h3 style="margin:0 0 6px">${p.title}</h3>
-            <p class="meta" style="margin:0 0 10px">${p.desc}</p>
-            <div style="display:flex; align-items:center; justify-content:space-between">
-              <span class="price">$${p.price.toFixed(2)}</span>
-              <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
-            </div>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    /* ===== Seasonal hero mapping ===== */
-    const THEME = {
-      "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
-      "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Personalized resin charms & happy vibes" },
-      "Christmas":{ cls:"season-christmas",title:"Christmas Holiday Gifts",    sub:"Cozy bundles, ornaments & winter sparkle" },
-      "Summer":   { cls:"season-summer",   title:"Summer & Friendship Gifts",  sub:"Beachy colors, citrus fresh & sunny picks" },
-      "All":      { cls:"",                title:"Premium Mini Gifts for Every Elegant Moment",
-                                         sub:"Wedding • Birthday • Christmas • Summer — curated sets, boutique packaging." }
-    };
-    function setSeason(key){
-      document.body.classList.remove('season-wedding','season-birthday','season-christmas','season-summer');
-      if(THEME[key] && THEME[key].cls) document.body.classList.add(THEME[key].cls);
-      $('#hero-title').textContent = THEME[key]?.title || THEME["All"].title;
-      $('#hero-sub').textContent   = THEME[key]?.sub   || THEME["All"].sub;
-    }
-
-    /* ===== Boot ===== */
-    document.addEventListener('DOMContentLoaded', ()=>{
-      setTheme();            // restore Romantic/Classic
-      updateCartCount();     // render cart count
-      renderProductsGrid($('#grid-all')); // all products
-
-      // filter buttons => grid + hero season
-      $$('.filter .chip').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          $$('.filter .chip').forEach(b=> b.classList.remove('active'));
-          btn.classList.add('active');
-          const cat = btn.dataset.cat;
-          renderProductsGrid($('#grid-all'), cat);
-          setSeason(cat || 'All');
-        });
-      });
-
-      // theme chips
-      $$('.tools .chip[data-theme]').forEach(btn=>{
-        btn.addEventListener('click', ()=> setTheme('theme-'+btn.dataset.theme));
-      });
-
-      // default season (All)
-      setSeason('All');
+    // update chip states + swatches
+    $$('.tools .chip[data-theme]').forEach(function(c){
+      c.classList.toggle('active', 'theme-'+c.dataset.theme===theme);
     });
-  </script>
+    var styles = getComputedStyle(document.documentElement);
+    var gold = styles.getPropertyValue('--gold').trim();
+    var accent = styles.getPropertyValue('--accent').trim();
+    var secondary = styles.getPropertyValue('--secondary').trim();
+    if($('#sw1')) $('#sw1').style.background = gold;
+    if($('#sw2')) $('#sw2').style.background = accent;
+    if($('#sw3')) $('#sw3').style.background = secondary;
+  }
+
+  /* ===== Cart count (nếu có dùng cart.html) ===== */
+  function getCart(){
+    try{ return JSON.parse(localStorage.getItem('cart')||'[]'); }catch(e){ return []; }
+  }
+  function updateCartCount(){
+    var c = getCart().reduce(function(s,it){ return s+it.qty; }, 0);
+    var el = $('#cart-count'); if(el) el.textContent = c;
+  }
+
+  /* ===== Render product grid (defensive) ===== */
+  function renderProductsGrid(container, filterCat){
+    if(!container){ console.warn('[grid] container missing'); return; }
+    var list = (window.PRODUCTS && Array.isArray(window.PRODUCTS)) ? window.PRODUCTS : [];
+    if(list.length===0){
+      container.innerHTML =
+        '<div class="card" style="grid-column: span 12; padding:16px"><strong>Heads up:</strong> Không thấy dữ liệu sản phẩm. Kiểm tra <code>assets/products.js</code> và biến <code>window.PRODUCTS</code>.</div>';
+      return;
+    }
+    var items = (filterCat && filterCat!=='All') ? list.filter(function(p){ return p.category===filterCat; }) : list;
+    container.innerHTML = items.map(function(p){
+      return (
+        '<article class="card">' +
+          '<a href="product.html?id=' + encodeURIComponent(p.id) + '">' +
+            '<img src="' + p.image + '" alt="' + p.title.replace(/"/g,'&quot;') + '">' +
+          '</a>' +
+          '<div class="info">' +
+            '<div class="badge">' + p.category + '</div>' +
+            '<h3 style="margin:0 0 6px">' + p.title + '</h3>' +
+            '<p class="meta" style="margin:0 0 10px">' + p.desc + '</p>' +
+            '<div style="display:flex; align-items:center; justify-content:space-between">' +
+              '<span class="price">$' + Number(p.price).toFixed(2) + '</span>' +
+              '<a class="btn btn-primary" href="product.html?id=' + encodeURIComponent(p.id) + '">View</a>' +
+            '</div>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join('');
+  }
+
+  /* ===== Seasonal hero mapping (avoid optional chaining) ===== */
+  var THEME = {
+    "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
+    "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Personalized resin charms & happy vibes" },
+    "Christmas":{ cls:"season-christmas",title:"Christmas Holiday Gifts",    sub:"Cozy bundles, ornaments & winter sparkle" },
+    "Summer":   { cls:"season-summer",   title:"Summer & Friendship Gifts",  sub:"Beachy colors, citrus fresh & sunny picks" },
+    "All":      { cls:"",                title:"Premium Mini Gifts for Every Elegant Moment",
+                                          sub:"Wedding • Birthday • Christmas • Summer — curated sets, boutique packaging." }
+  };
+  function setSeason(key){
+    document.body.classList.remove('season-wedding','season-birthday','season-christmas','season-summer');
+    var conf = THEME[key] || THEME["All"];
+    if(conf.cls) document.body.classList.add(conf.cls);
+    var t = $('#hero-title'), s = $('#hero-sub');
+    if(t) t.textContent = conf.title;
+    if(s) s.textContent = conf.sub;
+  }
+
+  /* ===== Boot ===== */
+  document.addEventListener('DOMContentLoaded', function(){
+    // Quick diagnostics
+    if(!window.PRODUCTS){ console.error('[products.js] window.PRODUCTS is undefined. Kiểm tra đường dẫn: assets/products.js'); }
+    setTheme();            // restore Romantic/Classic
+    updateCartCount();     // render cart count
+    renderProductsGrid($('#grid-all')); // all products
+
+    // filter buttons => grid + hero season
+    $$('.filter .chip').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        $$('.filter .chip').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var cat = btn.dataset.cat;
+        renderProductsGrid($('#grid-all'), cat);
+        setSeason(cat || 'All');
+      });
+    });
+
+    // theme chips
+    $$('.tools .chip[data-theme]').forEach(function(btn){
+      btn.addEventListener('click', function(){ setTheme('theme-'+btn.dataset.theme); });
+    });
+
+    // default season (All)
+    setSeason('All');
+  });
+</script>
+
 </body>
 </html>
