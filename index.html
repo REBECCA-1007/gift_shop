@@ -3,224 +3,249 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mini Gift Shop — Wedding • Birthday • Christmas • Summer</title>
-  <meta name="description" content="Elegant mini gifts for every occasion: Wedding, Birthday, Christmas, Summer." />
+  <title>Elegant Gift Shop — Wedding • Birthday • Christmas • Summer</title>
+  <meta name="description" content="Premium mini gifts: Wedding, Birthday, Christmas, Summer — boutique, elegant, artistic." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Boutique styles with paper texture, gold, cards, etc. -->
+  <link rel="stylesheet" href="assets/styles.css">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <!-- Hero seasonal backgrounds (không ảnh hưởng nền giấy toàn trang) -->
   <style>
-    :root {
-      --bg: #faf9f7;
-      --fg: #2d2d2d;
-      --muted: #666;
-      --brand: #6a5acd; /* Elegant purple */
-      --radius: 12px;
-      --container: 1200px;
+    body.season-wedding  .hero{
+      color:#2b3a55;
+      background:
+        linear-gradient(135deg, rgba(238,201,210,.32), rgba(255,255,255,.92)),
+        url('assets/images/wedding/wedding-candle.jpg') center/cover no-repeat;
+      text-shadow:0 1px 12px rgba(0,0,0,.15);
     }
-
-    body {
-      font-family: "Inter", sans-serif;
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
+    body.season-birthday .hero{
+      color:#2b3a55;
+      background:
+        linear-gradient(135deg, rgba(255,221,170,.32), rgba(255,255,255,.92)),
+        url('assets/images/birthday/birthday-box.jpg') center/cover no-repeat;
+      text-shadow:0 1px 12px rgba(0,0,0,.15);
     }
-    header {
-      background: white;
-      border-bottom: 1px solid #eee;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    body.season-christmas .hero{
+      color:#102418;
+      background:
+        linear-gradient(135deg, rgba(30,86,49,.32), rgba(255,255,255,.92)),
+        url('assets/images/christmas/christmas2.jpg') center/cover no-repeat;
+      text-shadow:0 1px 12px rgba(0,0,0,.18);
     }
-    nav {
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav .logo {
-      font-family: "Playfair Display", serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--brand);
-    }
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 1.5rem;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: var(--fg);
-      font-weight: 500;
-    }
-    nav ul li a:hover {
-      color: var(--brand);
-    }
-
-    .hero {
-      text-align: center;
-      padding: 4rem 2rem;
-      background: linear-gradient(135deg, #f6f1ff, #fff);
-    }
-    .hero h1 {
-      font-family: "Playfair Display", serif;
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .hero p {
-      color: var(--muted);
-      font-size: 1.1rem;
-    }
-
-    .filter {
-      max-width: var(--container);
-      margin: 2rem auto;
-      text-align: center;
-    }
-    .filter button {
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: var(--radius);
-      padding: 0.6rem 1.2rem;
-      margin: 0.3rem;
-      cursor: pointer;
-      font-weight: 500;
-    }
-    .filter button.active,
-    .filter button:hover {
-      background: var(--brand);
-      color: white;
-      border-color: var(--brand);
-    }
-
-    .grid {
-      max-width: var(--container);
-      margin: 2rem auto;
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      padding: 0 1rem;
-    }
-    .card {
-      background: white;
-      border-radius: var(--radius);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s;
-    }
-    .card:hover { transform: translateY(-4px); }
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-    .card-body {
-      padding: 1rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .card-body h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-    .card-body p {
-      flex: 1;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .card-body .price {
-      margin-top: 0.8rem;
-      font-weight: 600;
-      color: var(--brand);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
-      background: #f5f4f2;
-      font-size: 0.9rem;
-      color: var(--muted);
+    body.season-summer   .hero{
+      color:#0f2742;
+      background:
+        linear-gradient(135deg, rgba(46,139,139,.30), rgba(255,255,255,.92)),
+        url('assets/images/summer/beach-day.jpg') center/cover no-repeat;
+      text-shadow:0 1px 12px rgba(0,0,0,.15);
     }
   </style>
 </head>
 <body>
+  <!-- HEADER -->
   <header>
-    <nav>
-      <div class="logo">Mini Gift Shop</div>
-      <ul>
-        <li><a href="#wedding">Wedding</a></li>
-        <li><a href="#birthday">Birthday</a></li>
-        <li><a href="#christmas">Christmas</a></li>
-        <li><a href="#summer">Summer</a></li>
-      </ul>
-    </nav>
+    <div class="container nav">
+      <a class="brand" href="#">
+        <div class="logo">G</div>
+        <div>Elegant Gift Shop</div>
+      </a>
+
+      <nav class="menu">
+        <a href="#wedding">Wedding</a>
+        <a href="#birthday">Birthday</a>
+        <a href="#christmas">Christmas</a>
+        <a href="#summer">Summer</a>
+      </nav>
+
+      <!-- Brand theme: Romantic / Classic -->
+      <div class="tools">
+        <button class="chip" data-theme="romantic" title="Romantic Wedding">Romantic</button>
+        <button class="chip" data-theme="classic"  title="Classic Luxury">Classic</button>
+        <a class="chip" href="cart.html" aria-label="Cart">Cart <span id="cart-count">0</span></a>
+      </div>
+    </div>
   </header>
 
-  <section class="hero">
-    <h1>Elegant Mini Gifts for Every Occasion</h1>
-    <p>Wedding • Birthday • Christmas • Summer</p>
-  </section>
+  <!-- HERO -->
+  <main class="container">
+    <section class="hero" id="hero">
+      <div>
+        <h1 id="hero-title">Premium Mini Gifts for Every Elegant Moment</h1>
+        <p class="lead" id="hero-sub">Wedding • Birthday • Christmas • Summer — curated sets, boutique packaging.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a class="btn btn-primary" href="collections.html">Shop Collections</a>
+          <a class="btn btn-outline" href="collections.html">Custom & Wedding</a>
+        </div>
 
-  <section class="filter">
-    <button data-filter="All" class="active">All</button>
-    <button data-filter="Wedding">Wedding</button>
-    <button data-filter="Birthday">Birthday</button>
-    <button data-filter="Christmas">Christmas</button>
-    <button data-filter="Summer">Summer</button>
-  </section>
+        <div class="features" style="margin-top:26px">
+          <div class="feature"><div class="dot"></div><div>
+            <div style="font-weight:700">Design-first</div>
+            <div style="color:var(--muted)">Elegant, photogenic packaging</div>
+          </div></div>
+          <div class="feature"><div class="dot"></div><div>
+            <div style="font-weight:700">Ready-to-gift</div>
+            <div style="color:var(--muted)">Cards & wrap included</div>
+          </div></div>
+          <div class="feature"><div class="dot"></div><div>
+            <div style="font-weight:700">Fast ship</div>
+            <div style="color:var(--muted)">48–72h nationwide</div>
+          </div></div>
+          <div class="feature"><div class="dot"></div><div>
+            <div style="font-weight:700">Bulk friendly</div>
+            <div style="color:var(--muted)">Wedding & corporate pricing</div>
+          </div></div>
+        </div>
+      </div>
 
-  <section class="grid" id="product-grid">
-    <!-- JS render products -->
-  </section>
+      <div>
+        <div class="banner ornate">
+          <div style="position:relative;">
+            <span class="ribbon">Live Palette</span>
+            <img src="assets/images/wedding/wedding-candle.jpg" alt="Elegant gift boxes on a table">
+          </div>
+          <div class="bar">
+            <div class="swatch" id="sw1"></div>
+            <div class="swatch" id="sw2"></div>
+            <div class="swatch" id="sw3"></div>
+            <span style="font-weight:600;color:var(--fg)">Romantic ↔ Classic</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- FILTER -->
+    <section class="section">
+      <h2>Signature Collections</h2>
+      <p class="lead">Chọn chủ đề để xem đúng vibe & banner hero.</p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px" class="filter">
+        <button class="chip filter active" data-cat="All">All</button>
+        <button class="chip filter" data-cat="Wedding">Wedding</button>
+        <button class="chip filter" data-cat="Birthday">Birthday</button>
+        <button class="chip filter" data-cat="Christmas">Christmas</button>
+        <button class="chip filter" data-cat="Summer">Summer</button>
+      </div>
+
+      <!-- PRODUCT GRID -->
+      <div id="grid-all" class="grid"></div>
+    </section>
+
+    <!-- CUSTOM BANNER -->
+    <section class="section" id="custom">
+      <div class="banner ornate">
+        <img src="assets/images/christmas/christmas2.jpg" alt="Boutique ribbon and stationery">
+        <div class="bar">
+          <div style="font-weight:700; color:var(--brand);">Need custom wedding or corporate gifts?</div>
+          <a class="btn btn-primary" href="collections.html">Get a Quote</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
   <footer>
-    © 2025 Mini Gift Shop — Crafted with ♥
+    <div class="wrap container">
+      <div>© <span id="y"></span> Elegant Gift Shop — <em>“Gifts are the flowers of memory.”</em></div>
+      <div style="display:flex; gap:10px">
+        <a class="badge" href="#">Instagram</a>
+        <a class="badge" href="#">Facebook</a>
+        <a class="badge" href="#">Etsy</a>
+      </div>
+    </div>
+    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
   </footer>
 
-  <!-- Scripts -->
+  <!-- SCRIPTS -->
   <script src="assets/products.js"></script>
   <script>
-    const grid = document.getElementById("product-grid");
-    const filterBtns = document.querySelectorAll(".filter button");
+    /* ===== Tiny helpers ===== */
+    const $ = (s,ctx=document)=>ctx.querySelector(s);
+    const $$ = (s,ctx=document)=>Array.from(ctx.querySelectorAll(s));
 
-    function renderProducts(filter = "All") {
-      grid.innerHTML = "";
-      window.PRODUCTS.filter(p => filter === "All" || p.category === filter)
-        .forEach(p => {
-          const card = document.createElement("div");
-          card.className = "card";
-          card.innerHTML = `
-            <img src="${p.image}" alt="${p.title}">
-            <div class="card-body">
-              <h3>${p.title}</h3>
-              <p>${p.desc}</p>
-              <div class="price">$${p.price.toFixed(2)}</div>
-            </div>
-          `;
-          grid.appendChild(card);
-        });
+    /* ===== Brand theme toggle (Romantic / Classic) ===== */
+    function setTheme(name){
+      document.documentElement.classList.remove('theme-romantic','theme-classic');
+      const theme = name || localStorage.getItem('gift_theme') || 'theme-classic';
+      document.documentElement.classList.add(theme);
+      localStorage.setItem('gift_theme', theme);
+
+      // update chip states + swatches
+      $$('.tools .chip[data-theme]').forEach(c=> c.classList.toggle('active', 'theme-'+c.dataset.theme===theme));
+      const styles = getComputedStyle(document.documentElement);
+      const gold = styles.getPropertyValue('--gold').trim();
+      const accent = styles.getPropertyValue('--accent').trim();
+      const secondary = styles.getPropertyValue('--secondary').trim();
+      if($('#sw1')) $('#sw1').style.background = gold;
+      if($('#sw2')) $('#sw2').style.background = accent;
+      if($('#sw3')) $('#sw3').style.background = secondary;
     }
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener("click", () => {
-        filterBtns.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderProducts(btn.dataset.filter);
-      });
-    });
+    /* ===== Cart count (optional if bạn dùng cart.html) ===== */
+    function getCart(){ try{return JSON.parse(localStorage.getItem('cart')||'[]')}catch{return[]} }
+    function updateCartCount(){ const c = getCart().reduce((s,it)=>s+it.qty,0); const el=$('#cart-count'); if(el) el.textContent=c; }
 
-    renderProducts();
+    /* ===== Render product grid ===== */
+    function renderProductsGrid(container, filterCat){
+      if(!container || !window.PRODUCTS) return;
+      const items = filterCat && filterCat!=='All' ? window.PRODUCTS.filter(p=>p.category===filterCat) : window.PRODUCTS;
+      container.innerHTML = items.map(p => `
+        <article class="card">
+          <a href="product.html?id=${encodeURIComponent(p.id)}">
+            <img src="${p.image}" alt="${p.title}">
+          </a>
+          <div class="info">
+            <div class="badge">${p.category}</div>
+            <h3 style="margin:0 0 6px">${p.title}</h3>
+            <p class="meta" style="margin:0 0 10px">${p.desc}</p>
+            <div style="display:flex; align-items:center; justify-content:space-between">
+              <span class="price">$${p.price.toFixed(2)}</span>
+              <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    /* ===== Seasonal hero mapping ===== */
+    const THEME = {
+      "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
+      "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Personalized resin charms & happy vibes" },
+      "Christmas":{ cls:"season-christmas",title:"Christmas Holiday Gifts",    sub:"Cozy bundles, ornaments & winter sparkle" },
+      "Summer":   { cls:"season-summer",   title:"Summer & Friendship Gifts",  sub:"Beachy colors, citrus fresh & sunny picks" },
+      "All":      { cls:"",                title:"Premium Mini Gifts for Every Elegant Moment",
+                                         sub:"Wedding • Birthday • Christmas • Summer — curated sets, boutique packaging." }
+    };
+    function setSeason(key){
+      document.body.classList.remove('season-wedding','season-birthday','season-christmas','season-summer');
+      if(THEME[key] && THEME[key].cls) document.body.classList.add(THEME[key].cls);
+      $('#hero-title').textContent = THEME[key]?.title || THEME["All"].title;
+      $('#hero-sub').textContent   = THEME[key]?.sub   || THEME["All"].sub;
+    }
+
+    /* ===== Boot ===== */
+    document.addEventListener('DOMContentLoaded', ()=>{
+      setTheme();            // restore Romantic/Classic
+      updateCartCount();     // render cart count
+      renderProductsGrid($('#grid-all')); // all products
+
+      // filter buttons => grid + hero season
+      $$('.filter .chip').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          $$('.filter .chip').forEach(b=> b.classList.remove('active'));
+          btn.classList.add('active');
+          const cat = btn.dataset.cat;
+          renderProductsGrid($('#grid-all'), cat);
+          setSeason(cat || 'All');
+        });
+      });
+
+      // theme chips
+      $$('.tools .chip[data-theme]').forEach(btn=>{
+        btn.addEventListener('click', ()=> setTheme('theme-'+btn.dataset.theme));
+      });
+
+      // default season (All)
+      setSeason('All');
+    });
   </script>
 </body>
 </html>
