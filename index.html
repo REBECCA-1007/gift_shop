@@ -1,268 +1,90 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Elegant Gift Shop — Wedding • Christmas • Tết • Summer</title>
-  <meta name="description" content="Premium mini gifts for Wedding, Christmas, Tết Holiday, and Summer. Elegant, timeless design with seasonal themes." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Elegant Gift Shop — Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
-   :root{
-  /* Base */
-  --bg: #FFFFFF;            /* trắng thuần */
-  --fg: #1F2937;            /* text chính */
-  --muted: #6B7280;         /* text phụ */
-  --surface: #F8F9FA;       /* nền thẻ/card */
-  --border: #E5E7EB;        /* viền mảnh lạnh */
-
-  /* Brand & accents */
-  --brand: #0F2742;         /* navy đậm, sang */
-  --gold: #D4AF37;          /* vàng ánh kim */
-  --primary: var(--gold);   /* CTA */
-  --secondary: #B0B8C1;     /* silver/xám kim loại nhạt */
-  --accent: #B8C1D9;        /* xám xanh tinh tế */
-
-  /* Layout tokens (giữ nguyên nếu thích) */
-  --radius: 18px;
-  --container: 1200px;
-  --shadow: 0 10px 30px rgba(16,24,40,0.08);
-}
-
-    /* THEMES override accents only; base brand stays for elegance */
-    html.theme-wedding { --accent: #EEC9D2; --secondary:#1C3D5A; }
-    html.theme-christmas { --accent: #1E5631; --secondary:#8B0000; }
-    html.theme-tet { --accent: #D72638; --secondary:#FFD700; }
-    html.theme-summer { --accent: #2E8B8B; --secondary:#FF6B6B; }
-
-    *{ box-sizing: border-box }
-    body{ margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--fg); background:var(--bg); }
-    .container{ width:min(100%, var(--container)); padding:0 20px; margin:0 auto; }
-    a{ color:inherit; text-decoration:none }
-    img{ max-width:100%; display:block; border-radius: calc(var(--radius) - 4px); }
-    .btn{ display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius: 999px; font-weight:600; border:1px solid transparent; transition:.25s ease; cursor:pointer; }
-    .btn-primary{ background:var(--primary); color:white; box-shadow: var(--shadow); }
-    .btn-primary:hover{ filter:brightness(0.95) }
-    .btn-outline{ background:transparent; color:var(--brand); border-color:var(--brand); }
-    .btn-outline:hover{ background:var(--brand); color:white }
-    header{ position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(8px); background:rgba(255,255,255,.7); border-bottom:1px solid var(--border); }
-    .nav{ display:flex; align-items:center; justify-content:space-between; height:68px; }
-    .brand{ display:flex; align-items:center; gap:12px; font-weight:700; color:var(--brand); }
-    .logo{ width:34px; height:34px; display:grid; place-items:center; border-radius: 10px; background:linear-gradient(145deg, var(--primary), var(--secondary)); color:white; font-weight:800; box-shadow: var(--shadow); }
-    .menu{ display:flex; gap:18px; align-items:center; }
-    .menu a{ color:var(--muted); font-weight:500 }
-    .menu a:hover{ color:var(--brand) }
-    .theme-switch{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
-    .chip{ padding:8px 12px; border-radius:999px; border:1px solid var(--border); font-size:14px; color:var(--fg); cursor:pointer; background:#fff; }
-    .chip.active{ border-color:var(--primary); box-shadow:0 0 0 3px rgba(212,175,55,.15) }
-
-    .hero{ display:grid; grid-template-columns: 1.1fr .9fr; gap:40px; align-items:center; padding:48px 0 28px; }
-    .hero h1{ font-family: "Playfair Display", serif; font-size: clamp(2rem, 4.2vw, 56px); line-height:1.05; margin:0 0 16px; color:var(--brand); letter-spacing:.2px }
-    .hero p{ color:var(--muted); font-size: clamp(16px, 1.2vw, 18px); margin:0 0 22px }
-    .hero-card{ background: linear-gradient(180deg, var(--surface), #fff); border:1px solid var(--border); border-radius: var(--radius); padding:16px; box-shadow: var(--shadow); }
-    .ribbon{ position:absolute; top:14px; left:14px; background:var(--accent); color:white; padding:8px 12px; border-radius: 999px; font-weight:600; font-size:13px; }
-
-    .section{ padding:36px 0; }
-    .section h2{ font-family: "Playfair Display", serif; font-size: clamp(1.6rem, 3vw, 36px); color:var(--brand); margin:0 0 12px; letter-spacing:.2px }
-    .section h2:before{
-      content:""; display:inline-block; width:18px; height:18px; margin-right:10px; transform: translateY(3px);
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23D4AF37\" stroke-width=\"1.2\"><path d=\"M4 14c6-1 8-9 16-10-2 6-6 12-12 14\"/><circle cx=\"5\" cy=\"18\" r=\"1\" fill=\"%23D4AF37\"/></svg>');
-      background-size:contain; background-repeat:no-repeat;
-    }
-
-    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap:18px; }
-    .card{ grid-column: span 3; background: white; border:1px solid var(--border); border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow); display:flex; flex-direction:column; position:relative }
-    .card img{ transition: transform .45s ease, filter .45s ease }
-    .card:hover img{ transform: scale(1.035); filter:saturate(1.02) }
-    .card .info{ padding:14px 14px 18px; }
-    .badge{ display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border); border-radius:999px; padding:6px 10px; font-size:12px; color:var(--muted); margin-bottom:10px }
-    .price{ color:var(--brand); font-weight:700 }
-    .card::after{ content:""; position:absolute; inset:0; pointer-events:none; opacity:0; transition: opacity .35s ease; background: radial-gradient(400px 200px at 20% 10%, rgba(212,175,55,.12), transparent 60%); }
-    .card:hover::after{ opacity:1 }
-
-    .banner{ position:relative; border-radius: var(--radius); overflow:hidden; border:1px solid var(--border); box-shadow: var(--shadow); }
-    .banner .bar{ position:absolute; inset:auto 16px 16px 16px; background: rgba(255,255,255,.9); border:1px solid var(--border); border-radius: 14px; padding:12px 14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; backdrop-filter: blur(6px) saturate(130%); }
-    .swatch{ width:20px; height:20px; border-radius:5px; border:1px solid var(--border) }
-
-    .features{ display:grid; grid-template-columns: repeat(4, 1fr); gap:16px }
-    .feature{ background: white; border:1px solid var(--border); border-radius: var(--radius); padding:18px; display:flex; gap:12px; align-items:flex-start }
-    .dot{ width:12px; height:12px; border-radius:50%; background:var(--primary); margin-top:4px; box-shadow: 0 0 0 4px rgba(212,175,55,.12) }
-
-    footer{ margin-top:40px; border-top:1px solid var(--border); padding:28px 0; color:var(--muted) }
-
-    /* === Artistic Boutique Enhancements === */
-    /* Paper-like background with ultra-subtle texture */
-    body{ 
-      background:
-        radial-gradient(1200px 800px at 10% -10%, rgba(212,175,55,0.05), transparent 60%),
-        radial-gradient(1000px 600px at 110% 10%, rgba(28,61,90,0.04), transparent 60%),
-        linear-gradient(0deg, rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
-        repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 2px);
-    }
-
-    /* Ornate border with subtle corner gilding */
-    .ornate{ position: relative; border: 1px solid rgba(212,175,55,.5); box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.6); background-clip: padding-box; }
-    .ornate:before, .ornate:after{ content:""; position:absolute; width:24px; height:24px; pointer-events:none; background: conic-gradient(from 0deg, rgba(212,175,55,.65), rgba(255,255,255,.1) 40%, transparent 60%); filter: blur(.2px); }
-    .ornate:before{ top:-1px; left:-1px; border-top-left-radius: var(--radius); }
-    .ornate:after{ right:-1px; bottom:-1px; transform: rotate(180deg); border-bottom-right-radius: var(--radius); }
-
-    /* Buttons: soft metallic gradient */
-    .btn-primary{ background: linear-gradient(180deg, rgba(212,175,55,1), rgba(193,157,39,1)); }
-    .btn-primary:hover{ transform: translateY(-1px); box-shadow: 0 8px 22px rgba(212,175,55,.25) }
-
-    @media (max-width: 1000px){
-      .hero{ grid-template-columns: 1fr; }
-      .card{ grid-column: span 6; }
-      .features{ grid-template-columns: repeat(2,1fr) }
-    }
-    @media (max-width: 640px){
-      .card{ grid-column: span 12; }
-      .menu{ display:none }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+
   <header>
     <div class="container nav">
-      <a class="brand" href="#">
+      <a class="brand" href="index.html">
         <div class="logo">G</div>
         <div>Elegant Gift Shop</div>
       </a>
       <nav class="menu">
-        <a href="#wedding">Wedding</a>
-        <a href="#christmas">Christmas</a>
-        <a href="#tet">Tết</a>
-        <a href="#summer">Summer</a>
+        <a href="collections.html">Collections</a>
+        <a href="cart.html">Cart <span id="cart-count" aria-live="polite">0</span></a>
       </nav>
-      <div class="theme-switch" aria-label="Switch seasonal theme">
-        <button class="chip" data-theme="wedding">Wedding</button>
-        <button class="chip" data-theme="christmas">Christmas</button>
-        <button class="chip" data-theme="tet">Tết</button>
-        <button class="chip" data-theme="summer">Summer</button>
+      <div class="tools">
+        <button class="chip" data-theme="romantic" title="Romantic Wedding">Romantic</button>
+        <button class="chip" data-theme="classic" title="Classic Luxury">Classic</button>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <!-- HERO -->
     <section class="hero">
       <div>
         <h1>Premium Mini Gifts for Every Elegant Moment</h1>
-        <p>Curated wedding favors, cozy Christmas bundles, festive Tết boxes, and breezy summer picks. Timeless design, seasonal accents.</p>
+        <p class="lead">Curated wedding favors, cozy Christmas bundles, festive Tết boxes, and breezy summer picks. Timeless design, seasonal accents.</p>
         <div style="display:flex; gap:12px; flex-wrap:wrap">
-          <a class="btn btn-primary" href="#collections">Shop Collections</a>
-          <a class="btn btn-outline" href="#custom">Custom Corporate & Wedding</a>
+          <a class="btn btn-primary" href="collections.html">Shop Collections</a>
+          <a class="btn btn-outline" href="collections.html">Custom & Wedding</a>
         </div>
-        <div class="features" style="margin-top:26px">
-          <div class="feature"><div class="dot"></div><div>
-            <div style="font-weight:700">Design-first</div>
-            <div style="color:var(--muted)">Elegant, photogenic packaging</div>
-          </div></div>
-          <div class="feature"><div class="dot"></div><div>
-            <div style="font-weight:700">Ready-to-gift</div>
-            <div style="color:var(--muted)">Cards & wrap included</div>
-          </div></div>
-          <div class="feature"><div class="dot"></div><div>
-            <div style="font-weight:700">Fast ship</div>
-            <div style="color:var(--muted)">48–72h nationwide</div>
-          </div></div>
-          <div class="feature"><div class="dot"></div><div>
-            <div style="font-weight:700">Bulk friendly</div>
-            <div style="color:var(--muted)">Wedding & corporate pricing</div>
-          </div></div>
+
+        <div class="section" style="padding:24px 0 0">
+          <div class="grid">
+            <article class="card" style="grid-column: span 6;">
+              <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9f?q=80&w=1600&auto=format&fit=crop" alt="Gold ribbon and stationery">
+              <div class="info">
+                <div class="badge">Wedding</div>
+                <h3>Elegant Wedding Favors</h3>
+                <p class="meta">Pearl-white boxes, gold foils, and pastel blooms.</p>
+                <a class="btn btn-primary" href="collections.html">Explore Wedding</a>
+              </div>
+            </article>
+            <article class="card" style="grid-column: span 6;">
+              <img src="https://images.unsplash.com/photo-1519681391893-1efb07c3b0fe?q=80&w=1600&auto=format&fit=crop" alt="Red and gold gift for Lunar New Year">
+              <div class="info">
+                <div class="badge">Tết Holiday</div>
+                <h3>Premium Tết Gift Boxes</h3>
+                <p class="meta">Tea, candied fruits, and gilded red envelopes.</p>
+                <a class="btn btn-primary" href="collections.html">Explore Tết</a>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
       <div>
-        <div class="hero-card banner ornate">
+        <div class="banner">
           <div style="position:relative;">
-            <span class="ribbon">Seasonal Theme</span>
-            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="Elegant gift boxes on a table" />
+            <span class="ribbon">Live Palette</span>
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="Elegant gift boxes on a table">
           </div>
           <div class="bar">
             <div class="swatch" id="sw1"></div>
             <div class="swatch" id="sw2"></div>
             <div class="swatch" id="sw3"></div>
-            <span style="font-weight:600;color:var(--fg)">Live palette preview</span>
+            <span style="font-weight:600;">Romantic ↔ Classic</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- COLLECTIONS -->
-    <section id="collections" class="section">
-      <h2>Signature Collections</h2>
-      <p class="lead">Choose your season below. Colors adapt while the brand stays timeless.</p>
-      <div class="grid">
-        <!-- Wedding -->
-        <article class="card" id="wedding">
-          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1600&auto=format&fit=crop" alt="Wedding favors in pastel colors" />
-          <div class="info">
-            <div class="badge">Wedding</div>
-            <h3 style="margin:0 0 6px">Bridesmaid Mini Set</h3>
-            <p style="color:var(--muted); margin:0 0 10px">Silk scrunchie, mini candle, thank-you card</p>
-            <div style="display:flex; align-items:center; justify-content:space-between">
-              <span class="price">$24.00</span>
-              <a class="btn btn-primary" href="#">Add to Cart</a>
-            </div>
-          </div>
-        </article>
-        <!-- Christmas -->
-        <article class="card" id="christmas">
-          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1600&auto=format&fit=crop" alt="Christmas gift box with ribbon" />
-          <div class="info">
-            <div class="badge">Christmas</div>
-            <h3 style="margin:0 0 6px">Cozy Cocoa Bundle</h3>
-            <p style="color:var(--muted); margin:0 0 10px">Hot cocoa, marshmallow, cinnamon stir</p>
-            <div style="display:flex; align-items:center; justify-content:space-between">
-              <span class="price">$19.00</span>
-              <a class="btn btn-primary" href="#">Add to Cart</a>
-            </div>
-          </div>
-        </article>
-        <!-- Tết -->
-        <article class="card" id="tet">
-          <img src="https://images.unsplash.com/photo-1519681391893-1efb07c3b0fe?q=80&w=1600&auto=format&fit=crop" alt="Lunar New Year red & gold gift" />
-          <div class="info">
-            <div class="badge">Tết Holiday</div>
-            <h3 style="margin:0 0 6px">Premium Tết Box</h3>
-            <p style="color:var(--muted); margin:0 0 10px">Tea, candied fruits, red envelope</p>
-            <div style="display:flex; align-items:center; justify-content:space-between">
-              <span class="price">$32.00</span>
-              <a class="btn btn-primary" href="#">Add to Cart</a>
-            </div>
-          </div>
-        </article>
-        <!-- Summer -->
-        <article class="card" id="summer">
-          <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1600&auto=format&fit=crop" alt="Summer themed gift set" />
-          <div class="info">
-            <div class="badge">Summer</div>
-            <h3 style="margin:0 0 6px">Beach Day Mini</h3>
-            <p style="color:var(--muted); margin:0 0 10px">Mini sunscreen, lip balm, cooling towel</p>
-            <div style="display:flex; align-items:center; justify-content:space-between">
-              <span class="price">$18.00</span>
-              <a class="btn btn-primary" href="#">Add to Cart</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- CUSTOM / CORPORATE -->
-    <section id="custom" class="section">
-      <div class="banner ornate">
-        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9f?q=80&w=1920&auto=format&fit=crop" alt="Elegant ribbon and stationery" />
-        <div class="bar">
-          <div style="font-weight:700; color:var(--brand);">Need custom wedding or corporate gifts?</div>
-          <a class="btn btn-primary" href="#">Get a Quote</a>
-        </div>
-      </div>
+    <section class="section">
+      <h2>Top Picks</h2>
+      <p class="lead">Hand-picked sets people love this season.</p>
+      <div id="grid-all" class="grid"></div>
     </section>
   </main>
 
   <footer>
-    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
+    <div class="wrap container">
       <div>© <span id="y"></span> Elegant Gift Shop — <em>“Gifts are the flowers of memory.”</em></div>
       <div style="display:flex; gap:10px">
         <a class="badge" href="#">Instagram</a>
@@ -270,30 +92,13 @@
         <a class="badge" href="#">Etsy</a>
       </div>
     </div>
+    <script>
+      document.getElementById('y').textContent = new Date().getFullYear();
+    </script>
   </footer>
+  <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <script src="assets/products.js"></script>
+  <script src="assets/app.js"></script>
 
-  <script>
-    // Theme switching logic with localStorage persistence
-    const themeButtons = document.querySelectorAll('.chip');
-    const html = document.documentElement;
-    function setTheme(name){
-      html.classList.remove('theme-wedding','theme-christmas','theme-tet','theme-summer');
-      html.classList.add('theme-'+name);
-      localStorage.setItem('gift_theme', name);
-      themeButtons.forEach(b=> b.classList.toggle('active', b.dataset.theme === name));
-      // Update live swatches for quick palette sense
-      const styles = getComputedStyle(html);
-      const gold = styles.getPropertyValue('--gold').trim();
-      const accent = styles.getPropertyValue('--accent').trim();
-      const secondary = styles.getPropertyValue('--secondary').trim();
-      document.getElementById('sw1').style.background = gold;
-      document.getElementById('sw2').style.background = accent;
-      document.getElementById('sw3').style.background = secondary;
-    }
-    themeButtons.forEach(btn=> btn.addEventListener('click', ()=> setTheme(btn.dataset.theme)));
-    const initial = localStorage.getItem('gift_theme') || 'wedding';
-    setTheme(initial);
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
