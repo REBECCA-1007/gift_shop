@@ -1,0 +1,82 @@
+// Product catalog (local images). Place files under assets/images/<category>/
+window.PRODUCTS = [
+  // WEDDING
+  {
+    id: "wed-rose-set",
+    title: "Bridesmaid Mini Set",
+    price: 24.00,
+    category: "Wedding",
+    image: "assets/images/wedding/bridesmaid-mini.jpg",
+    desc: "Silk scrunchie, mini candle, thank-you card in pearl-white box."
+  },
+  {
+    id: "wed-candle",
+    title: "Pearl Candle Duo",
+    price: 18.00,
+    category: "Wedding",
+    image: "assets/images/wedding/wedding-candle.jpg",
+    desc: "Two scented candles with gold foiled labels."
+  },
+
+  // CHRISTMAS (khớp ảnh bạn đã upload)
+  {
+    id: "xmas-cocoa",
+    title: "Cozy Cocoa Bundle",
+    price: 19.00,
+    category: "Christmas",
+    image: "assets/images/christmas/christmas2.jpg",   // was cocoa-bundle.jpg
+    desc: "Hot cocoa, marshmallow, cinnamon stir — winter favorite."
+  },
+  {
+    id: "xmas-sock",
+    title: "Festive Sock Surprise",
+    price: 14.00,
+    category: "Christmas",
+    image: "assets/images/christmas/christmas3.jpg",   // was festive-sock.jpg
+    desc: "Mini gifts tucked inside premium knit sock."
+  },
+  {
+    id: "xmas-ornament",
+    title: "Holiday Ornament Duo",
+    price: 15.00,
+    category: "Christmas",
+    image: "assets/images/christmas/christmas1.avif",  // tận dụng ảnh avif
+    desc: "Two resin ornaments with ribbon — gift-ready."
+  },
+
+  // BIRTHDAY (thay Tết bằng Birthday)
+  {
+    id: "bday-box",
+    title: "Birthday Celebration Box",
+    price: 28.00,
+    category: "Birthday",
+    image: "assets/images/birthday/birthday-box.jpg",
+    desc: "Mini resin frame, scented candle, and birthday card in a luxe box."
+  },
+  {
+    id: "bday-zodiac",
+    title: "Zodiac Keychain",
+    price: 10.00,
+    category: "Birthday",
+    image: "assets/images/birthday/zodiac-keychain.jpg",
+    desc: "Custom resin zodiac sign keychain with glitter finish."
+  },
+
+  // SUMMER
+  {
+    id: "sum-beach",
+    title: "Beach Day Mini",
+    price: 18.00,
+    category: "Summer",
+    image: "assets/images/summer/beach-day.jpg",
+    desc: "Mini sunscreen, lip balm, cooling towel for sunny days."
+  },
+  {
+    id: "sum-citrus",
+    title: "Citrus Fresh Trio",
+    price: 16.00,
+    category: "Summer",
+    image: "assets/images/summer/citrus-trio.jpg",
+    desc: "Citrus soap, spray, and mini diffuser in a linen pouch."
+  }
+];
