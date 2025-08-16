@@ -2,81 +2,105 @@
 window.PRODUCTS = [
   // WEDDING
   {
-    id: "wed-rose-set",
-    title: "Bridesmaid Mini Set",
-    price: 24.00,
+    id: "wed-box",
+    title: "Wedding Gift Box",
+    price: 25.00,
     category: "Wedding",
-    image: "assets/images/wedding/bridesmaid-mini.jpg",
-    desc: "Silk scrunchie, mini candle, thank-you card in pearl-white box."
+    image: "assets/images/wedding/wedding_box.jpg",
+    desc: "Elegant mini gift box with resin keepsake and candle."
+  },
+  {
+    id: "wed-flower",
+    title: "Wedding Flower Charm",
+    price: 15.00,
+    category: "Wedding",
+    image: "assets/images/wedding/wedding_flower.jpg",
+    desc: "Handmade resin flower charm with delicate gold flakes."
   },
   {
     id: "wed-candle",
-    title: "Pearl Candle Duo",
+    title: "Pearl Wedding Candle",
     price: 18.00,
     category: "Wedding",
-    image: "assets/images/wedding/wedding-candle.jpg",
-    desc: "Two scented candles with gold foiled labels."
+    image: "assets/images/wedding/wedding_candle.jpg",
+    desc: "Scented pearl-white candle with gold accent."
   },
 
-  // CHRISTMAS (khớp ảnh bạn đã upload)
+  // BIRTHDAY
   {
-    id: "xmas-cocoa",
-    title: "Cozy Cocoa Bundle",
-    price: 19.00,
-    category: "Christmas",
-    image: "assets/images/christmas/christmas2.jpg",   // was cocoa-bundle.jpg
-    desc: "Hot cocoa, marshmallow, cinnamon stir — winter favorite."
+    id: "bday-cupcake",
+    title: "Birthday Cupcake Charm",
+    price: 12.00,
+    category: "Birthday",
+    image: "assets/images/birthday/birthday_cupcake.jpg",
+    desc: "Cute resin cupcake charm with glitter sprinkles."
   },
   {
-    id: "xmas-sock",
-    title: "Festive Sock Surprise",
+    id: "bday-gift",
+    title: "Mini Birthday Gift",
+    price: 20.00,
+    category: "Birthday",
+    image: "assets/images/birthday/birthday_gift.jpg",
+    desc: "Boutique birthday gift box with card and ribbon."
+  },
+  {
+    id: "bday-candle",
+    title: "Birthday Candle Duo",
+    price: 16.00,
+    category: "Birthday",
+    image: "assets/images/birthday/birthday_candle.jpg",
+    desc: "Two colorful candles with festive packaging."
+  },
+
+  // CHRISTMAS
+  {
+    id: "xmas-tree",
+    title: "Christmas Tree Ornament",
     price: 14.00,
     category: "Christmas",
-    image: "assets/images/christmas/christmas3.jpg",   // was festive-sock.jpg
-    desc: "Mini gifts tucked inside premium knit sock."
+    image: "assets/images/christmas/christmas_tree.jpg",
+    desc: "Resin tree ornament with ribbon, gift-ready."
   },
   {
-    id: "xmas-ornament",
-    title: "Holiday Ornament Duo",
+    id: "xmas-gift",
+    title: "Red Christmas Gift Box",
+    price: 22.00,
+    category: "Christmas",
+    image: "assets/images/christmas/christmas_red_gift.jpg",
+    desc: "Classic red box with mini candle and resin charm."
+  },
+  {
+    id: "xmas-snow",
+    title: "Snowflake Resin Charm",
     price: 15.00,
     category: "Christmas",
-    image: "assets/images/christmas/christmas1.avif",  // tận dụng ảnh avif
-    desc: "Two resin ornaments with ribbon — gift-ready."
-  },
-
-  // BIRTHDAY (thay Tết bằng Birthday)
-  {
-    id: "bday-box",
-    title: "Birthday Celebration Box",
-    price: 28.00,
-    category: "Birthday",
-    image: "assets/images/birthday/birthday-box.jpg",
-    desc: "Mini resin frame, scented candle, and birthday card in a luxe box."
-  },
-  {
-    id: "bday-zodiac",
-    title: "Zodiac Keychain",
-    price: 10.00,
-    category: "Birthday",
-    image: "assets/images/birthday/zodiac-keychain.jpg",
-    desc: "Custom resin zodiac sign keychain with glitter finish."
+    image: "assets/images/christmas/christmas_snow.jpg",
+    desc: "Snowflake-inspired resin charm — winter sparkle."
   },
 
   // SUMMER
   {
-    id: "sum-beach",
-    title: "Beach Day Mini",
-    price: 18.00,
+    id: "sum-shell",
+    title: "Summer Shell Keepsake",
+    price: 13.00,
     category: "Summer",
-    image: "assets/images/summer/beach-day.jpg",
-    desc: "Mini sunscreen, lip balm, cooling towel for sunny days."
+    image: "assets/images/summer/summer_shell.jpg",
+    desc: "Mini resin shell gift with coastal vibe."
   },
   {
-    id: "sum-citrus",
-    title: "Citrus Fresh Trio",
+    id: "sum-drink",
+    title: "Tropical Drink Charm",
+    price: 17.00,
+    category: "Summer",
+    image: "assets/images/summer/summer_drink.jpg",
+    desc: "Colorful resin drink charm, summer fresh."
+  },
+  {
+    id: "sum-flower",
+    title: "Summer Flower Mini",
     price: 16.00,
     category: "Summer",
-    image: "assets/images/summer/citrus-trio.jpg",
-    desc: "Citrus soap, spray, and mini diffuser in a linen pouch."
+    image: "assets/images/summer/summer_flower.jpg",
+    desc: "Bright resin flower keepsake for sunny days."
   }
 ];
