@@ -7,6 +7,25 @@
   <meta name="description" content="Mini gifts for Wedding, Birthday, Christmas and Summer. Boutique packaging, handcrafted details.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
+  /* FIX: hero full-bleed khi hero KHÔNG nằm trong .container */
+body > .hero.hero--bleed{
+  width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 !important;      /* bỏ mẹo calc(-50vw+50%) */
+  padding: clamp(56px, 8vw, 92px) 0;  /* giữ padding */
+  min-height: clamp(380px, 44vw, 560px);
+  display: block !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden;
+}
+
+/* nền phải phủ trọn hero */
+.hero--bleed .hero__bg,
+.hero--bleed .hero__veil{ position:absolute; inset:0; }
 
   <!-- inline overrides -->
   <style>
