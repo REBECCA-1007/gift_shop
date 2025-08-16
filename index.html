@@ -3,107 +3,207 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Elegant Gift Shop — Signature Event Gifts</title>
-  <meta name="description" content="Mini gift shop for weddings, birthdays, Christmas, and summer events. Signature handmade & curated gifts.">
+  <title>Elegant Gift Shop — Signature Gifts</title>
+  <meta name="description" content="Mini gifts for Wedding, Birthday, Christmas and Summer. Boutique packaging, handcrafted details.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body{margin:0;font-family:'Inter',sans-serif;color:#111;background:#fff;line-height:1.5}
-    header{display:flex;align-items:center;justify-content:space-between;padding:14px 5%;background:#fff;position:sticky;top:0;z-index:50;border-bottom:1px solid #eee}
-    header a{color:#0a0f18;text-decoration:none;font-weight:600}
-    header nav a{margin:0 12px;color:#222}
-    header .cart{color:#2563eb;font-weight:600}
+  <link rel="stylesheet" href="assets/styles.css">
 
-    /* HERO */
-    .hero{position:relative;overflow:hidden;min-height:clamp(380px,44vw,560px);display:flex;align-items:center;justify-content:center}
-    .hero__bg{position:absolute;inset:0;background:url('images/hero-wedding.jpg') center/cover no-repeat;filter:saturate(106%) contrast(104%) brightness(100%)}
-    .hero__veil{position:absolute;inset:0;
+  <!-- HERO full-bleed + seasonal backgrounds (đúng đường dẫn repo) -->
+  <style>
+    /* full-bleed khử layout cũ của .hero trong styles.css */
+    .hero.hero--bleed{
+      display:block!important; border:0!important; border-radius:0!important; background:transparent!important;
+      position:relative; width:100vw; left:50%; right:50%;
+      margin-left:calc(-50vw + 50%); margin-right:calc(-50vw + 50%);
+      min-height:clamp(380px,44vw,560px); padding:clamp(56px,8vw,92px) 0; overflow:hidden;
+    }
+    .hero__bg,.hero__veil{position:absolute; inset:0;}
+    .hero__bg{background-size:cover; background-position:center; filter:saturate(106%) contrast(104%) brightness(100%);}
+    .hero__veil{
       background:
         radial-gradient(1200px 600px at -10% 50%, rgba(0,0,0,.10), transparent 60%),
         radial-gradient(1200px 600px at 110% 50%, rgba(0,0,0,.10), transparent 60%),
-        linear-gradient(90deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.62) 34%,rgba(255,255,255,.40) 55%,rgba(255,255,255,.18) 100%);
-      backdrop-filter:blur(.5px)}
-    .hero__content{position:relative;z-index:10;text-align:left;max-width:600px;padding:0 5%}
-    .hero__content h1{font-size:clamp(28px,4vw,44px);margin:0 0 10px;font-weight:700;text-shadow:0 3px 14px rgba(0,0,0,.18)}
-    .hero__content p{font-size:1.1rem;margin:0 0 20px;color:#222;text-shadow:0 2px 8px rgba(255,255,255,.6)}
-    .btn{display:inline-block;padding:12px 20px;border-radius:28px;font-weight:600;text-decoration:none;margin-right:10px}
-    .btn-primary{background:#d4a017;color:#fff}
-    .btn-outline{border:2px solid #0a0f18;color:#0a0f18;background:#fff}
+        linear-gradient(90deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.62) 34%, rgba(255,255,255,.40) 55%, rgba(255,255,255,.18) 100%);
+      backdrop-filter:blur(.5px);
+    }
+    .hero__inner{position:relative; z-index:2;}
+    .hero__buttons{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px;}
+    html,body{overflow-x:hidden;} /* tránh scrollbar ngang khi dùng vw */
 
-    /* SIGNATURE COLLECTIONS */
-    section{padding:60px 5%}
-    h2{font-size:1.8rem;margin-bottom:8px}
-    .filter{margin-bottom:24px}
-    .filter button{margin:6px 6px 0 0;padding:8px 18px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer}
-    .collections{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-    .card{position:relative;overflow:hidden;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-    .card img{width:100%;height:180px;object-fit:cover;display:block}
-    .card span{position:absolute;bottom:10px;left:10px;background:rgba(255,255,255,.85);padding:6px 12px;border-radius:12px;font-weight:600;font-size:.9rem}
-    
-    footer{text-align:center;padding:30px 5%;font-size:.9rem;color:#555;border-top:1px solid #eee;margin-top:40px}
+    /* ảnh hero theo mùa — KHỚP repo của Becca */
+    body.season-wedding  .hero__bg{  background-image:url('assets/images/wedding/wedding_candle.jpg');  background-position:30% 35%;}
+    body.season-birthday .hero__bg{  background-image:url('assets/images/birthday/birthday_gift.webp'); background-position:40% 40%;}
+    body.season-christmas .hero__bg{ background-image:url('assets/images/christmas/christmas_tree.jpg'); background-position:60% 45%;}
+    body.season-summer   .hero__bg{  background-image:url('assets/images/summer/summer_shell.avif');   background-position:50% 35%;}
+
+    /* Signature Collections cards (thumbnail) */
+    .cat-grid{display:grid; gap:18px; grid-template-columns:repeat(12,1fr);}
+    .cat-card{grid-column:span 3; position:relative; overflow:hidden; border-radius:18px; border:1px solid var(--border); background:#fff; box-shadow:var(--shadow);}
+    .cat-card img{width:100%; height:220px; object-fit:cover; display:block;}
+    .cat-card .cat-info{position:absolute; left:12px; bottom:12px; background:rgba(255,255,255,.9); border:1px solid var(--border); padding:8px 12px; border-radius:999px; font-weight:700;}
+    @media (max-width:1000px){ .cat-card{grid-column:span 6} }
+    @media (max-width:640px){ .cat-card{grid-column:span 12} }
   </style>
 </head>
 <body class="season-wedding">
-
   <!-- HEADER -->
   <header>
-    <a href="#" class="logo"><strong>Elegant Gift Shop</strong></a>
-    <nav>
-      <a href="#">Wedding</a>
-      <a href="#">Birthday</a>
-      <a href="#">Christmas</a>
-      <a href="#">Summer</a>
-    </nav>
-    <div>
-      <a href="#" class="cart">Cart 0</a>
+    <div class="container nav">
+      <a class="brand" href="#"><div class="logo">G</div><div>Elegant Gift Shop</div></a>
+      <nav class="menu">
+        <a href="#wedding">Wedding</a><a href="#birthday">Birthday</a><a href="#christmas">Christmas</a><a href="#summer">Summer</a>
+      </nav>
+      <div class="tools">
+        <a class="chip" href="#">Cart <span id="cart-count">0</span></a>
+      </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero hero--bleed">
+  <!-- HERO FULL-BLEED -->
+  <section class="hero hero--bleed" id="hero">
     <div class="hero__bg"></div>
     <div class="hero__veil"></div>
-    <div class="hero__content">
-      <h1>Elegant Wedding Gifts</h1>
-      <p>Pearl whites, blush accents & golden details</p>
-      <a href="#" class="btn btn-primary">Shop Collections</a>
-      <a href="#" class="btn btn-outline">Custom & Wedding</a>
+    <div class="container hero__inner">
+      <h1 id="hero-title">Elegant Wedding Gifts</h1>
+      <p class="lead" id="hero-sub">Pearl whites, blush accents & gold details</p>
+      <div class="hero__buttons">
+        <a class="btn btn-primary" href="collections.html">Shop Collections</a>
+        <a class="btn btn-outline" href="collections.html">Custom & Wedding</a>
+      </div>
     </div>
   </section>
 
   <!-- SIGNATURE COLLECTIONS -->
-  <section>
-    <h2>Signature Collections</h2>
-    <p>Pick a theme to match the vibe and hero banner.</p>
-    <div class="filter">
-      <button>All</button>
-      <button>Wedding</button>
-      <button>Birthday</button>
-      <button>Christmas</button>
-      <button>Summer</button>
+  <section class="section">
+    <div class="container">
+      <h2>Signature Collections</h2>
+      <p class="lead">Pick a theme to match the vibe and hero banner.</p>
+
+      <!-- filter chips -->
+      <div class="filter" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px">
+        <button class="chip filter active" data-cat="All">All</button>
+        <button class="chip filter" data-cat="Wedding">Wedding</button>
+        <button class="chip filter" data-cat="Birthday">Birthday</button>
+        <button class="chip filter" data-cat="Christmas">Christmas</button>
+        <button class="chip filter" data-cat="Summer">Summer</button>
+      </div>
+
+      <!-- Category cards -->
+      <div class="cat-grid" style="margin-bottom:22px">
+        <a class="cat-card" href="#!" data-go="Wedding">
+          <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding gifts">
+          <span class="cat-info">Wedding</span>
+        </a>
+        <a class="cat-card" href="#!" data-go="Birthday">
+          <img src="assets/images/birthday/birthday_cupcake.jpg" alt="Birthday gifts">
+          <span class="cat-info">Birthday</span>
+        </a>
+        <a class="cat-card" href="#!" data-go="Christmas">
+          <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Christmas gifts">
+          <span class="cat-info">Christmas</span>
+        </a>
+        <a class="cat-card" href="#!" data-go="Summer">
+          <img src="assets/images/summer/summer_flower.avif" alt="Summer gifts">
+          <span class="cat-info">Summer</span>
+        </a>
+      </div>
+
+      <!-- PRODUCT GRID -->
+      <div id="grid-all" class="grid"></div>
     </div>
-    <div class="collections">
-      <div class="card">
-        <img src="images/wedding.jpg" alt="Wedding Gifts">
-        <span>Wedding</span>
-      </div>
-      <div class="card">
-        <img src="images/birthday.jpg" alt="Birthday Gifts">
-        <span>Birthday</span>
-      </div>
-      <div class="card">
-        <img src="images/christmas.jpg" alt="Christmas Gifts">
-        <span>Christmas</span>
-      </div>
-      <div class="card">
-        <img src="images/summer.jpg" alt="Summer Gifts">
-        <span>Summer</span>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="custom">
+    <div class="container">
+      <div class="banner ornate">
+        <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Boutique ribbon and stationery">
+        <div class="bar">
+          <div style="font-weight:700; color:var(--brand);">Need custom wedding or corporate gifts?</div>
+          <a class="btn btn-primary" href="collections.html">Get a Quote</a>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    © 2025 Elegant Gift Shop. All rights reserved.
+    <div class="wrap container">
+      <div>© <span id="y"></span> Elegant Gift Shop — <em>“Gifts are the flowers of memory.”</em></div>
+      <div style="display:flex; gap:10px">
+        <a class="badge" href="#">Instagram</a>
+        <a class="badge" href="#">Facebook</a>
+        <a class="badge" href="#">Etsy</a>
+      </div>
+    </div>
+    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
   </footer>
 
+  <!-- SCRIPTS -->
+  <script src="assets/products.js"></script>
+  <script>
+    const $=(s,ctx=document)=>ctx.querySelector(s); const $$=(s,ctx=document)=>Array.from(ctx.querySelectorAll(s));
+    function getCart(){try{return JSON.parse(localStorage.getItem('cart')||'[]')}catch{return[]}}
+    function updateCartCount(){const c=getCart().reduce((s,it)=>s+it.qty,0); const el=$('#cart-count'); if(el) el.textContent=c;}
+
+    function renderProductsGrid(container, filterCat){
+      if(!container||!window.PRODUCTS) return;
+      const items = filterCat && filterCat!=='All' ? window.PRODUCTS.filter(p=>p.category===filterCat) : window.PRODUCTS;
+      container.innerHTML = items.map(p=>`
+      <article class="card">
+        <a href="product.html?id=${encodeURIComponent(p.id)}"><img src="${p.image}" alt="${p.title}"></a>
+        <div class="info">
+          <div class="badge">${p.category}</div>
+          <h3>${p.title}</h3>
+          <p class="meta">${p.desc}</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span class="price">$${Number(p.price).toFixed(2)}</span>
+            <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
+          </div>
+        </div>
+      </article>`).join('');
+    }
+
+    const THEME={
+      "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
+      "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Playful vibes & personalized charms" },
+      "Christmas":{ cls:"season-christmas",title:"Christmas Holiday Gifts",    sub:"Cozy bundles & winter sparkle" },
+      "Summer":   { cls:"season-summer",   title:"Summer & Friendship Gifts",  sub:"Beachy colors & sunny picks" },
+      "All":      { cls:"", title:"Premium Mini Gifts for Every Elegant Moment",
+                          sub:"Wedding • Birthday • Christmas • Summer — curated sets, boutique packaging." }
+    };
+    function setSeason(key){
+      document.body.classList.remove('season-wedding','season-birthday','season-christmas','season-summer');
+      const conf=THEME[key]||THEME["All"]; if(conf.cls) document.body.classList.add(conf.cls);
+      const t=$('#hero-title'), s=$('#hero-sub'); if(t) t.textContent=conf.title; if(s) s.textContent=conf.sub;
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      updateCartCount();
+      renderProductsGrid($('#grid-all'));
+      setSeason('Wedding'); // hiện ảnh nền ngay
+
+      // chips filter
+      $$('.filter .chip').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          $$('.filter .chip').forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          const cat = btn.dataset.cat;
+          renderProductsGrid($('#grid-all'), cat);
+          setSeason(cat||'All');
+          document.getElementById('grid-all').scrollIntoView({behavior:'smooth', block:'start'});
+        });
+      });
+
+      // category cards click = filter
+      $$('.cat-card').forEach(card=>{
+        card.addEventListener('click', (e)=>{
+          e.preventDefault();
+          const cat = card.getAttribute('data-go');
+          const chip = document.querySelector('.filter .chip[data-cat="'+cat+'"]'); if(chip) chip.click();
+        });
+      });
+    });
+  </script>
 </body>
 </html>
