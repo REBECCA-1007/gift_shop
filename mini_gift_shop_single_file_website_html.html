@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mini Gift Shop — Quà Sự Kiện Noel • Tết • Summer • Wedding</title>
+<meta name="description" content="Mini Gift Shop chuyên quà mini cho sự kiện: Noel, Tết, Summer, Wedding. Đặt lẻ/đặt số lượng, giao nhanh."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf9f8; --fg:#0f172a; --muted:#475569; --brand:#ff6b6b; --brand-2:#1fb6ff; --ok:#22c55e; --warn:#f59e0b; --line:#e2e8f0; --card:#ffffff; --accent:#ef4444;
+    --radius:18px; --container:1200px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:var(--container);margin:0 auto;padding:24px}
+  header{position:sticky;top:0;background:linear-gradient(180deg,#ffffffee,#ffffffcc);backdrop-filter:blur(8px);z-index:20;border-bottom:1px solid var(--line)}
+  .hdr{display:flex;align-items:center;gap:16px;justify-content:space-between;padding:14px 0}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:40px;height:40px;border-radius:14px;background:conic-gradient(from 210deg,var(--brand),#ffd166,#06d6a0,#1fb6ff,var(--brand));box-shadow:0 6px 18px #0001}
+  .brand h1{font-size:22px;margin:0;font-weight:800;letter-spacing:.2px}
+  .brand small{display:block;color:var(--muted);font-weight:500;font-size:12px;margin-top:2px}
+  .search-bar{display:flex;gap:12px;align-items:center;flex:1;max-width:640px;margin:0 16px}
+  .search-bar input{flex:1;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 1px 0 #00000005}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:12px}
+  .chip.active{background:var(--fg);color:#fff;border-color:var(--fg)}
+  .cart-btn{position:relative;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--fg);color:#fff;font-weight:700}
+  .cart-btn .count{position:absolute;right:-6px;top:-6px;background:var(--accent);color:#fff;border-radius:20px;padding:2px 7px;font-size:11px;border:2px solid #fff}
+
+  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;padding:24px 0}
+  .hero-card{background:radial-gradient(1200px 600px at 10% -30%, #fff 10%, #ffeaea 55%, #fff 85%);border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative;overflow:hidden}
+  .hero-card.tet{background:radial-gradient(1000px 500px at 80% -30%, #fff 10%, #fff6e5 60%, #fff 90%)}
+  .hero h2{font-size:28px;margin:0 0 10px}
+  .hero p{color:var(--muted);margin:0 0 14px}
+  .hero .cta{display:flex;gap:10px}
+  .btn{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;font-weight:700;cursor:pointer}
+  .btn.primary{background:var(--fg);color:#fff;border-color:var(--fg)}
+
+  .toolbar{display:flex;align-items:center;gap:14px;justify-content:space-between;margin:8px 0 18px}
+  .sort{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media (max-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}}
+  @media (max-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.search-bar{display:none}}
+  @media (max-width:460px){.grid{grid-template-columns:1fr}}
+
+  .card{background:var(--card);border-radius:16px;border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+  .thumb{background:#f4f7fb;aspect-ratio:1/1;display:grid;place-items:center;font-size:40px}
+  .tag{position:absolute;left:10px;top:10px;background:#000c;color:#fff;padding:6px 8px;border-radius:10px;font-size:12px}
+  .thumb-wrap{position:relative}
+  .info{padding:14px;display:flex;flex-direction:column;gap:8px}
+  .title{font-weight:800;font-size:16px}
+  .desc{color:var(--muted);font-size:13px}
+  .price-row{display:flex;align-items:center;justify-content:space-between}
+  .price{font-weight:800}
+  .add-btn{padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#0f172a;color:#fff;font-weight:700;cursor:pointer}
+
+  /* Cart Drawer */
+  .drawer{position:fixed;right:0;top:0;height:100%;width:380px;max-width:92vw;background:#fff;border-left:1px solid var(--line);box-shadow:-12px 0 30px #00000014;transform:translateX(110%);transition:transform .28s ease;z-index:50;display:flex;flex-direction:column}
+  .drawer.open{transform:translateX(0)}
+  .drawer header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line)}
+  .drawer .head{display:flex;align-items:center;justify-content:space-between;padding:16px}
+  .drawer .items{flex:1;overflow:auto;padding:10px}
+  .drawer .row{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;padding:10px 8px;border-bottom:1px dashed var(--line)}
+  .drawer .row .qty{display:flex;align-items:center;gap:8px}
+  .drawer .row button{padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+  .drawer .foot{border-top:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:10px}
+  .total{display:flex;justify-content:space-between;font-weight:800}
+
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#f1f5f9;color:#0f172a;font-size:12px;border:1px solid var(--line)}
+  .hidden{display:none!important}
+
+  /* Occassion themes (applied on body via data-occasion) */
+  body[data-occasion="Noel"]{--brand:#e11d48;--accent:#ef4444}
+  body[data-occasion="Tết"]{--brand:#dc2626;--accent:#f59e0b}
+  body[data-occasion="Summer"]{--brand:#06b6d4;--accent:#22c55e}
+  body[data-occasion="Wedding"]{--brand:#8b5cf6;--accent:#f472b6}
+</style>
+</head>
+<body data-occasion="All">
+<header>
+  <div class="container hdr">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>Mini Gift Shop</h1>
+        <small>Quà mini cho sự kiện • Noel • Tết • Summer • Wedding</small>
+      </div>
+    </div>
+    <div class="search-bar">
+      <input id="search" type="search" placeholder="Tìm: nến thơm, thiệp cưới, hộp mini… (Ctrl+/)" />
+      <div class="chip-row" id="chipRow">
+        <button class="chip active" data-oc="All">Tất cả</button>
+        <button class="chip" data-oc="Noel">Noel</button>
+        <button class="chip" data-oc="Tết">Tết</button>
+        <button class="chip" data-oc="Summer">Summer</button>
+        <button class="chip" data-oc="Wedding">Wedding</button>
+      </div>
+    </div>
+    <button class="cart-btn" id="openCart" aria-label="Mở giỏ hàng">
+      🧺 <span>Giỏ hàng</span>
+      <span class="count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero" aria-label="Ưu đãi theo mùa">
+    <div class="hero-card" id="heroLeft">
+      <div class="badge">🎁 Ưu đãi mùa lễ</div>
+      <h2>Gift theo dịp — chọn nhanh, đẹp, vừa túi tiền</h2>
+      <p>Quà mini cho thiệp cưới, set Noel, hộp lì xì Tết, quà Summer picnic… Đặt lẻ hoặc đặt số lượng lớn cho sự kiện.</p>
+      <div class="cta">
+        <button class="btn primary" data-jump="#shop">Mua ngay</button>
+        <button class="btn" data-jump="#combo">Xem combo</button>
+      </div>
+    </div>
+    <div class="hero-card tet" id="heroRight">
+      <div class="badge">🧧 Chuẩn bị Tết</div>
+      <h2>Set lì xì mini • Hộp quà ấm áp</h2>
+      <p>Gợi ý từ 39.000đ — kèm thiệp & thẻ lời chúc miễn phí khi đặt từ 10 set.</p>
+      <div class="cta">
+        <button class="btn" data-oc-snap="Tết">Xem quà Tết</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="chip-row">
+      <span class="badge">Sắp xếp</span>
+      <select id="sort" class="sort" aria-label="Sắp xếp">
+        <option value="popular">Phổ biến</option>
+        <option value="price-asc">Giá tăng dần</option>
+        <option value="price-desc">Giá giảm dần</option>
+        <option value="name-asc">Tên A→Z</option>
+      </select>
+    </div>
+    <div class="chip-row">
+      <span class="badge">Bộ lọc nhanh</span>
+      <button class="chip" data-price="<50000">Dưới 50k</button>
+      <button class="chip" data-price="50000-100000">50k–100k</button>
+      <button class="chip" data-price=">=100000">≥100k</button>
+      <button class="chip" id="clearPrice">Xóa lọc</button>
+    </div>
+  </section>
+
+  <section id="shop" class="grid" aria-live="polite"></section>
+
+  <section id="combo" style="margin:32px 0 50px">
+    <h3 style="margin:0 0 12px;font-size:20px">Combo đề xuất</h3>
+    <div class="grid" id="comboGrid"></div>
+  </section>
+</main>
+
+<!-- Cart Drawer -->
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Giỏ hàng">
+  <header>
+    <div class="head">
+      <strong>Giỏ hàng</strong>
+      <button id="closeCart" title="Đóng">✕</button>
+    </div>
+  </header>
+  <div class="items" id="cartItems"></div>
+  <footer class="foot">
+    <div class="total"><span>Tạm tính</span><span id="subTotal">0₫</span></div>
+    <small style="color:var(--muted)">* Giá chưa gồm phí ship. Đơn từ 1.000.000₫ liên hệ để có giá sỉ.</small>
+    <button class="btn primary" id="checkoutBtn">Thanh toán</button>
+    <button class="btn" id="clearCart">Xóa giỏ</button>
+  </footer>
+</aside>
+
+<script>
+// ==========================
+// Data — Products & Combos
+// ==========================
+const PRODUCTS = [
+  // Noel
+  {id:'noel-ornament', name:'Ornament Noel mini', price:59000, occasion:'Noel', tag:'Best-seller', desc:'Quả treo thông resin/glitter', emoji:'🎄'},
+  {id:'noel-candle', name:'Nến thơm gỗ quế', price:79000, occasion:'Noel', tag:'New', desc:'Hương quế & cam ấm áp', emoji:'🕯️'},
+  {id:'noel-card', name:'Thiệp Noel thủ công', price:39000, occasion:'Noel', tag:'', desc:'Kèm phong bì đỏ ánh kim', emoji:'💌'},
+  // Tết
+  {id:'tet-li-xi', name:'Bao lì xì thủ công (set 6)', price:69000, occasion:'Tết', tag:'Best-seller', desc:'Giấy kraft in nổi', emoji:'🧧'},
+  {id:'tet-sachet', name:'Túi thơm lá nếp', price:45000, occasion:'Tết', tag:'', desc:'Khử mùi tủ, xe, góc làm việc', emoji:'🌿'},
+  {id:'tet-charm', name:'Charm bùa an', price:99000, occasion:'Tết', tag:'New', desc:'Charm treo khóa/ điện thoại', emoji:'🧿'},
+  // Summer
+  {id:'sum-fan', name:'Quạt giấy mini', price:35000, occasion:'Summer', tag:'', desc:'Gấp gọn, nhẹ, mát', emoji:'🪭'},
+  {id:'sum-sticker', name:'Sticker chống nước (set 10)', price:59000, occasion:'Summer', tag:'', desc:'Chủ đề biển/du lịch', emoji:'🏖️'},
+  {id:'sum-cup', name:'Cốc nhựa cold cup', price:99000, occasion:'Summer', tag:'Hot', desc:'Kèm ống hút tái sử dụng', emoji:'🥤'},
+  // Wedding
+  {id:'wed-thiep', name:'Thiệp cưới tối giản', price:120000, occasion:'Wedding', tag:'New', desc:'Giấy cotton/emboss sang', emoji:'💍'},
+  {id:'wed-scent', name:'Sáp thơm bàn tiệc', price:89000, occasion:'Wedding', tag:'', desc:'Mùi white tea/peony', emoji:'🌸'},
+  {id:'wed-box', name:'Hộp quà khách mời (mini)', price:115000, occasion:'Wedding', tag:'Best-seller', desc:'Hộp + ribbon + tag tên', emoji:'🎁'},
+];
+
+const COMBOS = [
+  {id:'combo-noel-01', name:'Noel Mini Box', price:199000, items:['noel-ornament','noel-card','noel-candle'], emoji:'🎁', note:'Tặng thiệp miễn phí khi mua ≥10 box'},
+  {id:'combo-tet-01', name:'Tết An Nhiên', price:189000, items:['tet-li-xi','tet-sachet','tet-charm'], emoji:'🧧', note:'Giảm 10% đơn ≥20 set'},
+  {id:'combo-wed-01', name:'Wedding Welcome Set', price:259000, items:['wed-thiep','wed-scent','wed-box'], emoji:'💒', note:'In tên khách miễn phí từ 50 set'}
+];
+
+// ==========================
+// State & Storage
+// ==========================
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+const formatVND = n => (n||0).toLocaleString('vi-VN',{style:'currency',currency:'VND'});
+
+let STATE = {
+  query: '',
+  occasion: 'All',
+  sort: 'popular',
+  priceFilter: null,
+  cart: loadCart()
+};
+
+function loadCart(){
+  try{ return JSON.parse(localStorage.getItem('mini_gift_cart')||'[]'); }catch{ return [] }
+}
+function saveCart(){ localStorage.setItem('mini_gift_cart', JSON.stringify(STATE.cart)); }
+
+function cartCount(){ return STATE.cart.reduce((a,b)=>a+b.qty,0); }
+function cartTotal(){ return STATE.cart.reduce((a,b)=>{
+  const p = PRODUCTS.find(x=>x.id===b.id); return a + (p?.price||0)*b.qty;
+},0); }
+
+// ==========================
+// Rendering
+// ==========================
+function renderProducts(){
+  const grid = $('#shop');
+  const list = filteredProducts();
+  grid.innerHTML = list.map(p=>cardHTML(p)).join('');
+  updateCartCount();
+}
+
+function cardHTML(p){
+  const tag = p.tag?`<span class="tag">${p.tag}</span>`:'';
+  return `
+  <article class="card" data-id="${p.id}">
+    <div class="thumb-wrap">
+      ${tag}
+      <div class="thumb" aria-label="${p.name}">${p.emoji}</div>
+    </div>
+    <div class="info">
+      <div class="title">${p.name}</div>
+      <div class="desc">${p.desc}</div>
+      <div class="price-row">
+        <div class="price">${formatVND(p.price)}</div>
+        <button class="add-btn" data-add="${p.id}">Thêm</button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="badge">${p.occasion}</span>
+      </div>
+    </div>
+  </article>`
+}
+
+function renderCombos(){
+  const g = $('#comboGrid');
+  g.innerHTML = COMBOS.map(c=>{
+    const names = c.items.map(id=>PRODUCTS.find(p=>p.id===id)?.name||'').join(', ');
+    return `
+    <article class="card">
+      <div class="thumb" aria-label="${c.name}">${c.emoji}</div>
+      <div class="info">
+        <div class="title">${c.name}</div>
+        <div class="desc">${names}</div>
+        <div class="price-row">
+          <div class="price">${formatVND(c.price)}</div>
+          <button class="add-btn" data-add-combo="${c.id}">Thêm</button>
+        </div>
+        <small class="desc">${c.note}</small>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function filteredProducts(){
+  let list = PRODUCTS.slice();
+  // Occasion
+  if(STATE.occasion !== 'All') list = list.filter(p=>p.occasion===STATE.occasion);
+  // Search
+  if(STATE.query){
+    const q = STATE.query.toLowerCase();
+    list = list.filter(p=> (p.name+p.desc).toLowerCase().includes(q));
+  }
+  // Price filter
+  if(STATE.priceFilter){
+    const f = STATE.priceFilter;
+    if(f.startsWith('<')){ const lim = Number(f.slice(1)); list = list.filter(p=>p.price < lim); }
+    else if(f.startsWith('>=')){ const lim = Number(f.slice(2)); list = list.filter(p=>p.price >= lim); }
+    else if(f.includes('-')){ const [a,b] = f.split('-').map(Number); list = list.filter(p=>p.price>=a && p.price<=b); }
+  }
+  // Sort
+  switch(STATE.sort){
+    case 'price-asc': list.sort((a,b)=>a.price-b.price); break;
+    case 'price-desc': list.sort((a,b)=>b.price-a.price); break;
+    case 'name-asc': list.sort((a,b)=>a.name.localeCompare(b.name,'vi')); break;
+    default: // popular (simple heuristic by tag)
+      list.sort((a,b)=> (b.tag?1:0) - (a.tag?1:0));
+  }
+  return list;
+}
+
+// ==========================
+// Cart
+// ==========================
+function updateCartCount(){ $('#cartCount').textContent = cartCount(); }
+
+function openCart(){ const d = $('#drawer'); d.classList.add('open'); d.setAttribute('aria-hidden','false'); renderCart(); }
+function closeCart(){ const d = $('#drawer'); d.classList.remove('open'); d.setAttribute('aria-hidden','true'); }
+
+function addToCart(id, qty=1){
+  const idx = STATE.cart.findIndex(x=>x.id===id);
+  if(idx>-1) STATE.cart[idx].qty += qty; else STATE.cart.push({id, qty});
+  saveCart(); updateCartCount(); flashCartButton();
+}
+
+function addCombo(id){
+  const combo = COMBOS.find(c=>c.id===id); if(!combo) return;
+  combo.items.forEach(pid=>addToCart(pid,1));
+}
+
+function setQty(id, qty){
+  const it = STATE.cart.find(x=>x.id===id); if(!it) return;
+  it.qty = Math.max(0, qty);
+  if(it.qty===0) STATE.cart = STATE.cart.filter(x=>x.id!==id);
+  saveCart(); renderCart(); updateCartCount();
+}
+
+function renderCart(){
+  const box = $('#cartItems');
+  if(STATE.cart.length===0){ box.innerHTML = '<p style="color:var(--muted);padding:12px">Giỏ hàng trống.</p>'; $('#subTotal').textContent = formatVND(0); return; }
+  box.innerHTML = STATE.cart.map(item=>{
+    const p = PRODUCTS.find(x=>x.id===item.id); if(!p) return '';
+    return `
+      <div class="row" data-id="${item.id}">
+        <div class="thumb">${p.emoji}</div>
+        <div>
+          <div style="font-weight:800">${p.name}</div>
+          <div style="color:var(--muted);font-size:13px">${formatVND(p.price)} • ${p.occasion}</div>
+        </div>
+        <div class="qty">
+          <button data-dec="${p.id}" aria-label="Giảm">−</button>
+          <strong>${item.qty}</strong>
+          <button data-inc="${p.id}" aria-label="Tăng">+</button>
+          <button data-del="${p.id}" title="Xóa">✕</button>
+        </div>
+      </div>`;
+  }).join('');
+  $('#subTotal').textContent = formatVND(cartTotal());
+}
+
+function flashCartButton(){
+  const btn = $('#openCart');
+  btn.animate([{transform:'scale(1)'},{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:300});
+}
+
+// ==========================
+// Events
+// ==========================
+// Search
+$('#search').addEventListener('input', e=>{ STATE.query = e.target.value.trim(); renderProducts(); });
+window.addEventListener('keydown', e=>{ if((e.ctrlKey||e.metaKey) && e.key==='/' ){ e.preventDefault(); $('#search').focus(); }});
+
+// Occasion chips
+$('#chipRow').addEventListener('click', e=>{
+  const btn = e.target.closest('.chip'); if(!btn) return;
+  $$('#chipRow .chip').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  STATE.occasion = btn.dataset.oc;
+  document.body.setAttribute('data-occasion', STATE.occasion);
+  renderProducts();
+});
+
+// Price filter chips
+$$('.toolbar .chip-row .chip').forEach(ch=>{
+  if(!ch.dataset.price) return;
+  ch.addEventListener('click', ()=>{
+    $$('.toolbar .chip-row .chip').forEach(x=>{ if(x.dataset.price) x.classList.remove('active'); });
+    ch.classList.add('active'); STATE.priceFilter = ch.dataset.price; renderProducts();
+  });
+});
+$('#clearPrice').addEventListener('click', ()=>{ STATE.priceFilter=null; $$('.toolbar .chip-row .chip').forEach(x=>x.classList.remove('active')); renderProducts(); });
+
+// Sort
+$('#sort').addEventListener('change', e=>{ STATE.sort = e.target.value; renderProducts(); });
+
+// Jump buttons
+$$('[data-jump]').forEach(b=> b.addEventListener('click', ()=>{
+  const id = b.getAttribute('data-jump'); document.querySelector(id)?.scrollIntoView({behavior:'smooth', block:'start'});
+}));
+
+// Occasion quick jump (hero)
+$$('[data-oc-snap]').forEach(b=> b.addEventListener('click', ()=>{
+  const oc = b.getAttribute('data-oc-snap');
+  STATE.occasion = oc; document.body.setAttribute('data-occasion', oc);
+  $$('#chipRow .chip').forEach(x=>x.classList.toggle('active', x.dataset.oc===oc));
+  renderProducts();
+  document.querySelector('#shop').scrollIntoView({behavior:'smooth', block:'start'});
+}));
+
+// Add to cart (delegation)
+addEventListener('click', e=>{
+  const addBtn = e.target.closest('[data-add]');
+  if(addBtn){ addToCart(addBtn.dataset.add,1); return; }
+
+  const addC = e.target.closest('[data-add-combo]');
+  if(addC){ addCombo(addC.dataset.addCombo); openCart(); return; }
+
+  const inc = e.target.closest('[data-inc]'); if(inc){ setQty(inc.dataset.inc, getQty(inc.dataset.inc)+1); return; }
+  const dec = e.target.closest('[data-dec]'); if(dec){ setQty(dec.dataset.dec, getQty(dec.dataset.dec)-1); return; }
+  const del = e.target.closest('[data-del]'); if(del){ setQty(del.dataset.del, 0); return; }
+
+  if(e.target.id==='openCart'){ openCart(); }
+  if(e.target.id==='closeCart'){ closeCart(); }
+});
+
+function getQty(id){ return STATE.cart.find(x=>x.id===id)?.qty||0; }
+
+$('#checkoutBtn').addEventListener('click', ()=>{
+  if(!STATE.cart.length) { alert('Giỏ hàng trống.'); return; }
+  const message = encodeURIComponent(
+    'Xin chào, tôi muốn đặt hàng mini gift. Danh sách: '\
+    + STATE.cart.map(it=>{ const p=PRODUCTS.find(x=>x.id===it.id); return `\n- ${p?.name} x ${it.qty} (${formatVND(p?.price||0)})`; }).join('') \
+    + `\nTạm tính: ${formatVND(cartTotal())}`
+  );
+  // Gợi ý: thay số Zalo/WhatsApp ở đây
+  window.location.href = `mailto:hello@gift.local?subject=Đặt hàng Mini Gift&body=${message}`;
+});
+
+$('#clearCart').addEventListener('click', ()=>{
+  if(confirm('Xóa toàn bộ giỏ hàng?')){ STATE.cart = []; saveCart(); renderCart(); updateCartCount(); }
+});
+
+// Drawer close on ESC & backdrop (optional)
+window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeCart(); });
+
+// ==========================
+// Init
+// ==========================
+renderProducts(); renderCombos(); updateCartCount();
+
+</script>
+</body>
+</html>
