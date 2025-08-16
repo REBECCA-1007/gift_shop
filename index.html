@@ -1,104 +1,226 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Elegant Gift Shop — Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
+  <title>Mini Gift Shop — Wedding • Birthday • Christmas • Summer</title>
+  <meta name="description" content="Elegant mini gifts for every occasion: Wedding, Birthday, Christmas, Summer." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --fg: #2d2d2d;
+      --muted: #666;
+      --brand: #6a5acd; /* Elegant purple */
+      --radius: 12px;
+      --container: 1200px;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    header {
+      background: white;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--brand);
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: var(--fg);
+      font-weight: 500;
+    }
+    nav ul li a:hover {
+      color: var(--brand);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #f6f1ff, #fff);
+    }
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .filter {
+      max-width: var(--container);
+      margin: 2rem auto;
+      text-align: center;
+    }
+    .filter button {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+      padding: 0.6rem 1.2rem;
+      margin: 0.3rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .filter button.active,
+    .filter button:hover {
+      background: var(--brand);
+      color: white;
+      border-color: var(--brand);
+    }
+
+    .grid {
+      max-width: var(--container);
+      margin: 2rem auto;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      padding: 0 1rem;
+    }
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-body h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .card-body p {
+      flex: 1;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .card-body .price {
+      margin-top: 0.8rem;
+      font-weight: 600;
+      color: var(--brand);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+      background: #f5f4f2;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
-
   <header>
-    <div class="container nav">
-      <a class="brand" href="index.html">
-        <div class="logo">G</div>
-        <div>Elegant Gift Shop</div>
-      </a>
-      <nav class="menu">
-        <a href="collections.html">Collections</a>
-        <a href="cart.html">Cart <span id="cart-count" aria-live="polite">0</span></a>
-      </nav>
-      <div class="tools">
-        <button class="chip" data-theme="romantic" title="Romantic Wedding">Romantic</button>
-        <button class="chip" data-theme="classic" title="Classic Luxury">Classic</button>
-      </div>
-    </div>
+    <nav>
+      <div class="logo">Mini Gift Shop</div>
+      <ul>
+        <li><a href="#wedding">Wedding</a></li>
+        <li><a href="#birthday">Birthday</a></li>
+        <li><a href="#christmas">Christmas</a></li>
+        <li><a href="#summer">Summer</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div>
-        <h1>Premium Mini Gifts for Every Elegant Moment</h1>
-        <p class="lead">Curated wedding favors, cozy Christmas bundles, festive Tết boxes, and breezy summer picks. Timeless design, seasonal accents.</p>
-        <div style="display:flex; gap:12px; flex-wrap:wrap">
-          <a class="btn btn-primary" href="collections.html">Shop Collections</a>
-          <a class="btn btn-outline" href="collections.html">Custom & Wedding</a>
-        </div>
+  <section class="hero">
+    <h1>Elegant Mini Gifts for Every Occasion</h1>
+    <p>Wedding • Birthday • Christmas • Summer</p>
+  </section>
 
-        <div class="section" style="padding:24px 0 0">
-          <div class="grid">
-            <article class="card" style="grid-column: span 6;">
-              <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9f?q=80&w=1600&auto=format&fit=crop" alt="Gold ribbon and stationery">
-              <div class="info">
-                <div class="badge">Wedding</div>
-                <h3>Elegant Wedding Favors</h3>
-                <p class="meta">Pearl-white boxes, gold foils, and pastel blooms.</p>
-                <a class="btn btn-primary" href="collections.html">Explore Wedding</a>
-              </div>
-            </article>
-            <article class="card" style="grid-column: span 6;">
-              <img src="https://images.unsplash.com/photo-1519681391893-1efb07c3b0fe?q=80&w=1600&auto=format&fit=crop" alt="Red and gold gift for Lunar New Year">
-              <div class="info">
-                <div class="badge">Tết Holiday</div>
-                <h3>Premium Tết Gift Boxes</h3>
-                <p class="meta">Tea, candied fruits, and gilded red envelopes.</p>
-                <a class="btn btn-primary" href="collections.html">Explore Tết</a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="banner">
-          <div style="position:relative;">
-            <span class="ribbon">Live Palette</span>
-            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="Elegant gift boxes on a table">
-          </div>
-          <div class="bar">
-            <div class="swatch" id="sw1"></div>
-            <div class="swatch" id="sw2"></div>
-            <div class="swatch" id="sw3"></div>
-            <span style="font-weight:600;">Romantic ↔ Classic</span>
-          </div>
-        </div>
-      </div>
-    </section>
+  <section class="filter">
+    <button data-filter="All" class="active">All</button>
+    <button data-filter="Wedding">Wedding</button>
+    <button data-filter="Birthday">Birthday</button>
+    <button data-filter="Christmas">Christmas</button>
+    <button data-filter="Summer">Summer</button>
+  </section>
 
-    <section class="section">
-      <h2>Top Picks</h2>
-      <p class="lead">Hand-picked sets people love this season.</p>
-      <div id="grid-all" class="grid"></div>
-    </section>
-  </main>
+  <section class="grid" id="product-grid">
+    <!-- JS render products -->
+  </section>
 
   <footer>
-    <div class="wrap container">
-      <div>© <span id="y"></span> Elegant Gift Shop — <em>“Gifts are the flowers of memory.”</em></div>
-      <div style="display:flex; gap:10px">
-        <a class="badge" href="#">Instagram</a>
-        <a class="badge" href="#">Facebook</a>
-        <a class="badge" href="#">Etsy</a>
-      </div>
-    </div>
-    <script>
-      document.getElementById('y').textContent = new Date().getFullYear();
-    </script>
+    © 2025 Mini Gift Shop — Crafted with ♥
   </footer>
-  <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-  <script src="assets/products.js"></script>
-  <script src="assets/app.js"></script>
 
+  <!-- Scripts -->
+  <script src="assets/products.js"></script>
+  <script>
+    const grid = document.getElementById("product-grid");
+    const filterBtns = document.querySelectorAll(".filter button");
+
+    function renderProducts(filter = "All") {
+      grid.innerHTML = "";
+      window.PRODUCTS.filter(p => filter === "All" || p.category === filter)
+        .forEach(p => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <img src="${p.image}" alt="${p.title}">
+            <div class="card-body">
+              <h3>${p.title}</h3>
+              <p>${p.desc}</p>
+              <div class="price">$${p.price.toFixed(2)}</div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderProducts(btn.dataset.filter);
+      });
+    });
+
+    renderProducts();
+  </script>
 </body>
 </html>
