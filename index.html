@@ -8,36 +8,38 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
 
-  <!-- Hero seasonal backgrounds -->
+  <!-- Hero tràn viền + seasonal backgrounds (độc lập với nền giấy) -->
   <style>
-    body.season-wedding  .hero{
-      color:#2b3a55;
-      background:
-        linear-gradient(135deg, rgba(238,201,210,.32), rgba(255,255,255,.92)),
-        url('assets/images/wedding/wedding_candle.jpg') center/cover no-repeat;
-      text-shadow:0 1px 12px rgba(0,0,0,.15);
+    /* Full-bleed hero */
+    .hero--bleed{
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      border: none; border-radius: 0;
+      padding: 78px 0 64px;
+      overflow: hidden;
     }
-    body.season-birthday .hero{
-      color:#2b3a55;
-      background:
-        linear-gradient(135deg, rgba(255,221,170,.32), rgba(255,255,255,.92)),
-        url('assets/images/birthday/birthday_gift.jpg') center/cover no-repeat;
-      text-shadow:0 1px 12px rgba(0,0,0,.15);
-    }
-    body.season-christmas .hero{
-      color:#102418;
-      background:
-        linear-gradient(135deg, rgba(30,86,49,.32), rgba(255,255,255,.92)),
-        url('assets/images/christmas/christmas_tree.jpg') center/cover no-repeat;
-      text-shadow:0 1px 12px rgba(0,0,0,.18);
-    }
-    body.season-summer   .hero{
-      color:#0f2742;
-      background:
-        linear-gradient(135deg, rgba(46,139,139,.30), rgba(255,255,255,.92)),
-        url('assets/images/summer/summer_shell.jpg') center/cover no-repeat;
-      text-shadow:0 1px 12px rgba(0,0,0,.15);
-    }
+    .hero__bg{ position:absolute; inset:0; background-size:cover; background-position:center; filter:saturate(104%) contrast(102%); }
+    .hero__veil{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.55) 40%, rgba(255,255,255,.82)); backdrop-filter: blur(1px); }
+    .hero__inner{ position:relative; z-index:2; }
+    .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+
+    /* Ảnh hero theo mùa (đúng với file Becca đã upload) */
+    body.season-wedding  .hero__bg{  background-image:url('assets/images/wedding/wedding_candle.jpg'); }
+    body.season-birthday .hero__bg{  background-image:url('assets/images/birthday/birthday_gift.webp'); }  /* bạn có .webp */
+    body.season-christmas .hero__bg{ background-image:url('assets/images/christmas/christmas_tree.jpg'); }
+    body.season-summer   .hero__bg{  background-image:url('assets/images/summer/summer_shell.avif'); }     /* bạn có .avif */
+
+    /* Signature Collections cards */
+    .cat-grid{ display:grid; gap:18px; grid-template-columns: repeat(12, 1fr); }
+    .cat-card{ grid-column: span 3; position:relative; overflow:hidden; border-radius:18px; border:1px solid var(--border); background:#fff; box-shadow:var(--shadow); }
+    .cat-card img{ width:100%; height:220px; object-fit:cover; display:block; }
+    .cat-card .cat-info{ position:absolute; left:12px; bottom:12px; background:rgba(255,255,255,.9); border:1px solid var(--border); padding:8px 12px; border-radius:999px; font-weight:700; }
+    @media (max-width:1000px){ .cat-card{ grid-column: span 6 } }
+    @media (max-width:640px){ .cat-card{ grid-column: span 12 } }
   </style>
 </head>
 <body>
@@ -64,24 +66,28 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <main class="container">
-    <section class="hero" id="hero">
-      <div>
-        <h1 id="hero-title">Premium Mini Gifts for Every Elegant Moment</h1>
-        <p class="lead" id="hero-sub">Wedding • Birthday • Christmas • Summer — curated sets, boutique packaging.</p>
-        <div style="display:flex; gap:12px; flex-wrap:wrap">
-          <a class="btn btn-primary" href="collections.html">Shop Collections</a>
-          <a class="btn btn-outline" href="collections.html">Custom & Wedding</a>
-        </div>
+  <!-- HERO FULL-BLEED -->
+  <section class="hero hero--bleed" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__veil"></div>
+    <div class="container hero__inner">
+      <h1 id="hero-title">Elegant Wedding Gifts</h1>
+      <p class="lead" id="hero-sub">Pearl whites, blush accents & gold details</p>
+      <div class="hero__buttons">
+        <a class="btn btn-primary" href="collections.html">Shop Collections</a>
+        <a class="btn btn-outline" href="collections.html">Custom & Wedding</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FILTER -->
-    <section class="section">
+  <!-- SIGNATURE COLLECTIONS -->
+  <section class="section">
+    <div class="container">
       <h2>Signature Collections</h2>
-      <p class="lead">Chọn chủ đề để xem đúng vibe & banner hero.</p>
-      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px" class="filter">
+      <p class="lead">Pick a theme to match the vibe and hero banner.</p>
+
+      <!-- Filter chips -->
+      <div class="filter" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px">
         <button class="chip filter active" data-cat="All">All</button>
         <button class="chip filter" data-cat="Wedding">Wedding</button>
         <button class="chip filter" data-cat="Birthday">Birthday</button>
@@ -89,12 +95,34 @@
         <button class="chip filter" data-cat="Summer">Summer</button>
       </div>
 
+      <!-- Category cards -->
+      <div class="cat-grid" style="margin-bottom:22px">
+        <a class="cat-card" href="#!" data-go="Wedding">
+          <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding gifts">
+          <span class="cat-info">Wedding</span>
+        </a>
+        <a class="cat-card" href="#!" data-go="Birthday">
+          <img src="assets/images/birthday/birthday_cupcake.jpg" alt="Birthday gifts">
+          <span class="cat-info">Birthday</span>
+        </a>
+        <a class="cat-card" href="#!" data-go="Christmas">
+          <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Christmas gifts">
+          <span class="cat-info">Christmas</span>
+        </a>
+        <a class="cat-card" href="#!" data-go="Summer">
+          <img src="assets/images/summer/summer_flower.avif" alt="Summer gifts">
+          <span class="cat-info">Summer</span>
+        </a>
+      </div>
+
       <!-- PRODUCT GRID -->
       <div id="grid-all" class="grid"></div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CUSTOM BANNER -->
-    <section class="section" id="custom">
+  <!-- CTA BANNER -->
+  <section class="section" id="custom">
+    <div class="container">
       <div class="banner ornate">
         <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Boutique ribbon and stationery">
         <div class="bar">
@@ -102,8 +130,8 @@
           <a class="btn btn-primary" href="collections.html">Get a Quote</a>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -121,19 +149,24 @@
   <!-- SCRIPTS -->
   <script src="assets/products.js"></script>
   <script>
+    /* Helpers */
     const $ = (s,ctx=document)=>ctx.querySelector(s);
     const $$ = (s,ctx=document)=>Array.from(ctx.querySelectorAll(s));
 
+    /* Theme toggle (Romantic / Classic) */
     function setTheme(name){
       document.documentElement.classList.remove('theme-romantic','theme-classic');
       const theme = name || localStorage.getItem('gift_theme') || 'theme-classic';
       document.documentElement.classList.add(theme);
       localStorage.setItem('gift_theme', theme);
+      $$('.tools .chip[data-theme]').forEach(c=> c.classList.toggle('active', 'theme-'+c.dataset.theme===theme));
     }
 
+    /* Cart count (optional) */
     function getCart(){ try{return JSON.parse(localStorage.getItem('cart')||'[]')}catch{return[]} }
     function updateCartCount(){ const c=getCart().reduce((s,it)=>s+it.qty,0); const el=$('#cart-count'); if(el) el.textContent=c; }
 
+    /* Render product grid */
     function renderProductsGrid(container, filterCat){
       if(!container || !window.PRODUCTS) return;
       const items = filterCat && filterCat!=='All' ? window.PRODUCTS.filter(p=>p.category===filterCat) : window.PRODUCTS;
@@ -147,7 +180,7 @@
             <h3>${p.title}</h3>
             <p class="meta">${p.desc}</p>
             <div style="display:flex; align-items:center; justify-content:space-between">
-              <span class="price">$${p.price.toFixed(2)}</span>
+              <span class="price">$${Number(p.price).toFixed(2)}</span>
               <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
             </div>
           </div>
@@ -155,36 +188,57 @@
       `).join('');
     }
 
+    /* Seasonal hero text + body class */
     const THEME = {
       "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
       "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Playful vibes & personalized charms" },
       "Christmas":{ cls:"season-christmas",title:"Christmas Holiday Gifts",    sub:"Cozy bundles & winter sparkle" },
       "Summer":   { cls:"season-summer",   title:"Summer & Friendship Gifts",  sub:"Beachy colors & sunny picks" },
       "All":      { cls:"", title:"Premium Mini Gifts for Every Elegant Moment",
-                             sub:"Wedding • Birthday • Christmas • Summer — curated sets, boutique packaging." }
+                         sub:"Wedding • Birthday • Christmas • Summer — curated sets, boutique packaging." }
     };
     function setSeason(key){
       document.body.classList.remove('season-wedding','season-birthday','season-christmas','season-summer');
-      if(THEME[key] && THEME[key].cls) document.body.classList.add(THEME[key].cls);
-      $('#hero-title').textContent = THEME[key]?.title || THEME["All"].title;
-      $('#hero-sub').textContent   = THEME[key]?.sub   || THEME["All"].sub;
+      const conf = THEME[key] || THEME["All"];
+      if(conf.cls) document.body.classList.add(conf.cls);
+      const t=$('#hero-title'), s=$('#hero-sub');
+      if(t) t.textContent = conf.title;
+      if(s) s.textContent = conf.sub;
     }
 
+    /* Boot */
     document.addEventListener('DOMContentLoaded', ()=>{
       setTheme();
       updateCartCount();
       renderProductsGrid($('#grid-all'));
+      setSeason('Wedding'); // show a background immediately
 
+      // filter chips
       $$('.filter .chip').forEach(btn=>{
         btn.addEventListener('click', ()=>{
           $$('.filter .chip').forEach(b=> b.classList.remove('active'));
           btn.classList.add('active');
-          const cat=btn.dataset.cat;
+          const cat = btn.dataset.cat;
           renderProductsGrid($('#grid-all'), cat);
           setSeason(cat || 'All');
+          document.getElementById('grid-all').scrollIntoView({behavior:'smooth', block:'start'});
         });
       });
-      setSeason('All');
+
+      // category cards behave like filters
+      $$('.cat-card').forEach(card=>{
+        card.addEventListener('click', (e)=>{
+          e.preventDefault();
+          const cat = card.getAttribute('data-go');
+          const chip = document.querySelector('.filter .chip[data-cat="'+cat+'"]');
+          if(chip){ chip.click(); }
+        });
+      });
+
+      // theme chips
+      $$('.tools .chip[data-theme]').forEach(btn=>{
+        btn.addEventListener('click', ()=> setTheme('theme-'+btn.dataset.theme));
+      });
     });
   </script>
 </body>
