@@ -1,106 +1,107 @@
-// Product catalog (local images). Place files under assets/images/<category>/
+// assets/products.js
+// Product catalog (12 tấm ảnh Becca đã upload)
 window.PRODUCTS = [
   // WEDDING
   {
     id: "wed-box",
-    title: "Wedding Gift Box",
-    price: 25.00,
+    title: "Bridesmaid Mini Box",
+    price: 26.00,
     category: "Wedding",
     image: "assets/images/wedding/wedding_box.jpg",
-    desc: "Elegant mini gift box with resin keepsake and candle."
+    desc: "Pearl-white box with ribbon — petite curation for bridesmaids."
   },
   {
     id: "wed-flower",
-    title: "Wedding Flower Charm",
-    price: 15.00,
+    title: "Floral Keepsake",
+    price: 18.00,
     category: "Wedding",
     image: "assets/images/wedding/wedding_flower.jpg",
-    desc: "Handmade resin flower charm with delicate gold flakes."
+    desc: "Pressed floral charm & card — elegant and timeless."
   },
   {
     id: "wed-candle",
-    title: "Pearl Wedding Candle",
-    price: 18.00,
+    title: "Pearl Candle Duo",
+    price: 19.00,
     category: "Wedding",
     image: "assets/images/wedding/wedding_candle.jpg",
-    desc: "Scented pearl-white candle with gold accent."
+    desc: "Two scented candles with gold foiled labels."
   },
 
   // BIRTHDAY
   {
     id: "bday-cupcake",
-    title: "Birthday Cupcake Charm",
+    title: "Cupcake Mini",
     price: 12.00,
     category: "Birthday",
     image: "assets/images/birthday/birthday_cupcake.jpg",
-    desc: "Cute resin cupcake charm with glitter sprinkles."
+    desc: "Sweet-and-simple mini with a celebratory vibe."
   },
   {
     id: "bday-gift",
-    title: "Mini Birthday Gift",
-    price: 20.00,
+    title: "Birthday Gift Set",
+    price: 24.00,
     category: "Birthday",
     image: "assets/images/birthday/birthday_gift.jpg",
-    desc: "Boutique birthday gift box with card and ribbon."
+    desc: "Curated mini frame, candle & card — ready to party."
   },
   {
     id: "bday-candle",
-    title: "Birthday Candle Duo",
-    price: 16.00,
+    title: "Birthday Candle",
+    price: 10.00,
     category: "Birthday",
     image: "assets/images/birthday/birthday_candle.jpg",
-    desc: "Two colorful candles with festive packaging."
+    desc: "Scented candle with festive label — small but special."
   },
 
   // CHRISTMAS
   {
     id: "xmas-tree",
-    title: "Christmas Tree Ornament",
-    price: 14.00,
+    title: "Holiday Tree Mini",
+    price: 16.00,
     category: "Christmas",
     image: "assets/images/christmas/christmas_tree.jpg",
-    desc: "Resin tree ornament with ribbon, gift-ready."
+    desc: "Cozy greens & ribbon — winter classic."
   },
   {
-    id: "xmas-gift",
-    title: "Red Christmas Gift Box",
+    id: "xmas-red",
+    title: "Red Gift Bundle",
     price: 22.00,
     category: "Christmas",
     image: "assets/images/christmas/christmas_red_gift.jpg",
-    desc: "Classic red box with mini candle and resin charm."
+    desc: "Warm red palette with ready-to-gift packaging."
   },
   {
     id: "xmas-snow",
-    title: "Snowflake Resin Charm",
+    title: "Snow Ornament Duo",
     price: 15.00,
     category: "Christmas",
     image: "assets/images/christmas/christmas_snow.jpg",
-    desc: "Snowflake-inspired resin charm — winter sparkle."
+    desc: "Two ornaments with ribbon — gift-ready."
   },
 
   // SUMMER
   {
     id: "sum-shell",
-    title: "Summer Shell Keepsake",
-    price: 13.00,
+    title: "Seashell Mini",
+    price: 14.00,
     category: "Summer",
     image: "assets/images/summer/summer_shell.jpg",
-    desc: "Mini resin shell gift with coastal vibe."
+    desc: "Beachy keepsake with summer palette."
   },
   {
     id: "sum-drink",
-    title: "Tropical Drink Charm",
-    price: 17.00,
+    title: "Citrus Drink Set",
+    price: 16.00,
     category: "Summer",
     image: "assets/images/summer/summer_drink.jpg",
-    desc: "Colorful resin drink charm, summer fresh."
+    desc: "Fresh citrus vibe — perfect for sunny days."
   },
   {
     id: "sum-flower",
     title: "Summer Flower Mini",
-    price: 16.00,
+    price: 13.00,
     category: "Summer",
     image: "assets/images/summer/summer_flower.jpg",
-    desc: "Bright resin flower keepsake for sunny days."
+    desc: "Bright floral accent with friendly mood."
   }
 ];
