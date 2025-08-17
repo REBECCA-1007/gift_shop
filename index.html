@@ -81,7 +81,11 @@
     @media (max-width:640px){
       .sig--birthday,.sig--christmas,.sig--summer{ grid-column:span 12; }
     }
-
+     /* Filter chips */
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; }
+    .chip{ background:var(--chip); border:1px solid var(--border); padding:8px 12px; border-radius:999px; cursor:pointer; }
+    .chip.active{ background:#1a2140; color:#fff; border-color:#1a2140; }
+    
     /* ===== Carousel (Bestsellers / New Arrivals) ===== */
     .carousel-wrap{ position:relative; }
     .carousel{
