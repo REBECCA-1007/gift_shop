@@ -25,32 +25,7 @@
     html, body{ overflow-x:hidden; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";}
     .container{max-width:1200px; margin:0 auto; padding:0 16px;}
 
-    /* ===== Header ===== */
-    :root{
-  --header-h: 72px;         /* chiều cao header mặc định */
-}
-
-/* Header luôn bám trên cùng */
-header{
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  background: rgba(255,255,255,.86);
-  backdrop-filter: saturate(180%) blur(6px);
-  border-bottom: 1px solid var(--border);
-}
-
-/* đảm bảo nav cao đúng */
-header .nav{ min-height: var(--header-h); }
-
-/* đẩy toàn bộ trang xuống đúng bằng chiều cao header */
-body{
-  padding-top: var(--header-h);
-  /* iOS safe area (tai thỏ) */
-  padding-top: calc(var(--header-h) + env(safe-area-inset-top));
-}
-
-    
+    /* ===== Header ===== */ 
     header{ position:sticky; top:0; z-index:20; backdrop-filter:saturate(180%) blur(6px); background:rgba(255,255,255,.86); border-bottom:1px solid var(--border);}
     header .nav{ display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:60px; }
     .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--brand); }
@@ -501,14 +476,5 @@ body{
       });
     });
   </script>
-      <script>
-  function setHeaderHeight(){
-    const h = document.querySelector('header')?.offsetHeight || 72;
-    document.documentElement.style.setProperty('--header-h', h + 'px');
-  }
-  window.addEventListener('load', setHeaderHeight);
-  window.addEventListener('resize', setHeaderHeight);
-</script>
-
 </body>
 </html>
