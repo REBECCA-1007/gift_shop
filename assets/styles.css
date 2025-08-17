@@ -108,3 +108,12 @@ footer .wrap{ display:flex; align-items:center; justify-content:space-between; g
 .occ h4{margin:0 0 6px;}
 @media (max-width:1000px){ .occ{grid-column:span 6} }
 @media (max-width:640px){ .occ{grid-column:span 12} .occ .pic{height:130px} }
+/* Ẩn thanh scroll ngang trong carousel */
+.rail {
+  overflow-x: auto;
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE/Edge cũ */
+}
+.rail::-webkit-scrollbar {
+  display: none;              /* Chrome, Safari */
+}
