@@ -78,3 +78,33 @@ footer .wrap{ display:flex; align-items:center; justify-content:space-between; g
   .occ{ grid-column: span 12; } 
   .occ .pic{ height:130px; } 
 }
+/* --- Signature Lookbook (kiểu OLV) --- */
+.sig-lookbook{display:grid; gap:18px; grid-template-columns:repeat(12,1fr);}
+.sig{position:relative; overflow:hidden; border-radius:18px; border:1px solid var(--border); box-shadow:var(--shadow); background:#fff;}
+.sig img{width:100%; height:100%; display:block; object-fit:cover; aspect-ratio:5/3;}
+.sig .lb{position:absolute; left:16px; bottom:16px; padding:10px 14px; border-radius:12px;
+  background:rgba(255,255,255,.92); border:1px solid var(--border); font-weight:700;}
+.sig--xl{grid-column:span 6;}
+.sig--md{grid-column:span 3;}
+@media (max-width:1000px){ .sig--xl{grid-column:span 12} .sig--md{grid-column:span 6} }
+@media (max-width:640px){ .sig--md{grid-column:span 12} }
+
+/* --- Rails = Carousel ngang (phương án C) --- */
+.rail{display:flex; gap:16px; overflow:auto; padding:4px 2px 10px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;}
+.rail::-webkit-scrollbar{height:8px}
+.rail .card{min-width:260px; scroll-snap-align:start; border:1px solid var(--border); border-radius:14px;
+  background:#fff; box-shadow:0 4px 14px rgba(0,0,0,.04); overflow:hidden; transition:transform .2s, box-shadow .2s;}
+.rail .card img{width:100%; aspect-ratio:4/5; object-fit:cover; display:block;}
+.rail .card .info{padding:12px 12px 14px}
+.rail .card h3{margin:6px 0 8px; font-size:15px; line-height:1.25}
+.rail .card .price{font-weight:700}
+.rail .card:hover{transform:translateY(-3px); box-shadow:0 10px 22px rgba(0,0,0,.08)}
+
+/* --- Occasion Guides có ảnh banner + tiêu đề --- */
+.occasions{display:grid; gap:14px; grid-template-columns:repeat(12,1fr);}
+.occ{grid-column:span 3; border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow); overflow:hidden; padding:0;}
+.occ .pic{height:150px; background:#f3f3f3 center/cover no-repeat;}
+.occ .txt{padding:16px;}
+.occ h4{margin:0 0 6px;}
+@media (max-width:1000px){ .occ{grid-column:span 6} }
+@media (max-width:640px){ .occ{grid-column:span 12} .occ .pic{height:130px} }
