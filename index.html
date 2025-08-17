@@ -140,6 +140,26 @@
     .btn-primary{ background:#c5a020; color:#1a2140; font-weight:700; }
     .btn-outline{ border:1px solid #1a2140; color:#1a2140; }
     .price{ font-weight:700; color:#1a2140; }
+    /* ===== FOOTER ===== */
+footer {
+  background: var(--brand);   /* màu nền đậm */
+  color: #fff;
+  width: 100%;
+}
+footer .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 24px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+footer .badge {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+  color: #fff;
+}
+
   </style>
 </head>
 
@@ -336,18 +356,19 @@
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="wrap container" style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:18px 0; border-top:1px solid var(--border);">
-      <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
-      <div style="display:flex; gap:10px">
-        <a class="badge" href="about.html">About</a>
-        <a class="badge" href="#">Shipping</a>
-        <a class="badge" href="#">Returns</a>
-        <a class="badge" href="#">Contact</a>
-      </div>
+<footer>
+  <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:18px 24px; border-top:1px solid var(--border);">
+    <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
+    <div style="display:flex; gap:10px">
+      <a class="badge" href="about.html">About</a>
+      <a class="badge" href="#">Shipping</a>
+      <a class="badge" href="#">Returns</a>
+      <a class="badge" href="#">Contact</a>
     </div>
-    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-  </footer>
+  </div>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</footer>
+
 
   <!-- SCRIPTS -->
   <script src="assets/products.js"></script>
