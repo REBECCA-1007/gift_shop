@@ -353,11 +353,20 @@
 
       // Rails: pick some IDs từ catalog mẫu (Becca có thể đổi sau)
       // (đã từng đặt trong products.js: wed-box, wed-candle, bday-gift, bday-cupcake, xmas-tree, sum-flower, v.v.)
-      const bestIDs = ['wed-box','wed-candle','bday-gift','xmas-tree','bday-cupcake','sum-flower','wed-flower','xmas-snow'];
-      const newIDs  = ['sum-drink','sum-shell','bday-candle','xmas-gift']; // thay theo sản phẩm mới
+      // Không trùng nhau giữa 2 rail
+const bestIDs = [
+  'wed-candle', 'bday-gift', 'xmas-tree',
+  'sum-flower', 'wed-box', 'bday-cupcake'
+];
 
-      renderRail($('#rail-best'), bestIDs);
-      renderRail($('#rail-new'), newIDs);
+const newIDs  = [
+  'xmas-red', 'sum-drink', 'bday-candle',
+  'wed-flower', 'xmas-snow', 'sum-shell'
+];
+
+renderRail($('#rail-best'), bestIDs);
+renderRail($('#rail-new'), newIDs);
+
     });
   </script>
 </body>
