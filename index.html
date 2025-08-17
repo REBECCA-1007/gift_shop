@@ -5,45 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rebecca’s Choice — Signature Gifts</title>
   <meta name="description" content="Curated mini gifts for Wedding, Birthday, Christmas and Summer. Boutique packaging, handcrafted details.">
-
-  <!-- Fonts -->
+  <!-- Inter + Satisfy -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Satisfy&display=swap" rel="stylesheet">
-
-  <!-- Global styles -->
   <link rel="stylesheet" href="assets/styles.css">
 
-  <!-- Small inline overrides (hero + brand wordmark) -->
   <style>
     html, body { overflow-x:hidden; margin:0; }
-    /* HERO mỏng, full width (ngắn như Becca muốn) */
+    /* ===== Header / Brand ===== */
+    .brand{ text-decoration:none; }
+    .brand .logo{ font-weight:700; }
+    .brand div:last-child{
+      font-family:'Satisfy', cursive;
+      font-size: 26px;
+      line-height:1;
+      text-decoration:none !important;
+    }
+
+    /* ===== HERO (mỏng, full width) ===== */
     body > .hero.hero--bleed{
-      width:100% !important; margin:0 !important; left:0 !important; right:0 !important;
-      position:relative; display:block !important; border:0 !important; border-radius:0 !important; box-shadow:none !important;
-      background:transparent !important; overflow:hidden;
-      min-height:clamp(100px, 15vw, 180px);
-      padding:clamp(22px,3.8vw,40px) 0;
+      width:100%!important; margin:0!important; left:0!important; right:0!important;
+      position:relative; display:block!important; border:0!important; border-radius:0!important; box-shadow:none!important;
+      background:transparent!important; overflow:hidden;
+      min-height:clamp(120px, 17vw, 220px);
+      padding:clamp(24px,4vw,36px) 0;
     }
     .hero--bleed .hero__bg,.hero--bleed .hero__veil{position:absolute; inset:0;}
     .hero--bleed .hero__bg{background-size:cover; background-position:center; filter:saturate(106%) contrast(104%) brightness(100%);}
     .hero--bleed .hero__veil{
       background:
-        radial-gradient(1200px 600px at -10% 50%, rgba(0,0,0,.10), transparent 60%),
-        radial-gradient(1200px 600px at 110% 50%, rgba(0,0,0,.10), transparent 60%),
+        radial-gradient(1200px 600px at -10% 50%, rgba(0,0,0,.08), transparent 60%),
+        radial-gradient(1200px 600px at 110% 50%, rgba(0,0,0,.08), transparent 60%),
         linear-gradient(90deg, rgba(255,255,255,.78), rgba(255,255,255,.18));
-      backdrop-filter:blur(.5px);
+      backdrop-filter: blur(.5px);
     }
     .hero__inner{ position:relative; z-index:2; }
     .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
-
-    /* Seasonal hero images (khớp tên file Becca đã upload) */
+    /* Seasonal hero (khớp tên file) */
     body.season-wedding  .hero__bg{  background-image:url('assets/images/wedding/wedding_candle.jpg');  background-position:30% 35%; }
     body.season-birthday .hero__bg{  background-image:url('assets/images/birthday/birthday_gift.jpg');   background-position:40% 40%; }
     body.season-christmas .hero__bg{ background-image:url('assets/images/christmas/christmas_tree.jpg');  background-position:60% 45%; }
     body.season-summer   .hero__bg{  background-image:url('assets/images/summer/summer_shell.jpg');       background-position:50% 35%; }
 
-    /* Wordmark = Satisfy cho brand */
-    .brand .wordmark{ font-family:'Satisfy', cursive; font-weight:400; letter-spacing:.3px; font-size:20px; }
-    @media (min-width:640px){ .brand .wordmark{ font-size:22px; } }
+    /* ===== Section spacing ===== */
+    .section{ padding:54px 0; }
+    .section .section-head{ display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:18px; }
+    .section h2{ margin:0; }
+
+    /* ===== Signature Lookbook (giống OLV) ===== */
+    .sig-wrap{ position:relative; }
+    .sig-row{
+      display:grid; gap:16px;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 260px 260px;
+    }
+    .sig--xl{ grid-column:1/2; grid-row:1/3; }
+    .sig--md{ grid-auto-flow:row; }
+    .sig{
+      position:relative; display:block; overflow:hidden;
+      border:1px solid var(--border); border-radius:18px; box-shadow:var(--shadow);
+    }
+    .sig img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .sig .lb{
+      position:absolute; left:14px; bottom:14px;
+      background:#fff; border:1px solid var(--border); border-radius:999px;
+      padding:8px 12px; font-weight:700; box-shadow:var(--shadow);
+    }
+    /* Mũi tên điều hướng: scroll ngang khi nhỏ */
+    .sig-scroller{ overflow-x:auto; scroll-snap-type:x mandatory; display:flex; gap:16px; }
+    .sig-scroller .sig{ flex:0 0 78vw; height:46vw; scroll-snap-align:start; }
+    .sig-btn{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:40px; height:40px; border-radius:999px; border:1px solid var(--border);
+      display:grid; place-items:center; background:#fff; box-shadow:var(--shadow); cursor:pointer;
+    }
+    .sig-btn.prev{ left:-6px; } .sig-btn.next{ right:-6px; }
+    @media (max-width:1000px){
+      .sig-row{ display:none; }
+      .sig-scroller{ display:flex; }
+      .sig-wrap{ padding:0 26px; }
+    }
+    @media (min-width:1001px){
+      .sig-scroller{ display:none; }
+      .sig-btn{ display:none; }
+      .sig-row{ grid-template-rows: 220px 220px; }
+    }
+
+    /* ===== Category chips ===== */
+    .filter{ display:flex; gap:8px; flex-wrap:wrap; }
+    .cat-grid{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
+    .cat-card{ grid-column:span 3; position:relative; overflow:hidden; border-radius:18px; border:1px solid var(--border); background:#fff; box-shadow:var(--shadow); }
+    .cat-card img{ width:100%; height:220px; object-fit:cover; display:block; }
+    .cat-card .cat-info{ position:absolute; left:12px; bottom:12px; background:rgba(255,255,255,.92); border:1px solid var(--border); padding:8px 12px; border-radius:999px; font-weight:700; }
+    @media (max-width:1000px){ .cat-card{ grid-column:span 6; } }
+    @media (max-width:640px){ .cat-card{ grid-column:span 12; } }
+
+    /* ===== Rails: Bestsellers & New (phương án C – card nhỏ) ===== */
+    .rail{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
+    .rail .card{ grid-column: span 3; }
+    .rail .card img{ width:100%; height:180px; object-fit:cover; display:block; }
+    @media (max-width:1000px){ .rail .card{ grid-column: span 6; } }
+    @media (max-width:640px){ .rail .card{ grid-column: span 12; } }
+
+    /* ===== Occasion tiles có ảnh & tiêu đề ===== */
+    .occasions{ display:grid; gap:16px; grid-template-columns:repeat(12,1fr); }
+    .occ{ grid-column:span 3; border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow); overflow:hidden; }
+    .occ .pic{ height:160px; background-size:cover; background-position:center; }
+    .occ .txt{ padding:14px 16px; }
+    .occ h4{ margin:0 0 6px; }
+
+    /* ===== Custom banner (đã cố định chiều cao) ===== */
+    .cta-banner{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); }
+    .cta-banner img{ width:100%; height:300px; object-fit:cover; object-position:center; display:block; }
+    .cta-banner .bar{ position:absolute; left:16px; right:16px; bottom:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      background:rgba(255,255,255,.9); border:1px solid var(--border); border-radius:14px; padding:12px 14px; }
+
+    /* ===== FAQ thanh lịch (style cũ) ===== */
+    .faq{ border:1px solid var(--border); border-radius:18px; background:#fff; box-shadow:var(--shadow); overflow:hidden; }
+    .faq details+details{ border-top:1px solid var(--border); }
+    .faq summary{ cursor:pointer; padding:16px 18px; font-weight:700; list-style:none; }
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq .a{ padding:0 18px 16px; color:var(--muted); }
+
   </style>
 </head>
 
@@ -53,7 +135,7 @@
     <div class="container nav">
       <a class="brand" href="#">
         <div class="logo">R</div>
-        <div class="wordmark">Rebecca’s Choice</div>
+        <div>Rebecca’s Choice</div>
       </a>
 
       <nav class="menu">
@@ -89,7 +171,7 @@
     <div class="container">
       <div class="section-head">
         <h2>Signature Collections</h2>
-        <div class="filter" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <div class="filter">
           <button class="chip filter active" data-cat="All">All</button>
           <button class="chip filter" data-cat="Wedding">Wedding</button>
           <button class="chip filter" data-cat="Birthday">Birthday</button>
@@ -98,28 +180,48 @@
         </div>
       </div>
 
-      <!-- Lookbook kiểu OLV -->
-      <div class="sig-lookbook" style="margin-bottom:18px">
-        <a class="sig sig--xl" href="#signature" data-go="Wedding">
-          <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding">
-          <span class="lb">Wedding Collection</span>
-        </a>
-        <a class="sig sig--md" href="#signature" data-go="Birthday">
-          <img src="assets/images/birthday/birthday_cupcake.jpg" alt="Birthday">
-          <span class="lb">Birthday</span>
-        </a>
-        <a class="sig sig--md" href="#signature" data-go="Christmas">
-          <img src="assets/images/christmas/christmas_tree.jpg" alt="Christmas">
-          <span class="lb">Christmas</span>
-        </a>
-        <a class="sig sig--md" href="#signature" data-go="Summer">
-          <img src="assets/images/summer/summer_flower.jpg" alt="Summer">
-          <span class="lb">Summer</span>
-        </a>
+      <!-- Lookbook desktop -->
+      <div class="sig-wrap">
+        <div class="sig-row">
+          <a class="sig sig--xl" href="#!" data-go="Wedding">
+            <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding">
+            <span class="lb">Wedding Collection</span>
+          </a>
+          <a class="sig sig--md" href="#!" data-go="Birthday">
+            <img src="assets/images/birthday/birthday_cupcake.jpg" alt="Birthday">
+            <span class="lb">Birthday</span>
+          </a>
+          <a class="sig sig--md" href="#!" data-go="Christmas">
+            <img src="assets/images/christmas/christmas_tree.jpg" alt="Christmas">
+            <span class="lb">Christmas</span>
+          </a>
+          <a class="sig sig--md" href="#!" data-go="Summer">
+            <img src="assets/images/summer/summer_flower.jpg" alt="Summer">
+            <span class="lb">Summer</span>
+          </a>
+        </div>
+
+        <!-- Lookbook mobile (scroll ngang + mũi tên) -->
+        <div class="sig-scroller" id="sigScroll">
+          <a class="sig" href="#!" data-go="Wedding">
+            <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding"><span class="lb">Wedding</span>
+          </a>
+          <a class="sig" href="#!" data-go="Birthday">
+            <img src="assets/images/birthday/birthday_cupcake.jpg" alt="Birthday"><span class="lb">Birthday</span>
+          </a>
+          <a class="sig" href="#!" data-go="Christmas">
+            <img src="assets/images/christmas/christmas_tree.jpg" alt="Christmas"><span class="lb">Christmas</span>
+          </a>
+          <a class="sig" href="#!" data-go="Summer">
+            <img src="assets/images/summer/summer_flower.jpg" alt="Summer"><span class="lb">Summer</span>
+          </a>
+        </div>
+        <button class="sig-btn prev" id="sigPrev" aria-label="Prev">‹</button>
+        <button class="sig-btn next" id="sigNext" aria-label="Next">›</button>
       </div>
 
-      <!-- (tuỳ chọn) thumbnails nhỏ -->
-      <div class="cat-grid" style="margin-bottom:22px">
+      <!-- Lưới danh mục nhỏ (giữ lại để lọc & thêm nội dung) -->
+      <div class="cat-grid" style="margin:20px 0">
         <a class="cat-card" href="#!" data-go="Wedding">
           <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding gifts"><span class="cat-info">Wedding</span>
         </a>
@@ -134,23 +236,18 @@
         </a>
       </div>
 
-      <!-- Grid all/filtered -->
       <div id="grid-all" class="grid"></div>
     </div>
   </section>
 
-  <!-- BESTSELLERS (carousel + arrows) -->
+  <!-- BESTSELLERS -->
   <section class="section" id="bestsellers">
     <div class="container">
       <div class="section-head">
         <h2>Bestsellers</h2>
         <a class="badge" href="#signature">View all</a>
       </div>
-      <div class="rail-wrap" style="position:relative">
-        <button class="rail-nav prev" aria-label="Previous" data-target="#rail-best">‹</button>
-        <div class="rail" id="rail-best"></div>
-        <button class="rail-nav next" aria-label="Next" data-target="#rail-best">›</button>
-      </div>
+      <div class="rail" id="rail-best"></div>
     </div>
   </section>
 
@@ -158,37 +255,33 @@
   <section class="section" id="occasions">
     <div class="container">
       <div class="section-head"><h2>Occasion Guides</h2></div>
-
       <div class="occasions">
         <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/wedding/wedding_flower.jpg')" aria-hidden="true"></div>
+          <div class="pic" style="background-image:url('assets/images/wedding/wedding_flower.jpg')"></div>
           <div class="txt">
             <h4>For Bridesmaids</h4>
             <p class="meta">Pearl whites & blush picks</p>
             <a class="btn btn-outline" href="#signature" data-go="Wedding">Shop Wedding</a>
           </div>
         </div>
-
         <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/summer/summer_drink.jpg')" aria-hidden="true"></div>
+          <div class="pic" style="background-image:url('assets/images/summer/summer_drink.jpg')"></div>
           <div class="txt">
             <h4>For Him</h4>
             <p class="meta">Understated, practical minis</p>
             <a class="btn btn-outline" href="#signature" data-go="Birthday">Shop Birthday</a>
           </div>
         </div>
-
         <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/christmas/christmas_red_gift.jpg')" aria-hidden="true"></div>
+          <div class="pic" style="background-image:url('assets/images/christmas/christmas_red_gift.jpg')"></div>
           <div class="txt">
             <h4>For Her</h4>
             <p class="meta">Romantic & photogenic</p>
             <a class="btn btn-outline" href="#signature" data-go="Christmas">Shop Christmas</a>
           </div>
         </div>
-
         <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/birthday/birthday_gift.jpg')" aria-hidden="true"></div>
+          <div class="pic" style="background-image:url('assets/images/birthday/birthday_gift.jpg')"></div>
           <div class="txt">
             <h4>For Colleagues</h4>
             <p class="meta">Warm & friendly sets</p>
@@ -199,22 +292,18 @@
     </div>
   </section>
 
-  <!-- NEW ARRIVALS / SEASONAL SPOTLIGHT (carousel + arrows) -->
+  <!-- NEW ARRIVALS / SEASONAL SPOTLIGHT -->
   <section class="section" id="arrivals">
     <div class="container">
       <div class="section-head">
         <h2>New Arrivals / Seasonal Spotlight</h2>
         <a class="badge" href="#signature">View all</a>
       </div>
-      <div class="rail-wrap" style="position:relative">
-        <button class="rail-nav prev" aria-label="Previous" data-target="#rail-new">‹</button>
-        <div class="rail" id="rail-new"></div>
-        <button class="rail-nav next" aria-label="Next" data-target="#rail-new">›</button>
-      </div>
+      <div class="rail" id="rail-new"></div>
     </div>
   </section>
 
-  <!-- CUSTOM GIFT -->
+  <!-- BUILD A BOX / CUSTOM GIFT (ngay trước FAQ) -->
   <section class="section" id="custom">
     <div class="container">
       <div class="cta-banner">
@@ -323,7 +412,6 @@
       const t=$('#hero-title'), s=$('#hero-sub'); if(t) t.textContent=conf.title; if(s) s.textContent=conf.sub;
     }
 
-    // Đợi products load rồi mới render để tránh rail trống
     function waitForProducts(cb, tries=40){
       if (window.PRODUCTS && Array.isArray(window.PRODUCTS) && window.PRODUCTS.length){
         cb();
@@ -334,28 +422,13 @@
       }
     }
 
-    // Mũi tên điều hướng cho carousel
-    function setupRailNav(){
-      $$('.rail-nav').forEach(btn=>{
-        const targetSel = btn.getAttribute('data-target');
-        const dir = btn.classList.contains('next') ? 1 : -1;
-        const rail = document.querySelector(targetSel);
-        if(!rail) return;
-        btn.addEventListener('click', ()=>{
-          const step = Math.round(rail.clientWidth * 0.8);
-          rail.scrollBy({ left: dir*step, behavior:'smooth' });
-        });
-      });
-    }
-
     document.addEventListener('DOMContentLoaded', ()=>{
       setSeason('Wedding');
 
       waitForProducts(()=>{
-        // Signature grid
         renderProductsGrid($('#grid-all'));
 
-        // Filters
+        // Filter chips
         $$('.filter .chip').forEach(btn=>{
           btn.addEventListener('click', ()=>{
             $$('.filter .chip').forEach(b=>b.classList.remove('active'));
@@ -366,12 +439,12 @@
           });
         });
 
-        // Category/Occasion shortcuts
+        // Shortcuts (lookbook & tiles)
         $$('.cat-card,[data-go]').forEach(el=>{
           el.addEventListener('click', (e)=>{
             e.preventDefault();
             const cat = el.getAttribute('data-go');
-            const chip = document.querySelector('.filter .chip[data-cat="'+cat+'"]'); 
+            const chip = document.querySelector('.filter .chip[data-cat="'+cat+'"]');
             if(chip) chip.click();
             document.getElementById('signature').scrollIntoView({behavior:'smooth'});
           });
@@ -382,9 +455,14 @@
         const newIDs  = ['xmas-red','sum-drink','bday-candle','wed-flower','xmas-snow','sum-shell'];
         renderRail($('#rail-best'), bestIDs);
         renderRail($('#rail-new'), newIDs);
-
-        setupRailNav();
       });
+
+      // Mũi tên lookbook (mobile)
+      const scroller = $('#sigScroll');
+      const prev = $('#sigPrev'), next = $('#sigNext');
+      function scrollByStep(dir){ if(!scroller) return; scroller.scrollBy({left: dir * scroller.clientWidth * 0.8, behavior:'smooth'}); }
+      if(prev) prev.addEventListener('click', ()=>scrollByStep(-1));
+      if(next) next.addEventListener('click', ()=>scrollByStep(1));
     });
   </script>
 </body>
