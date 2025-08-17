@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — Rebecca’s Choice</title>
+  <meta name="description" content="About Rebecca’s Choice — curated mini gifts for elegant moments.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+
+  <style>
+    html, body { margin:0; overflow-x:hidden; }
+
+    /* HERO mỏng (trùng style home) */
+    body > .hero.hero--bleed{
+      width:100% !important; margin:0 !important; left:0 !important; right:0 !important;
+      position:relative; display:block !important; border:0 !important; border-radius:0 !important; box-shadow:none !important;
+      background:transparent !important; overflow:hidden;
+      min-height:clamp(100px, 15vw, 200px);
+      padding: clamp(28px, 4.5vw, 48px) 0;
+    }
+    .hero--bleed .hero__bg,.hero--bleed .hero__veil{ position:absolute; inset:0; }
+    .hero--bleed .hero__bg{
+      background-image:url('assets/images/wedding/wedding_box.jpg'); /* đổi ảnh nếu muốn */
+      background-size:cover; background-position:center 35%;
+      filter:saturate(106%) contrast(104%) brightness(100%);
+    }
+    .hero--bleed .hero__veil{
+      background:
+        radial-gradient(1200px 600px at -10% 50%, rgba(0,0,0,.10), transparent 60%),
+        radial-gradient(1200px 600px at 110% 50%, rgba(0,0,0,.10), transparent 60%),
+        linear-gradient(90deg, rgba(255,255,255,.78), rgba(255,255,255,.18));
+      backdrop-filter: blur(.5px);
+    }
+    .hero__inner{ position:relative; z-index:2; }
+
+    /* Sections chung */
+    .section{ padding:54px 0; }
+    .section h2{ margin:0 0 10px; }
+    .lead{ color:var(--muted); }
+
+    /* Layout 2 cột cho story & process */
+    .split{ display:grid; gap:24px; grid-template-columns: 1.2fr .8fr; align-items:start; }
+    .split img{ width:100%; border-radius:16px; object-fit:cover; }
+    @media (max-width: 900px){ .split{ grid-template-columns:1fr; } }
+
+    /* Value props */
+    .values{ display:grid; gap:16px; grid-template-columns:repeat(12,1fr); }
+    .val{ grid-column: span 6; border:1px solid var(--border); border-radius:16px; padding:16px; background:#fff; box-shadow:var(--shadow); }
+    .val h4{ margin:0 0 6px; }
+    @media (max-width: 800px){ .val{ grid-column: span 12; } }
+
+    /* Testimonials */
+    .testis{ display:grid; gap:16px; grid-template-columns:repeat(12,1fr); }
+    .quote{ grid-column: span 4; border:1px solid var(--border); border-radius:16px; padding:16px; background:#fff; box-shadow:var(--shadow); }
+    .quote b{ display:block; margin-top:8px; }
+    @media (max-width: 1000px){ .quote{ grid-column: span 6; } }
+    @media (max-width: 700px){ .quote{ grid-column: span 12; } }
+
+    /* CTA cuối trang */
+    .cta{ border:1px solid var(--border); border-radius:16px; padding:20px; display:flex; gap:12px; align-items:center; justify-content:space-between; background:#fff; box-shadow:var(--shadow); }
+    .btn{ display:inline-block; padding:10px 16px; border-radius:999px; text-decoration:none; font-weight:700; }
+    .btn-primary{ background:#d4a017; color:#fff; }
+    .btn-outline{ border:2px solid #0a0f18; color:#0a0f18; background:#fff; }
+
+    /* Nhỏ xíu cho detail */
+    .small{ color:var(--muted); font-size:.92rem; }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER (giống Home, sửa brand nếu cần) -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <div class="logo">R</div>
+        <div>Rebecca’s Choice</div>
+      </a>
+
+      <nav class="menu">
+        <a href="index.html#signature">Collections</a>
+        <a href="index.html#bestsellers">Bestsellers</a>
+        <a href="index.html#custom">Custom Gift</a>
+        <a href="index.html#occasions">Occasions</a>
+        <a href="index.html#arrivals">New</a>
+        <a class="active" href="about.html">About</a>
+      </nav>
+
+      <div class="tools">
+        <a class="chip" href="index.html#">Cart <span id="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO ABOUT (mỏng) -->
+  <section class="hero hero--bleed">
+    <div class="hero__bg"></div>
+    <div class="hero__veil"></div>
+    <div class="container hero__inner">
+      <h1>Why Rebecca’s Choice</h1>
+      <p class="lead">Curated by Rebecca — design-first, gift-ready, and made to be remembered.</p>
+    </div>
+  </section>
+
+  <!-- BRAND STORY -->
+  <section class="section">
+    <div class="container split">
+      <div>
+        <h2>Our Story</h2>
+        <p>Founded by Rebecca, Rebecca’s Choice started from a simple joy: tiny, beautiful objects that make big moments warmer. We curate and craft mini gifts with a boutique approach — thoughtful materials, elegant colors, and packaging that feels special to open.</p>
+        <p>From weddings and birthdays to seasonal holidays, we believe the best gifts are the ones that carry a memory. Every set is made gift-ready with care, so you can celebrate without the hassle.</p>
+        <p class="small">Hand-assembled in small batches. Limited drops each season.</p>
+      </div>
+      <div>
+        <img src="assets/images/wedding/wedding_candle.jpg" alt="Studio detail">
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY REBECCA'S CHOICE (Value Props) -->
+  <section class="section">
+    <div class="container">
+      <h2>What Makes Us Different</h2>
+      <div class="values">
+        <div class="val">
+          <h4>Design-first</h4>
+          <p>Elegant palettes, photogenic details, and cohesive presentation in every set.</p>
+        </div>
+        <div class="val">
+          <h4>Gift-ready</h4>
+          <p>Cards, tissue & ribbon are included. Add a message and we’ll handwrite it for you.</p>
+        </div>
+        <div class="val">
+          <h4>Fast & Flexible</h4>
+          <p>Prep within 24–48h, ship nationwide. Bulk pricing for weddings & corporate.</p>
+        </div>
+        <div class="val">
+          <h4>Thoughtful Sourcing</h4>
+          <p>Small-batch, artisan-made items whenever possible. Seasonal drops keep it fresh.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRAFT / PROCESS -->
+  <section class="section">
+    <div class="container split">
+      <div>
+        <img src="assets/images/summer/summer_flower.jpg" alt="Workbench and packaging">
+      </div>
+      <div>
+        <h2>Craft & Process</h2>
+        <p>Each mini set is assembled by hand in our studio: we test scents, pair textures, and refine unboxing down to the last ribbon. Color stories are tuned to the occasion — pearl whites & blush for weddings, cozy reds & greens for Christmas, fresh tones for summer.</p>
+        <p class="small">Packaging is recyclable where possible. We minimize excess and keep things reusable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section">
+    <div class="container">
+      <h2>Loved by Our Customers</h2>
+      <div class="testis">
+        <div class="quote">“Perfect bridesmaid minis — everyone kept the keepsake!”<b>— Linh N.</b></div>
+        <div class="quote">“Gift-ready and classy. Arrived fast, beautiful packaging.”<b>— Anh T.</b></div>
+        <div class="quote">“The Christmas sets were a hit at our office.”<b>— Quang P.</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESS / PARTNERS (tuỳ chọn: thay logo thật) -->
+  <section class="section">
+    <div class="container">
+      <h2>As Seen In</h2>
+      <p class="small">Add your press mentions or partner logos here.</p>
+    </div>
+  </section>
+
+  <!-- CTA LIÊN HỆ / CUSTOM -->
+  <section class="section">
+    <div class="container">
+      <div class="cta">
+        <div>
+          <h3>Planning a wedding or corporate gifting?</h3>
+          <p class="small">Tell us your date, quantity, and budget — we’ll curate a perfect suite.</p>
+        </div>
+        <div>
+          <a class="btn btn-primary" href="index.html#custom">Start a Custom Gift</a>
+          <a class="btn btn-outline" href="index.html#signature">Browse Collections</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap container">
+      <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
+      <div style="display:flex; gap:10px">
+        <a class="badge" href="about.html">About</a>
+        <a class="badge" href="index.html#">Shipping</a>
+        <a class="badge" href="index.html#">Returns</a>
+        <a class="badge" href="index.html#">Contact</a>
+      </div>
+    </div>
+    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  </footer>
+
+  <script>
+    // (tuỳ chọn) cập nhật số lượng giỏ như ở home, nếu bạn đã dùng localStorage cart
+    try{
+      const c = JSON.parse(localStorage.getItem('cart')||'[]').reduce((s,it)=>s+it.qty,0);
+      const el = document.querySelector('#cart-count'); if(el) el.textContent = c;
+    }catch(e){}
+  </script>
+</body>
+</html>
