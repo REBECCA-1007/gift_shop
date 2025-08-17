@@ -1,398 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rebecca’s Choice — Signature Gifts</title>
-  <meta name="description" content="Curated mini gifts for Wedding, Birthday, Christmas and Summer. Boutique packaging, handcrafted details.">
-  <!-- Inter + (đã có Satisfy trong styles.css của Becca) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rebecca's Choice</title>
+  <link rel="stylesheet" href="assets/styles.css"/>
 
   <style>
-    html, body { overflow-x:hidden; margin:0; }
-    /* --- Header brand không gạch dưới --- */
-    .brand{ text-decoration:none !important; }
-
-    /* --- HERO mỏng, full width --- */
-    body > .hero.hero--bleed{
-      width:100% !important; margin:0 !important; left:0 !important; right:0 !important;
-      position:relative; display:block !important; border:0 !important; border-radius:0 !important; box-shadow:none !important;
-      background:transparent !important; overflow:hidden;
-      min-height:clamp(120px, 18vw, 240px);
-      padding:clamp(28px,4.5vw,48px) 0;
+    :root {
+      --border:#e5e7eb;
+      --shadow:0 2px 6px rgba(0,0,0,.08);
     }
-    .hero--bleed .hero__bg,.hero--bleed .hero__veil{position:absolute; inset:0;}
-    .hero--bleed .hero__bg{background-size:cover; background-position:center; filter:saturate(106%) contrast(104%) brightness(100%);}
-    .hero--bleed .hero__veil{
-      background:
-        radial-gradient(1200px 600px at -10% 50%, rgba(0,0,0,.10), transparent 60%),
-        radial-gradient(1200px 600px at 110% 50%, rgba(0,0,0,.10), transparent 60%),
-        linear-gradient(90deg, rgba(255,255,255,.78), rgba(255,255,255,.18));
-      backdrop-filter:blur(.5px);
-    }
-    .hero__inner{ position:relative; z-index:2; }
-    .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
 
-    /* --- Seasonal hero (khớp tên file Becca) --- */
-    body.season-wedding  .hero__bg{  background-image:url('assets/images/wedding/wedding_candle.jpg');  background-position:30% 35%; }
-    body.season-birthday .hero__bg{  background-image:url('assets/images/birthday/birthday_gift.jpg');   background-position:40% 40%; }
-    body.season-christmas .hero__bg{ background-image:url('assets/images/christmas/christmas_tree.jpg');  background-position:60% 45%; }
-    body.season-summer   .hero__bg{  background-image:url('assets/images/summer/summer_shell.jpg');       background-position:50% 35%; }
-
-    /* --- Sections & rails --- */
-    .section{ padding:54px 0; }
-    .section .section-head{ display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:14px; }
-    .section h2{ margin:0; }
-
-    .rail{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
-    .rail .card{ grid-column: span 3; }
-    @media (max-width:1000px){ .rail .card{ grid-column: span 6; } }
-    @media (max-width:640px){ .rail .card{ grid-column: span 12; } }
-
-    /* --- LOOKBOOK Signature (kiểu studio/OLV) --- */
+    /* ---- Signature Collections Lookbook ---- */
     .sig-lookbook{
-      display:grid; gap:16px; grid-template-columns:repeat(12,1fr);
-      grid-auto-flow:dense;
-      margin: 6px 0 18px;
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap:16px;
+      align-items:stretch;
+      margin-bottom:18px;
     }
     .sig{
-      position:relative; display:block; overflow:hidden; border-radius:18px;
-      border:1px solid var(--border); box-shadow:var(--shadow); background:#fff;
-      isolation:isolate;
+      position:relative; overflow:hidden; border-radius:18px;
+      border:1px solid var(--border); box-shadow:var(--shadow);
+      background:#fff;
     }
     .sig img{ width:100%; height:100%; object-fit:cover; display:block; }
-    /* Nhịp 7–5 để kín khung, summer dài ra */
-    .sig--xl{ grid-column:span 7; height:clamp(260px, 36vw, 440px); }
-    .sig--md{ grid-column:span 5; height:clamp(180px, 22vw, 280px); }
-    .sig--wide{ grid-column:span 7; height:clamp(180px, 22vw, 280px); } /* Summer dài */
-
     .sig .lb{
-      position:absolute; left:14px; bottom:14px;
-      background:rgba(255,255,255,.92); border:1px solid var(--border);
-      padding:8px 12px; border-radius:999px; font-weight:700;
-      box-shadow:var(--shadow);
+      position:absolute; left:12px; bottom:12px;
+      background:#fff; border:1px solid var(--border);
+      border-radius:999px; padding:8px 12px; font-weight:700;
+      color:#0040ff;
+    }
+    .sig--xl{ grid-column:1 / span 1; grid-row:1 / span 2; min-height:420px; }
+    .sig--md{ min-height:200px; }
+    .sig--wide{ grid-column:2 / span 2; min-height:240px; }
+
+    @media (max-width:1000px){
+      .sig-lookbook{ grid-template-columns: 1fr; }
+      .sig--xl, .sig--wide{ grid-column:1 / -1; grid-row:auto; min-height:260px; }
     }
 
-    /* --- Occasion tiles có ảnh --- */
-    .occasions{ display:grid; gap:16px; grid-template-columns:repeat(12,1fr); }
-    .occ{ grid-column: span 3; border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow); overflow:hidden; }
-    .occ .pic{ height:160px; background-size:cover; background-position:center; }
-    .occ .txt{ padding:14px; }
-    .occ h4{ margin:0 0 6px; }
-    @media (max-width:1000px){ .occ{grid-column: span 6} }
-    @media (max-width:640px){ .occ{grid-column: span 12} }
+    /* ---- Carousel ---- */
+    .carousel {
+      position: relative; overflow: hidden; padding: 10px 0;
+    }
+    .carousel-track {
+      display: flex; gap:16px;
+      overflow-x: auto; scroll-behavior: smooth;
+    }
+    .carousel-track::-webkit-scrollbar{ display:none; }
+    .carousel-item {
+      flex:0 0 240px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .carousel-item img{ width:100%; height:180px; object-fit:cover; }
+    .carousel-item .info{ padding:10px; }
+    .carousel-item h4{ margin:0; font-size:14px; }
+    .carousel-item p{ font-size:13px; color:#555; }
 
-    /* --- FAQ thanh lịch --- */
-    .faq{ border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; }
-    .faq details+details{ border-top:1px solid var(--border); }
-    .faq summary{ cursor:pointer; padding:16px 18px; font-weight:700; list-style:none; }
-    .faq summary::-webkit-details-marker{ display:none; }
-    .faq .a{ padding:0 18px 18px; color:var(--muted); }
+    /* Carousel arrows */
+    .carousel-btn {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(255,255,255,.9);
+      border:none; border-radius:50%;
+      width:36px; height:36px;
+      box-shadow:var(--shadow);
+      cursor:pointer; z-index:2;
+    }
+    .carousel-btn.left{ left:10px; }
+    .carousel-btn.right{ right:10px; }
+
+    /* ---- FAQ ---- */
+    .faq-section { max-width:800px; margin:40px auto; }
+    details{ border-bottom:1px solid var(--border); padding:12px 0; }
+    summary{ cursor:pointer; font-weight:600; }
+    details p{ margin:8px 0 0; color:#444; }
+
+    /* ---- Header Rebecca’s Choice ---- */
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-size:22px; font-weight:600; margin:20px;
+    }
+    .brand span{ font-family:"Satisfy", cursive; text-decoration:none; }
   </style>
 </head>
+<body>
 
-<body class="season-wedding">
-  <!-- HEADER -->
+  <!-- Header -->
   <header>
-    <div class="container nav">
-      <a class="brand" href="#">
-        <div class="logo">R</div>
-        <div style="font-family:'Satisfy',cursive; font-size:22px;">Rebecca’s Choice</div>
-      </a>
-
-      <nav class="menu">
-        <a href="#signature">Collections</a>
-        <a href="#bestsellers">Bestsellers</a>
-        <a href="#occasions">Occasions</a>
-        <a href="#arrivals">New</a>
-        <a href="about.html">Why Rebecca’s Choice</a>
-      </nav>
-
-      <div class="tools">
-        <a class="chip" href="#">Cart <span id="cart-count">0</span></a>
-      </div>
+    <div class="brand">
+      <img src="assets/logo.png" alt="Logo" style="width:32px;height:32px;border-radius:8px;">
+      <span>Rebecca's Choice</span>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero hero--bleed" id="hero">
-    <div class="hero__bg"></div>
-    <div class="hero__veil"></div>
-    <div class="container hero__inner">
-      <h1 id="hero-title">Curated Mini Gifts for Elegant Moments</h1>
-      <p class="lead" id="hero-sub">Wedding • Birthday • Christmas • Summer — gift-ready, beautifully packed.</p>
-      <div class="hero__buttons">
-        <a class="btn btn-primary" href="#signature">Shop Collections</a>
-        <a class="btn btn-outline"  href="#arrivals">Seasonal Spotlight</a>
-      </div>
+  <!-- Signature Collections -->
+  <section>
+    <h2>Signature Collections</h2>
+    <div class="sig-lookbook">
+      <a class="sig sig--xl" href="#signature" data-go="Wedding">
+        <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding">
+        <span class="lb">Wedding Collection</span>
+      </a>
+      <a class="sig sig--md" href="#signature" data-go="Birthday">
+        <img src="assets/images/birthday/birthday_cupcake.jpg" alt="Birthday">
+        <span class="lb">Birthday</span>
+      </a>
+      <a class="sig sig--md" href="#signature" data-go="Christmas">
+        <img src="assets/images/christmas/christmas_tree.jpg" alt="Christmas">
+        <span class="lb">Christmas</span>
+      </a>
+      <a class="sig sig--wide" href="#signature" data-go="Summer">
+        <img src="assets/images/summer/summer_flower.jpg" alt="Summer">
+        <span class="lb">Summer</span>
+      </a>
     </div>
   </section>
 
-  <!-- SIGNATURE COLLECTIONS -->
-  <section class="section" id="signature">
-    <div class="container">
-      <div class="section-head">
-        <h2>Signature Collections</h2>
-        <div class="filter" style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="chip filter active" data-cat="All">All</button>
-          <button class="chip filter" data-cat="Wedding">Wedding</button>
-          <button class="chip filter" data-cat="Birthday">Birthday</button>
-          <button class="chip filter" data-cat="Christmas">Christmas</button>
-          <button class="chip filter" data-cat="Summer">Summer</button>
+  <!-- Bestsellers -->
+  <section>
+    <h2>Bestsellers</h2>
+    <div class="carousel">
+      <button class="carousel-btn left" onclick="scrollCarousel(this,-1)">‹</button>
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <img src="assets/images/wedding/wedding_candle.jpg" alt="Candle">
+          <div class="info"><h4>Pearl Candle Duo</h4><p>$19.00</p></div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/summer/summer_drink.jpg" alt="Drink">
+          <div class="info"><h4>Summer Drink Set</h4><p>$22.00</p></div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/christmas/christmas_star.jpg" alt="Star">
+          <div class="info"><h4>Christmas Star</h4><p>$25.00</p></div>
         </div>
       </div>
-
-      <!-- LOOKBOOK 7–5, Summer dài ra -->
-      <div class="sig-lookbook">
-        <!-- Row 1: 7 + 5 -->
-        <a class="sig sig--xl" href="#signature" data-go="Wedding">
-          <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding">
-          <span class="lb">Wedding Collection</span>
-        </a>
-        <a class="sig sig--md" href="#signature" data-go="Birthday">
-          <img src="assets/images/birthday/birthday_cupcake.jpg" alt="Birthday">
-          <span class="lb">Birthday</span>
-        </a>
-
-        <!-- Row 2: 7 + 5 (summer dài) -->
-        <a class="sig sig--wide" href="#signature" data-go="Summer">
-          <img src="assets/images/summer/summer_flower.jpg" alt="Summer">
-          <span class="lb">Summer</span>
-        </a>
-        <a class="sig sig--md" href="#signature" data-go="Christmas">
-          <img src="assets/images/christmas/christmas_tree.jpg" alt="Christmas">
-          <span class="lb">Christmas</span>
-        </a>
-
-        <!-- Ảnh bổ sung để cân đối khi mở rộng lưới (tùy chọn) -->
-        <a class="sig sig--md" href="#bestsellers">
-          <img src="assets/images/wedding/wedding_flower.jpg" alt="Best Sellers">
-          <span class="lb">Best Sellers</span>
-        </a>
-      </div>
-
-      <!-- Grid all/filtered (vẫn giữ cho phần sản phẩm) -->
-      <div id="grid-all" class="grid"></div>
+      <button class="carousel-btn right" onclick="scrollCarousel(this,1)">›</button>
     </div>
   </section>
 
-  <!-- BESTSELLERS -->
-  <section class="section" id="bestsellers">
-    <div class="container">
-      <div class="section-head">
-        <h2>Bestsellers</h2>
-        <a class="badge" href="#signature">View all</a>
-      </div>
-      <div class="rail" id="rail-best"></div>
-    </div>
-  </section>
-
-  <!-- OCCASION GUIDES (có ảnh) -->
-  <section class="section" id="occasions">
-    <div class="container">
-      <div class="section-head"><h2>Occasion Guides</h2></div>
-      <div class="occasions">
-        <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/wedding/wedding_flower.jpg')"></div>
-          <div class="txt">
-            <h4>For Bridesmaids</h4>
-            <p class="meta">Pearl whites & blush picks</p>
-            <a class="btn btn-outline" href="#signature" data-go="Wedding">Shop Wedding</a>
-          </div>
+  <!-- New Arrivals -->
+  <section>
+    <h2>New Arrivals</h2>
+    <div class="carousel">
+      <button class="carousel-btn left" onclick="scrollCarousel(this,-1)">‹</button>
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <img src="assets/images/wedding/wedding_flower.jpg" alt="Flower">
+          <div class="info"><h4>Wedding Bloom</h4><p>$20.00</p></div>
         </div>
-        <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/summer/summer_drink.jpg')"></div>
-          <div class="txt">
-            <h4>For Him</h4>
-            <p class="meta">Understated, practical minis</p>
-            <a class="btn btn-outline" href="#signature" data-go="Birthday">Shop Birthday</a>
-          </div>
+        <div class="carousel-item">
+          <img src="assets/images/summer/summer_shell.jpg" alt="Shell">
+          <div class="info"><h4>Ocean Shell</h4><p>$15.00</p></div>
         </div>
-        <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/christmas/christmas_red_gift.jpg')"></div>
-          <div class="txt">
-            <h4>For Her</h4>
-            <p class="meta">Romantic & photogenic</p>
-            <a class="btn btn-outline" href="#signature" data-go="Christmas">Shop Christmas</a>
-          </div>
-        </div>
-        <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/birthday/birthday_gift.jpg')"></div>
-          <div class="txt">
-            <h4>For Colleagues</h4>
-            <p class="meta">Warm & friendly sets</p>
-            <a class="btn btn-outline" href="#signature" data-go="Summer">Shop Summer</a>
-          </div>
+        <div class="carousel-item">
+          <img src="assets/images/birthday/birthday_gift.jpg" alt="Gift">
+          <div class="info"><h4>Birthday Gift Box</h4><p>$30.00</p></div>
         </div>
       </div>
+      <button class="carousel-btn right" onclick="scrollCarousel(this,1)">›</button>
     </div>
   </section>
 
-  <!-- NEW ARRIVALS -->
-  <section class="section" id="arrivals">
-    <div class="container">
-      <div class="section-head">
-        <h2>New Arrivals / Seasonal Spotlight</h2>
-        <a class="badge" href="#signature">View all</a>
-      </div>
-      <div class="rail" id="rail-new"></div>
-    </div>
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>FAQ</h2>
+    <details>
+      <summary>How fast do you ship?</summary>
+      <p>We prepare within 24–48h and ship nationwide in 2–5 business days.</p>
+    </details>
+    <details>
+      <summary>Is gift wrapping included?</summary>
+      <p>Yes, all gifts come beautifully wrapped and ready to present.</p>
+    </details>
+    <details>
+      <summary>Do you customize gifts?</summary>
+      <p>Absolutely, check our Custom Gift section to build your own box.</p>
+    </details>
   </section>
 
-  <!-- CUSTOM GIFT (trước FAQ) -->
-  <section class="section" id="custom">
-    <div class="container">
-      <div class="cta-banner">
-        <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Ribbon & stationery">
-        <div class="bar">
-          <div style="font-weight:700; color:var(--brand);">Build a Box / Custom Gift</div>
-          <a class="btn btn-primary" href="collections.html">Start Building</a>
-          <a class="btn btn-outline" href="collections.html">Wedding & Corporate</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ thanh lịch -->
-  <section class="section" id="faq">
-    <div class="container">
-      <h2>FAQ</h2>
-      <div class="faq">
-        <details open>
-          <summary>How fast do you ship?</summary>
-          <div class="a">We prepare within 24–48h and ship nationwide in 2–5 business days.</div>
-        </details>
-        <details>
-          <summary>Is gift wrapping included?</summary>
-          <div class="a">Yes. All sets come gift-ready with tissue & ribbon. Add a message at checkout.</div>
-        </details>
-        <details>
-          <summary>Do you do custom/corporate gifts?</summary>
-          <div class="a">Absolutely. Head to “Build a Box / Custom Gift” and tell us your budget & timeline.</div>
-        </details>
-        <details>
-          <summary>Return & exchange?</summary>
-          <div class="a">Unopened items can be exchanged within 7 days. Custom items are final-sale.</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="wrap container">
-      <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
-      <div style="display:flex; gap:10px">
-        <a class="badge" href="about.html">About</a>
-        <a class="badge" href="#">Shipping</a>
-        <a class="badge" href="#">Returns</a>
-        <a class="badge" href="#">Contact</a>
-      </div>
-    </div>
-    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-  </footer>
-
-  <!-- SCRIPTS -->
-  <script src="assets/products.js"></script>
   <script>
-    const $=(s,ctx=document)=>ctx.querySelector(s);
-    const $$=(s,ctx=document)=>Array.from(ctx.querySelectorAll(s));
-
-    function renderProductsGrid(container, filterCat){
-      if(!container||!window.PRODUCTS) return;
-      const items = filterCat && filterCat!=='All' ? window.PRODUCTS.filter(p=>p.category===filterCat) : window.PRODUCTS;
-      container.innerHTML = items.map(p=>`
-        <article class="card">
-          <a href="product.html?id=${encodeURIComponent(p.id)}"><img src="${p.image}" alt="${p.title}"></a>
-          <div class="info">
-            <div class="badge">${p.category}</div>
-            <h3>${p.title}</h3>
-            <p class="meta">${p.desc}</p>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <span class="price">$${Number(p.price).toFixed(2)}</span>
-              <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
-            </div>
-          </div>
-        </article>`).join('');
+    function scrollCarousel(btn,dir){
+      const track = btn.parentElement.querySelector('.carousel-track');
+      track.scrollBy({left: dir*260, behavior:'smooth'});
     }
-
-    function renderRail(container, ids){
-      if(!container||!window.PRODUCTS) return;
-      const map = new Map(window.PRODUCTS.map(p=>[p.id,p]));
-      const items = ids.map(id=>map.get(id)).filter(Boolean);
-      container.innerHTML = items.map(p=>`
-        <article class="card">
-          <a href="product.html?id=${encodeURIComponent(p.id)}"><img src="${p.image}" alt="${p.title}"></a>
-          <div class="info">
-            <div class="badge">${p.category}</div>
-            <h3>${p.title}</h3>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <span class="price">$${Number(p.price).toFixed(2)}</span>
-              <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
-            </div>
-          </div>
-        </article>`).join('');
-    }
-
-    const THEME={
-      "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
-      "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Playful vibes & personalized charms" },
-      "Christmas":{ cls:"season-christmas",title:"Christmas Holiday Gifts",    sub:"Cozy bundles & winter sparkle" },
-      "Summer":   { cls:"season-summer",   title:"Summer & Friendship Gifts",  sub:"Beachy colors & sunny picks" },
-      "All":      { cls:"", title:"Curated Mini Gifts for Elegant Moments",
-                    sub:"Wedding • Birthday • Christmas • Summer — gift-ready, beautifully packed." }
-    };
-    function setSeason(key){
-      document.body.classList.remove('season-wedding','season-birthday','season-christmas','season-summer');
-      const conf=THEME[key]||THEME["All"]; if(conf.cls) document.body.classList.add(conf.cls);
-      const t=$('#hero-title'), s=$('#hero-sub'); if(t) t.textContent=conf.title; if(s) s.textContent=conf.sub;
-    }
-
-    // chờ products.js
-    function waitForProducts(cb, tries=40){
-      if (window.PRODUCTS && Array.isArray(window.PRODUCTS) && window.PRODUCTS.length){
-        cb();
-      } else if (tries>0){
-        setTimeout(()=>waitForProducts(cb, tries-1), 100);
-      } else {
-        console.warn('PRODUCTS chưa load. Kiểm tra assets/products.js');
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', ()=>{
-      setSeason('Wedding');
-
-      waitForProducts(()=>{
-        renderProductsGrid($('#grid-all'));
-
-        $$('.filter .chip').forEach(btn=>{
-          btn.addEventListener('click', ()=>{
-            $$('.filter .chip').forEach(b=>b.classList.remove('active'));
-            btn.classList.add('active');
-            const cat = btn.dataset.cat;
-            renderProductsGrid($('#grid-all'), cat);
-            setSeason(cat||'All');
-          });
-        });
-
-        $$('.sig,[data-go]').forEach(el=>{
-          el.addEventListener('click', (e)=>{
-            const cat = el.getAttribute('data-go');
-            if(cat){ e.preventDefault();
-              const chip = document.querySelector('.filter .chip[data-cat="'+cat+'"]');
-              if(chip) chip.click();
-              document.getElementById('signature').scrollIntoView({behavior:'smooth'});
-            }
-          });
-        });
-
-        const bestIDs = ['wed-candle','bday-gift','xmas-tree','sum-flower','wed-box','bday-cupcake'];
-        const newIDs  = ['xmas-red','sum-drink','bday-candle','wed-flower','xmas-snow','sum-shell'];
-        renderRail($('#rail-best'), bestIDs);
-        renderRail($('#rail-new'), newIDs);
-      });
-    });
   </script>
+
 </body>
 </html>
