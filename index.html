@@ -12,32 +12,34 @@
   <!-- Base styles -->
   <link rel="stylesheet" href="assets/styles.css">
 
-  <!-- Inline overrides just for this page -->
   <style>
     :root{
-      --brand:#0b2a42; /* giữ màu nhận diện */
-      --rail-btn-bg: rgba(255,255,255,.92);
-      --rail-btn-bd: rgba(10,30,60,.18);
+      --brand:#0b2a42;
+      --border:rgba(10,30,60,.12);
+      --shadow:0 6px 18px rgba(10,30,60,.08);
+      --muted:#667085;
     }
 
-    html,body{overflow-x:hidden;}
+    html,body{overflow-x:hidden; margin:0; font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+    img{max-width:100%; display:block}
 
-    /* Header: bỏ logo R, chỉ chữ, không gạch dưới */
+    /* Header */
     header .brand{
-      display:flex; align-items:center; gap:10px;
       text-decoration:none !important;
-      font-family:"Satisfy", system-ui, -apple-system, "Inter", sans-serif;
-      font-weight:400; font-size:28px; letter-spacing:.2px; color:var(--brand);
+      color:var(--brand);
+      font-family:"Satisfy",cursive;
+      font-weight:400;
+      font-size:28px;
+      letter-spacing:.15px;
     }
-    header .brand:focus{outline:none;}
+    header .brand:hover, header .brand:focus{ text-decoration:none; outline:0; }
 
-    /* Hero (mỏng, full width như trước) */
+    /* HERO mỏng + full width */
     body > .hero.hero--bleed{
-      width:100% !important; margin:0 !important; left:0 !important; right:0 !important;
-      position:relative; display:block !important; border:0 !important; border-radius:0 !important; box-shadow:none !important;
-      background:transparent !important; overflow:hidden;
+      position:relative; width:100%; margin:0; border:0; border-radius:0; box-shadow:none;
       min-height:clamp(120px, 18vw, 240px);
-      padding:clamp(28px,4.5vw,48px) 0;
+      padding: clamp(28px,4.5vw,48px) 0;
+      background:transparent; overflow:hidden;
     }
     .hero--bleed .hero__bg,.hero--bleed .hero__veil{position:absolute; inset:0;}
     .hero--bleed .hero__bg{background-size:cover; background-position:center; filter:saturate(106%) contrast(104%) brightness(100%);}
@@ -48,74 +50,113 @@
         linear-gradient(90deg, rgba(255,255,255,.78), rgba(255,255,255,.18));
       backdrop-filter:blur(.5px);
     }
-    .hero__inner{position:relative; z-index:2;}
-    .hero__buttons{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;}
+    .hero__inner{ position:relative; z-index:2; }
+    .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
 
-    /* Seasonal hero (khớp tên file Becca đã upload) */
-    body.season-wedding  .hero__bg{  background-image:url('assets/images/wedding/wedding_candle.jpg');  background-position:30% 35%;}
-    body.season-birthday .hero__bg{  background-image:url('assets/images/birthday/birthday_gift.jpg');   background-position:40% 40%;}
-    body.season-christmas .hero__bg{ background-image:url('assets/images/christmas/christmas_tree.jpg');  background-position:60% 45%;}
-    body.season-summer   .hero__bg{  background-image:url('assets/images/summer/summer_shell.jpg');       background-position:50% 35%;}
+    /* Seasonal hero images (khớp tên file) */
+    body.season-wedding  .hero__bg{  background-image:url('assets/images/wedding/wedding_candle.jpg');  background-position:30% 35%; }
+    body.season-birthday .hero__bg{  background-image:url('assets/images/birthday/birthday_gift.jpg');   background-position:40% 40%; }
+    body.season-christmas .hero__bg{ background-image:url('assets/images/christmas/christmas_tree.jpg');  background-position:60% 45%; }
+    body.season-summer   .hero__bg{  background-image:url('assets/images/summer/summer_shell.jpg');       background-position:50% 35%; }
 
-    /* Signature lookbook masonry (giữ như bản đẹp trước) */
-    .sig-lookbook{
-      display:grid; grid-template-columns:2.1fr 1fr 1fr; gap:18px; margin:8px 0 18px;
-    }
-    .sig{position:relative; display:block; overflow:hidden; border-radius:18px; border:1px solid var(--border); box-shadow:var(--shadow);}
-    .sig img{width:100%; height:100%; object-fit:cover; display:block;}
-    .sig--xl{grid-row:span 2; min-height:440px;}
-    .sig--md{min-height:210px;}
-    .sig .lb{
-      position:absolute; left:12px; bottom:12px;
-      background:rgba(255,255,255,.96); border:1px solid var(--border);
-      padding:8px 12px; border-radius:999px; font-weight:700; color:#111;
-    }
-    @media (max-width:980px){
-      .sig-lookbook{grid-template-columns:1fr 1fr;}
-      .sig--xl{grid-row:span 1;}
-    }
-    @media (max-width:640px){
-      .sig-lookbook{grid-template-columns:1fr;}
-    }
-
-    /* Rails (carousel) — ẨN HOÀN TOÀN thanh kéo ngang */
-    .rail-wrap{position:relative;}
-    .rail{
-      display:grid; grid-auto-flow:column; grid-auto-columns:minmax(260px, 280px);
-      gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:2px;
-      -ms-overflow-style:none; scrollbar-width:none;
-    }
-    .rail::-webkit-scrollbar{display:none;}
-    .rail .card{scroll-snap-align:start;}
-
-    /* Nút mũi tên */
-    .rail-btn{
-      position:absolute; top:50%; transform:translateY(-50%);
-      height:40px; width:40px; display:grid; place-items:center;
-      border-radius:999px; border:1px solid var(--rail-btn-bd);
-      background:var(--rail-btn-bg); box-shadow:0 6px 18px rgba(0,0,0,.08);
-      cursor:pointer; user-select:none;
-    }
-    .rail-btn:focus{outline:none;}
-    .rail-btn.prev{left:-6px;}
-    .rail-btn.next{right:-6px;}
-    .rail-btn svg{width:20px; height:20px; fill:#111;}
-
-    /* Occasion cards có ảnh (đã chuyển sang có hình) */
-    .occasions{ display:grid; gap:14px; grid-template-columns:repeat(12,1fr);}
-    .occ{ grid-column: span 3; border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow); overflow:hidden;}
-    .occ .pic{height:160px; background-size:cover; background-position:center;}
-    .occ .txt{ padding:16px; }
-    .occ h4{margin:0 0 6px;}
-    @media (max-width:1000px){ .occ{grid-column:span 6;} }
-    @media (max-width:640px){ .occ{grid-column:span 12;} }
-
-    /* Section spacing giữ như cũ */
+    /* Section spacing */
     .section{ padding:54px 0; }
     .section .section-head{ display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:14px; }
     .section h2{ margin:0; }
 
-    /* FAQ thanh lịch (giữ kiểu cũ) */
+    /* LOOKBOOK masonry – KHÔNG ĐỂ Ô TRẮNG */
+    .sig-lookbook{
+      display:grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 210px 210px 210px;
+      grid-template-areas:
+        "A B"
+        "A C"
+        "A D";
+      gap:18px; margin:6px 0 18px;
+    }
+    .sig{position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow);}
+    .sig img{width:100%; height:100%; object-fit:cover;}
+    .sig .lb{
+      position:absolute; left:12px; bottom:12px;
+      background:rgba(255,255,255,.96);
+      border:1px solid var(--border);
+      padding:8px 12px; border-radius:999px; font-weight:700; color:#111;
+    }
+    .sig--wedding{ grid-area:A; min-height:100%; }
+    .sig--birthday{ grid-area:B; }
+    .sig--christmas{ grid-area:C; }
+    .sig--summer{ grid-area:D; }
+
+    @media (max-width:980px){
+      .sig-lookbook{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 220px;
+        grid-template-areas:
+          "A A"
+          "B C";
+      }
+      .sig--summer{ display:none; }
+    }
+    @media (max-width:640px){
+      .sig-lookbook{
+        grid-template-columns: 1fr;
+        grid-template-rows: 220px 180px 180px 180px;
+        grid-template-areas:
+          "A"
+          "B"
+          "C"
+          "D";
+      }
+      .sig--summer{ display:block; }
+    }
+
+    /* GRID sản phẩm */
+    .grid{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
+    .grid .card{ grid-column:span 3; border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow); overflow:hidden; }
+    .grid .card img{width:100%; height:210px; object-fit:cover;}
+    .grid .card .info{ padding:14px; }
+    .grid .card .badge{ font-size:12px; padding:4px 8px; background:#f1f5f9; border-radius:999px; display:inline-block; margin-bottom:8px; }
+    .grid .card h3{ margin:6px 0 10px; font-size:16px; }
+    .grid .card .meta{ color:var(--muted); font-size:14px; margin:0 0 12px; }
+    .price{ font-weight:700; }
+    @media (max-width:1000px){ .grid .card{ grid-column:span 6; } }
+    @media (max-width:640px){ .grid .card{ grid-column:span 12; } }
+
+    /* Carousel rails: ẩn hoàn toàn scrollbar */
+    .rail-wrap{ position:relative; }
+    .rail{
+      display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding:2px 2px 4px;
+      scrollbar-width:none;
+    }
+    .rail::-webkit-scrollbar{ display:none; }
+    .rail .card{ min-width:280px; max-width:280px; scroll-snap-align:start; border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow); overflow:hidden; }
+    .rail .card img{ width:100%; height:180px; object-fit:cover; }
+    .rail .card .info{ padding:14px; }
+    .rail .card .badge{ font-size:12px; padding:4px 8px; background:#f1f5f9; border-radius:999px; display:inline-block; margin-bottom:8px; }
+
+    .rail-btn{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:40px; height:40px; display:grid; place-items:center;
+      background:rgba(255,255,255,.95); border:1px solid var(--border); border-radius:999px; box-shadow:var(--shadow);
+      cursor:pointer; user-select:none;
+    }
+    .rail-btn svg{ width:18px; height:18px; fill:#111; }
+    .rail-btn.prev{ left:-6px; }
+    .rail-btn.next{ right:-6px; }
+
+    /* Occasion cards có ảnh */
+    .occasions{ display:grid; gap:14px; grid-template-columns:repeat(12,1fr); }
+    .occ{ grid-column:span 3; border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow); overflow:hidden; }
+    .occ .pic{ height:160px; background-size:cover; background-position:center; }
+    .occ .txt{ padding:16px; }
+    .occ h4{ margin:0 0 6px; }
+    @media (max-width:1000px){ .occ{ grid-column:span 6; } }
+    @media (max-width:640px){ .occ{ grid-column:span 12; } }
+
+    /* FAQ thanh lịch */
     .faq{ border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; }
     .faq details+details{ border-top:1px solid var(--border); }
     .faq summary{ cursor:pointer; padding:14px 16px; font-weight:700; list-style:none; }
@@ -172,32 +213,32 @@
         </div>
       </div>
 
-      <!-- Lookbook kiểu OLV -->
+      <!-- LOOKBOOK (không còn khoảng trắng) -->
       <div class="sig-lookbook" style="margin-bottom:18px">
-        <a class="sig sig--xl" href="#signature" data-go="Wedding">
+        <a class="sig sig--wedding" href="#signature" data-go="Wedding">
           <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding">
           <span class="lb">Wedding Collection</span>
         </a>
-        <a class="sig sig--md" href="#signature" data-go="Birthday">
+        <a class="sig sig--birthday" href="#signature" data-go="Birthday">
           <img src="assets/images/birthday/birthday_cupcake.jpg" alt="Birthday">
           <span class="lb">Birthday</span>
         </a>
-        <a class="sig sig--md" href="#signature" data-go="Christmas">
+        <a class="sig sig--christmas" href="#signature" data-go="Christmas">
           <img src="assets/images/christmas/christmas_tree.jpg" alt="Christmas">
           <span class="lb">Christmas</span>
         </a>
-        <a class="sig sig--md" href="#signature" data-go="Summer">
+        <a class="sig sig--summer" href="#signature" data-go="Summer">
           <img src="assets/images/summer/summer_flower.jpg" alt="Summer">
           <span class="lb">Summer</span>
         </a>
       </div>
 
-      <!-- Product grid theo filter -->
+      <!-- GRID theo filter -->
       <div id="grid-all" class="grid"></div>
     </div>
   </section>
 
-  <!-- BESTSELLERS (carousel, ẩn scrollbar, có mũi tên) -->
+  <!-- BESTSELLERS (carousel) -->
   <section class="section" id="bestsellers">
     <div class="container">
       <div class="section-head">
@@ -217,7 +258,7 @@
     </div>
   </section>
 
-  <!-- OCCASION GUIDES (có ảnh) -->
+  <!-- OCCASION GUIDES -->
   <section class="section" id="occasions">
     <div class="container">
       <div class="section-head"><h2>Occasion Guides</h2></div>
@@ -258,7 +299,7 @@
     </div>
   </section>
 
-  <!-- NEW ARRIVALS (carousel, ẩn scrollbar, có mũi tên) -->
+  <!-- NEW ARRIVALS (carousel) -->
   <section class="section" id="arrivals">
     <div class="container">
       <div class="section-head">
@@ -278,7 +319,7 @@
     </div>
   </section>
 
-  <!-- BUILD A BOX / CUSTOM GIFT -->
+  <!-- BUILD A BOX -->
   <section class="section" id="custom">
     <div class="container">
       <div class="cta-banner">
@@ -351,7 +392,7 @@
           <div class="info">
             <div class="badge">${p.category}</div>
             <h3>${p.title}</h3>
-            <p class="meta">${p.desc}</p>
+            <p class="meta">${p.desc||''}</p>
             <div style="display:flex;align-items:center;justify-content:space-between">
               <span class="price">$${Number(p.price).toFixed(2)}</span>
               <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
@@ -392,8 +433,8 @@
       const t=$('#hero-title'), s=$('#hero-sub'); if(t) t.textContent=conf.title; if(s) s.textContent=conf.sub;
     }
 
-    // Đợi products load
-    function waitForProducts(cb, tries=40){
+    // Đợi products load để tránh rail trống
+    function waitForProducts(cb, tries=60){
       if (window.PRODUCTS && Array.isArray(window.PRODUCTS) && window.PRODUCTS.length){
         cb();
       } else if (tries>0){
@@ -403,15 +444,16 @@
       }
     }
 
-    // Nút mũi tên carousel
+    // Nút mũi tên cho carousel
     function hookRailButtons(){
       $$('.rail-btn').forEach(btn=>{
         const targetId = btn.getAttribute('data-for');
         const rail = document.getElementById(targetId);
         if(!rail) return;
         btn.addEventListener('click', ()=>{
-          const delta = (btn.classList.contains('next') ? 1 : -1) * (rail.clientWidth * 0.9);
-          rail.scrollBy({left: delta, behavior:'smooth'});
+          const card = rail.querySelector('.card');
+          const step = card ? (card.getBoundingClientRect().width + 18) : (rail.clientWidth*0.9);
+          rail.scrollBy({left: (btn.classList.contains('next')? step : -step), behavior:'smooth'});
         });
       });
     }
@@ -435,7 +477,7 @@
           });
         });
 
-        // Shortcuts
+        // Lookbook & occasion -> filter
         $$('.sig,[data-go]').forEach(el=>{
           el.addEventListener('click', (e)=>{
             e.preventDefault();
@@ -446,7 +488,7 @@
           });
         });
 
-        // Rails data (không có lưới Summer 3 thẻ nữa)
+        // Rails
         const bestIDs = ['wed-candle','bday-gift','xmas-tree','sum-flower','wed-box','bday-cupcake'];
         const newIDs  = ['xmas-red','sum-drink','bday-candle','wed-flower','xmas-snow','sum-shell'];
         renderRail($('#rail-best'), bestIDs);
