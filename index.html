@@ -81,7 +81,8 @@
     @media (max-width:640px){
       .sig--birthday,.sig--christmas,.sig--summer{ grid-column:span 12; }
     }
-     /* Filter chips */
+
+    /* Filter chips */
     .chips{ display:flex; gap:8px; flex-wrap:wrap; }
     .chip{ background:var(--chip); border:1px solid var(--border); padding:8px 12px; border-radius:999px; cursor:pointer; }
     .chip.active{ background:#1a2140; color:#fff; border-color:#1a2140; }
@@ -90,8 +91,8 @@
     .carousel-wrap{ position:relative; }
     .carousel{
       display:flex; gap:18px; overflow-x:auto; scroll-snap-type:inline mandatory; padding:4px 0 8px;
-      -ms-overflow-style:none;       /* IE, Edge cũ */
-      scrollbar-width:none;          /* Firefox */
+      -ms-overflow-style:none;             /* IE, Edge cũ */
+      scrollbar-width:none;                /* Firefox */
     }
     .carousel::-webkit-scrollbar{ display:none; } /* Chrome/Safari ẩn thanh kéo */
     .carousel .card{
@@ -131,7 +132,7 @@
     .faq details+details{ border-top:1px solid var(--border); }
     .faq summary{ cursor:pointer; padding:16px 18px; font-weight:700; list-style:none; color:#0f2742; }
     .faq summary::-webkit-details-marker{ display:none; }
-    .faq .a{ padding:0 18px 18px; color:var(--muted); }
+    .faq .a{ padding:0 18px 18px; color:#999; }
 
     /* Buttons & badges */
     .badge{ display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid var(--border); color:var(--brand); text-decoration:none; }
@@ -140,14 +141,37 @@
     .btn-outline{ border:1px solid #1a2140; color:#1a2140; }
     .price{ font-weight:700; color:#1a2140; }
 
-    /* ===== FOOTER (full-bleed) ===== */
-    footer{ background:var(--brand); color:#fff; width:100%; }
-    footer .wrap{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:18px 24px; border-top:1px solid rgba(255,255,255,0.2);
-      max-width:1200px; margin:0 auto;
+    /* ===== Xoá khoảng trắng trước footer (nhẹ) ===== */
+    #faq.section{ padding-bottom:16px; }
+    .section:last-of-type{ padding-bottom:16px; }
+
+    /* ===== FOOTER (đã chỉnh) ===== */
+    footer{
+      background: var(--brand);  /* full-bleed */
+      color:#fff;
+      width:100%;
     }
-    footer .badge{ background:transparent; border:1px solid rgba(255,255,255,.5); color:#fff; }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      padding:18px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      border-top:1px solid rgba(255,255,255,.2);
+    }
+    footer .links{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    footer .links a{
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.55);
+      color:#fff;
+      background:transparent;
+    }
   </style>
 </head>
 
@@ -220,7 +244,6 @@
           <span class="lb">Summer</span>
         </a>
       </div>
-
 
   <!-- BESTSELLERS (carousel) -->
   <section class="section" id="bestsellers">
@@ -344,15 +367,15 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (đã chỉnh) -->
   <footer>
-    <div class="wrap">
+    <div class="footer-inner">
       <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
-      <div style="display:flex; gap:10px">
-        <a class="badge" href="about.html">About</a>
-        <a class="badge" href="#">Shipping</a>
-        <a class="badge" href="#">Returns</a>
-        <a class="badge" href="#">Contact</a>
+      <div class="links">
+        <a href="about.html">About</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact</a>
       </div>
     </div>
     <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
@@ -364,11 +387,9 @@
     const $=(s,ctx=document)=>ctx.querySelector(s);
     const $$=(s,ctx=document)=>Array.from(ctx.querySelectorAll(s));
 
-    /* cart count (optional) */
     function getCart(){ try{return JSON.parse(localStorage.getItem('cart')||'[]')}catch{return[]} }
     function updateCartCount(){ const c=getCart().reduce((s,it)=>s+it.qty,0); const el=$('#cart-count'); if(el) el.textContent=c; }
 
-    /* render product grid (signature list) */
     function renderProductsGrid(container, filterCat){
       if(!container||!window.PRODUCTS) return;
       const items = filterCat && filterCat!=='All' ? window.PRODUCTS.filter(p=>p.category===filterCat) : window.PRODUCTS;
@@ -387,7 +408,6 @@
         </article>`).join('');
     }
 
-    /* render rail for carousels */
     function renderRail(container, ids){
       if(!container||!window.PRODUCTS) return;
       const map = new Map(window.PRODUCTS.map(p=>[p.id,p]));
@@ -406,7 +426,6 @@
         </article>`).join('');
     }
 
-    /* seasonal hero text */
     const THEME={
       "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
       "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Playful vibes & personalized charms" },
@@ -421,7 +440,6 @@
       const t=$('#hero-title'), s=$('#hero-sub'); if(t) t.textContent=conf.title; if(s) s.textContent=conf.sub;
     }
 
-    /* wait for products */
     function waitForProducts(cb, tries=40){
       if (window.PRODUCTS && Array.isArray(window.PRODUCTS) && window.PRODUCTS.length){
         cb();
@@ -432,7 +450,6 @@
       }
     }
 
-    /* arrow scroll for carousels */
     function bindCarouselArrows(){
       $$('.caro-btn').forEach(btn=>{
         btn.addEventListener('click', ()=>{
@@ -450,20 +467,17 @@
       setSeason('Wedding');
 
       waitForProducts(()=>{
-        /* signature product grid */
-    
-        /* filter chips */
+        /* (Nếu cần) renderProductsGrid($('#grid-all')); */
+
         $$('.filter').forEach(btn=>{
           btn.addEventListener('click', ()=>{
             $$('.filter').forEach(b=>b.classList.remove('active'));
             btn.classList.add('active');
             const cat = btn.dataset.cat;
-        
             setSeason(cat||'All');
           });
         });
 
-        /* shortcuts (lookbook & occasion) */
         $$('.sig,[data-go]').forEach(el=>{
           el.addEventListener('click', (e)=>{
             e.preventDefault();
@@ -474,7 +488,6 @@
           });
         });
 
-        /* rails */
         const bestIDs = ['wed-candle','bday-gift','xmas-tree','sum-flower','wed-box','bday-cupcake'];
         const newIDs  = ['xmas-red','sum-drink','bday-candle','wed-flower','xmas-snow','sum-shell'];
         renderRail($('#caro-best'), bestIDs);
