@@ -22,15 +22,19 @@
       --chip:#eef2f5;
       --pill-bg: rgba(255,255,255,.92);
     }
-    html, body{ overflow-x:hidden; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";}
+    html, body{ overflow-x:hidden; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";}
     .container{max-width:1200px; margin:0 auto; padding:0 16px;}
 
-    /* ===== Header ===== */ 
-    header{ position:sticky; top:0; z-index:20; backdrop-filter:saturate(180%) blur(6px); background:rgba(255,255,255,.86); border-bottom:1px solid var(--border);}
+    /* ===== Header (fixed on scroll) ===== */
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(180%) blur(6px);
+      background:rgba(255,255,255,.92);
+      border-bottom:1px solid var(--border);
+    }
     header .nav{ display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:60px; }
     .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--brand); }
-    .brand .logo{ width:36px; height:36px; border-radius:10px; display:grid; place-items:center; background:linear-gradient(145deg,#273f3a,#b7a253); color:#fff; font-weight:700;}
-    .brand .title{ font-family:"Satisfy", cursive; font-size:26px; line-height:1; text-decoration:none; }
+    .brand .title{ font-family:"Satisfy", cursive; font-size:28px; line-height:1; font-weight:700; text-decoration:none; }
     .menu{ display:flex; gap:16px; flex-wrap:wrap; }
     .menu a{ color:var(--brand); text-decoration:none; padding:8px 10px; border-radius:999px; }
     .menu a:hover{ background:var(--chip); }
@@ -50,7 +54,7 @@
     .hero__inner{ position:relative; z-index:2; }
     .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
 
-    /* seasonal hero images (khớp repo) */
+    /* seasonal hero images */
     body.season-wedding  .hero__bg{  background-image:url('assets/images/wedding/wedding_candle.jpg');  background-position:30% 35%; }
     body.season-birthday .hero__bg{  background-image:url('assets/images/birthday/birthday_gift.jpg');   background-position:40% 40%; }
     body.season-christmas .hero__bg{ background-image:url('assets/images/christmas/christmas_tree.jpg');  background-position:60% 45%; }
@@ -61,17 +65,11 @@
     .section .section-head{ display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:16px; }
     .section h2{ margin:0; }
 
-    /* ===== Signature LOOKBOOK grid (giống bố cục bạn muốn) ===== */
-    .sig-grid{
-      display:grid; gap:18px;
-      grid-template-columns:repeat(12,1fr);
-    }
-    .sig{
-      position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); display:block;
-    }
+    /* ===== Signature LOOKBOOK grid (1 lớn + 2 nhỏ + Summer kéo dài) ===== */
+    .sig-grid{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
+    .sig{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); display:block; }
     .sig img{ width:100%; height:100%; object-fit:cover; display:block; }
     .sig .lb{ position:absolute; left:14px; bottom:14px; background:var(--pill-bg); border:1px solid var(--border); border-radius:999px; padding:8px 12px; font-weight:700; color:#1a2140; }
-    /* Layout: 12 cột — Wedding 6c/2h; Birthday 3c; Christmas 3c; Summer chiếm toàn bộ phần trống bên dưới (6c) */
     .sig--wedding{ grid-column:span 6; grid-row:span 2; min-height:520px; }
     .sig--birthday{ grid-column:span 3; min-height:250px; }
     .sig--christmas{ grid-column:span 3; min-height:250px; }
@@ -84,7 +82,14 @@
       .sig--birthday,.sig--christmas,.sig--summer{ grid-column:span 12; }
     }
 
- 
+    /* ===== Product grid (All/filtered) ===== */
+    .grid{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
+    .grid .card{ grid-column: span 3; border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; box-shadow:var(--shadow); }
+    .grid .card img{ width:100%; height:200px; object-fit:cover; display:block; }
+    .grid .info{ padding:12px 14px; }
+    @media (max-width:1000px){ .grid .card{ grid-column: span 6; } }
+    @media (max-width:640px){ .grid .card{ grid-column: span 12; } }
+
     /* Filter chips */
     .chips{ display:flex; gap:8px; flex-wrap:wrap; }
     .chip{ background:var(--chip); border:1px solid var(--border); padding:8px 12px; border-radius:999px; cursor:pointer; }
@@ -93,8 +98,11 @@
     /* ===== Carousel (Bestsellers / New Arrivals) ===== */
     .carousel-wrap{ position:relative; }
     .carousel{
-      display:flex; gap:18px; overflow-x:hidden; scroll-snap-type:inline mandatory; padding:4px 0 8px;
+      display:flex; gap:18px; overflow-x:auto; scroll-snap-type:inline mandatory; padding:4px 0 8px;
+      -ms-overflow-style:none;       /* IE, Edge cũ */
+      scrollbar-width:none;          /* Firefox */
     }
+    .carousel::-webkit-scrollbar{ display:none; } /* Chrome/Safari ẩn thanh kéo */
     .carousel .card{
       flex:0 0 clamp(240px, 26vw, 280px);
       scroll-snap-align:start;
@@ -119,7 +127,7 @@
       background:var(--pill-bg); border:1px solid var(--border); border-radius:14px; padding:12px 14px;
     }
 
-    /* ===== Occasion WITH image (đẹp & gọn) ===== */
+    /* ===== Occasion WITH image ===== */
     .occasions{ display:grid; gap:14px; grid-template-columns:repeat(12,1fr); }
     .occ{ grid-column: span 3; border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; box-shadow:var(--shadow); }
     .occ .pic{ height:140px; background-size:cover; background-position:center; }
@@ -127,39 +135,28 @@
     @media (max-width:1000px){ .occ{ grid-column:span 6; } }
     @media (max-width:640px){ .occ{ grid-column:span 12; } }
 
-    /* ===== FAQ (thanh lịch) ===== */
+    /* ===== FAQ ===== */
     .faq{ border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; }
     .faq details+details{ border-top:1px solid var(--border); }
     .faq summary{ cursor:pointer; padding:16px 18px; font-weight:700; list-style:none; color:#0f2742; }
     .faq summary::-webkit-details-marker{ display:none; }
     .faq .a{ padding:0 18px 18px; color:var(--muted); }
 
-    /* Tiny helpers */
+    /* Buttons & badges */
     .badge{ display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid var(--border); color:var(--brand); text-decoration:none; }
     .btn{ display:inline-block; padding:10px 14px; border-radius:999px; text-decoration:none; }
     .btn-primary{ background:#c5a020; color:#1a2140; font-weight:700; }
     .btn-outline{ border:1px solid #1a2140; color:#1a2140; }
     .price{ font-weight:700; color:#1a2140; }
-    /* ===== FOOTER ===== */
-footer {
-  background: var(--brand);   /* màu nền đậm */
-  color: #fff;
-  width: 100%;
-}
-footer .wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 18px 24px;
-  border-top: 1px solid rgba(255,255,255,0.2);
-}
-footer .badge {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.5);
-  color: #fff;
-}
 
+    /* ===== FOOTER (full-bleed) ===== */
+    footer{ background:var(--brand); color:#fff; width:100%; }
+    footer .wrap{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:18px 24px; border-top:1px solid rgba(255,255,255,0.2);
+      max-width:1200px; margin:0 auto;
+    }
+    footer .badge{ background:transparent; border:1px solid rgba(255,255,255,.5); color:#fff; }
   </style>
 </head>
 
@@ -175,7 +172,7 @@ footer .badge {
         <a href="#signature">Collections</a>
         <a href="#bestsellers">Bestsellers</a>
         <a href="#occasions">Occasions</a>
-        <a href="#arrivals">New Arrival</a>
+        <a href="#arrivals">New</a>
         <a href="about.html">Why Rebecca’s Choice</a>
       </nav>
 
@@ -213,7 +210,7 @@ footer .badge {
         </div>
       </div>
 
-      <!-- Lookbook layout you wanted -->
+      <!-- Lookbook layout -->
       <div class="sig-grid" style="margin-bottom:18px">
         <a class="sig sig--wedding" href="#signature" data-go="Wedding">
           <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding">
@@ -232,6 +229,11 @@ footer .badge {
           <span class="lb">Summer</span>
         </a>
       </div>
+
+      <!-- Grid All / Filter -->
+      <div id="grid-all" class="grid"></div>
+    </div>
+  </section> <!-- đóng #signature đúng chỗ -->
 
   <!-- BESTSELLERS (carousel) -->
   <section class="section" id="bestsellers">
@@ -253,7 +255,7 @@ footer .badge {
     </div>
   </section>
 
-  <!-- OCCASION GUIDES (có ảnh) -->
+  <!-- OCCASION GUIDES -->
   <section class="section" id="occasions">
     <div class="container">
       <div class="section-head">
@@ -356,19 +358,18 @@ footer .badge {
   </section>
 
   <!-- FOOTER -->
-<footer>
-  <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:18px 24px; border-top:1px solid var(--border);">
-    <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
-    <div style="display:flex; gap:10px">
-      <a class="badge" href="about.html">About</a>
-      <a class="badge" href="#">Shipping</a>
-      <a class="badge" href="#">Returns</a>
-      <a class="badge" href="#">Contact</a>
+  <footer>
+    <div class="wrap">
+      <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
+      <div style="display:flex; gap:10px">
+        <a class="badge" href="about.html">About</a>
+        <a class="badge" href="#">Shipping</a>
+        <a class="badge" href="#">Returns</a>
+        <a class="badge" href="#">Contact</a>
+      </div>
     </div>
-  </div>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-</footer>
-
+    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  </footer>
 
   <!-- SCRIPTS -->
   <script src="assets/products.js"></script>
@@ -476,7 +477,7 @@ footer .badge {
           });
         });
 
-        /* shortcut clicks (lookbook + occasion) */
+        /* shortcuts (lookbook & occasion) */
         $$('.sig,[data-go]').forEach(el=>{
           el.addEventListener('click', (e)=>{
             e.preventDefault();
@@ -492,7 +493,6 @@ footer .badge {
         const newIDs  = ['xmas-red','sum-drink','bday-candle','wed-flower','xmas-snow','sum-shell'];
         renderRail($('#caro-best'), bestIDs);
         renderRail($('#caro-new'), newIDs);
-
         bindCarouselArrows();
       });
     });
