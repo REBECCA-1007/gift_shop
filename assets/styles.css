@@ -108,12 +108,39 @@ footer .wrap{ display:flex; align-items:center; justify-content:space-between; g
 .occ h4{margin:0 0 6px;}
 @media (max-width:1000px){ .occ{grid-column:span 6} }
 @media (max-width:640px){ .occ{grid-column:span 12} .occ .pic{height:130px} }
-/* Ẩn thanh scroll ngang trong carousel */
-.rail {
-  overflow-x: auto;
-  scrollbar-width: none;      /* Firefox */
-  -ms-overflow-style: none;   /* IE/Edge cũ */
+/* 1) Bọc mọi carousel bằng .rail-wrap để giấu bar của phần tử ngoài */
+.rail-wrap {
+  overflow: hidden;               /* Ẩn thanh kéo của wrapper */
+  position: relative;
 }
-.rail::-webkit-scrollbar {
-  display: none;              /* Chrome, Safari */
+
+/* 2) Phần tử thực sự cuộn là .rail – vẫn cuộn được, nhưng không hiện thanh */
+.rail {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 18px;
+
+  overflow-x: auto;
+  scroll-behavior: smooth;
+
+  /* Ẩn scrollbar (Chrome/Safari/Edge/Firefox/IE) */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge cũ */
+}
+.rail::-webkit-scrollbar {        /* Chrome/Safari/Edge mới */
+  height: 0;
+  width: 0;
+  display: none;
+}
+
+/* 3) Thủ thuật Windows: đẩy “kênh” scrollbar ra ngoài vùng nhìn thấy */
+.rail {
+  padding-bottom: 16px;           /* tạo đệm cho nội dung */
+  margin-bottom: -16px;           /* kéo scrollbar ra ngoài khung */
+}
+
+/* 4) Nếu từng set gutter ổn định, hủy nó ở carousel */
+.rail,
+.rail-wrap {
+  scrollbar-gutter: auto !important;
 }
