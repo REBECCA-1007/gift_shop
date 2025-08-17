@@ -3,24 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Elegant Gift Shop — Signature Gifts</title>
-  <meta name="description" content="Mini gifts for Wedding, Birthday, Christmas and Summer. Boutique packaging, handcrafted details.">
+  <title>Rebecca’s Choice — Signature Gifts</title>
+  <meta name="description" content="Curated mini gifts for Wedding, Birthday, Christmas and Summer. Boutique packaging, handcrafted details.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
 
-  <!-- Inline overrides: đảm bảo HERO full-width đúng ý Becca -->
+  <!-- Inline overrides: HERO full-width gọn, các block mới -->
   <style>
     html, body { overflow-x:hidden; margin:0; }
 
-    /* === HERO full-width: không dùng mẹo 100vw gây lệch, phủ toàn trang === */
+    /* === HERO full-width (ngắn như Becca muốn) === */
     body > .hero.hero--bleed{
-      width: 100% !important;
-      left: 0 !important; right: 0 !important; margin: 0 !important;
-      display:block !important; border:0 !important; border-radius:0 !important; box-shadow:none !important;
-      background:transparent !important;
-      position:relative; overflow:hidden;
-      min-height:clamp(80px, 12vw, 160px);
-      padding:clamp(56px, 8vw, 92px) 0;
+      width: 100% !important; margin:0 !important; left:0 !important; right:0 !important;
+      position:relative; display:block !important; border:0 !important; border-radius:0 !important; box-shadow:none !important;
+      background:transparent !important; overflow:hidden;
+      min-height:clamp(80px, 12vw, 160px);     /* <- chiều cao ngắn */
+      padding: clamp(28px, 4.5vw, 48px) 0;     /* padding gọn */
     }
     .hero--bleed .hero__bg,
     .hero--bleed .hero__veil{ position:absolute; inset:0; }
@@ -32,72 +30,110 @@
       background:
         radial-gradient(1200px 600px at -10% 50%, rgba(0,0,0,.10), transparent 60%),
         radial-gradient(1200px 600px at 110% 50%, rgba(0,0,0,.10), transparent 60%),
-        linear-gradient(90deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.62) 34%, rgba(255,255,255,.40) 55%, rgba(255,255,255,.18) 100%);
+        linear-gradient(90deg, rgba(255,255,255,.78), rgba(255,255,255,.18));
       backdrop-filter: blur(.5px);
     }
     .hero__inner{ position:relative; z-index:2; }
-    .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+    .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
 
-    /* Ảnh hero theo mùa — trỏ ĐÚNG file .jpg trong repo của Becca */
+    /* Seasonal hero backgrounds (KHỚP repo .jpg) */
     body.season-wedding  .hero__bg{  background-image:url('assets/images/wedding/wedding_candle.jpg');  background-position:30% 35%; }
     body.season-birthday .hero__bg{  background-image:url('assets/images/birthday/birthday_gift.jpg');   background-position:40% 40%; }
     body.season-christmas .hero__bg{ background-image:url('assets/images/christmas/christmas_tree.jpg');  background-position:60% 45%; }
     body.season-summer   .hero__bg{  background-image:url('assets/images/summer/summer_shell.jpg');       background-position:50% 35%; }
 
-    /* Signature Collections cards (thumbnails) */
+    /* Signature Collections (category thumbnails) */
     .cat-grid{display:grid; gap:18px; grid-template-columns:repeat(12,1fr);}
     .cat-card{grid-column:span 3; position:relative; overflow:hidden; border-radius:18px; border:1px solid var(--border); background:#fff; box-shadow:var(--shadow);}
     .cat-card img{width:100%; height:220px; object-fit:cover; display:block;}
     .cat-card .cat-info{position:absolute; left:12px; bottom:12px; background:rgba(255,255,255,.9); border:1px solid var(--border); padding:8px 12px; border-radius:999px; font-weight:700;}
     @media (max-width:1000px){ .cat-card{grid-column:span 6} }
     @media (max-width:640px){ .cat-card{grid-column:span 12} }
+
+    /* Shared: simple section spacing */
+    .section{ padding: 54px 0; }
+    .section .section-head{ display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:14px; }
+    .section h2{ margin:0; }
+
+    /* Product rail (cards nhỏ) cho Bestsellers & New Arrivals */
+    .rail{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
+    .rail .card{ grid-column: span 3; }
+    @media (max-width:1000px){ .rail .card{ grid-column: span 6; } }
+    @media (max-width:640px){ .rail .card{ grid-column: span 12; } }
+
+    /* Build-a-Box banner */
+    .cta-banner{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); }
+    .cta-banner img{ width:100%; height:260px; object-fit:cover; display:block; }
+    .cta-banner .bar{ position:absolute; left:16px; right:16px; bottom:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      background:rgba(255,255,255,.9); border:1px solid var(--border); border-radius:14px; padding:12px 14px; }
+
+    /* Occasion tiles */
+    .occasions{ display:grid; gap:14px; grid-template-columns:repeat(12,1fr); }
+    .occ{ grid-column: span 3; border:1px solid var(--border); border-radius:16px; padding:16px; background:#fff; box-shadow:var(--shadow); }
+    .occ h4{ margin:0 0 6px; }
+
+    /* FAQ simple accordion */
+    .faq{ border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; }
+    .faq details+details{ border-top:1px solid var(--border); }
+    .faq summary{ cursor:pointer; padding:14px 16px; font-weight:700; list-style:none; }
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq .a{ padding:0 16px 16px; color:var(--muted); }
   </style>
 </head>
+
 <body class="season-wedding">
   <!-- HEADER -->
   <header>
     <div class="container nav">
-      <a class="brand" href="#"><div class="logo">G</div><div>Rebecca's Choice</div></a>
+      <a class="brand" href="#">
+        <div class="logo">R</div>
+        <div>Rebecca’s Choice</div>
+      </a>
+
       <nav class="menu">
-        <a href="#wedding">Wedding</a>
-        <a href="#birthday">Birthday</a>
-        <a href="#christmas">Christmas</a>
-        <a href="#summer">Summer</a>
+        <a href="#signature">Collections</a>
+        <a href="#bestsellers">Bestsellers</a>
+        <a href="#custom">Custom Gift</a>
+        <a href="#occasions">Occasions</a>
+        <a href="#arrivals">New</a>
+        <a href="about.html">Why Rebecca’s Choice</a> <!-- trang riêng -->
       </nav>
+
       <div class="tools">
         <a class="chip" href="#">Cart <span id="cart-count">0</span></a>
       </div>
     </div>
   </header>
 
-  <!-- HERO (đừng bọc section này trong .container bên ngoài) -->
+  <!-- HERO (full-width, ngắn) -->
   <section class="hero hero--bleed" id="hero">
     <div class="hero__bg"></div>
     <div class="hero__veil"></div>
     <div class="container hero__inner">
-      <h1 id="hero-title">Elegant Wedding Gifts</h1>
-      <p class="lead" id="hero-sub">Pearl whites, blush accents &amp; gold details</p>
+      <h1 id="hero-title">Curated Mini Gifts for Elegant Moments</h1>
+      <p class="lead" id="hero-sub">Wedding • Birthday • Christmas • Summer — gift-ready, beautifully packed.</p>
       <div class="hero__buttons">
-        <a class="btn btn-primary" href="collections.html">Shop Collections</a>
-        <a class="btn btn-outline"  href="collections.html">Custom &amp; Wedding</a>
+        <a class="btn btn-primary" href="#signature">Shop Collections</a>
+        <a class="btn btn-outline"  href="#custom">Custom &amp; Wedding</a>
       </div>
     </div>
   </section>
 
   <!-- SIGNATURE COLLECTIONS -->
-  <section class="section">
+  <section class="section" id="signature">
     <div class="container">
-      <h2>Signature Collections</h2>
-      <p class="lead">Pick a theme to match the vibe and hero banner.</p>
-
-      <div class="filter" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px">
-        <button class="chip filter active" data-cat="All">All</button>
-        <button class="chip filter" data-cat="Wedding">Wedding</button>
-        <button class="chip filter" data-cat="Birthday">Birthday</button>
-        <button class="chip filter" data-cat="Christmas">Christmas</button>
-        <button class="chip filter" data-cat="Summer">Summer</button>
+      <div class="section-head">
+        <h2>Signature Collections</h2>
+        <div class="filter" style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="chip filter active" data-cat="All">All</button>
+          <button class="chip filter" data-cat="Wedding">Wedding</button>
+          <button class="chip filter" data-cat="Birthday">Birthday</button>
+          <button class="chip filter" data-cat="Christmas">Christmas</button>
+          <button class="chip filter" data-cat="Summer">Summer</button>
+        </div>
       </div>
 
+      <!-- Category cards -->
       <div class="cat-grid" style="margin-bottom:22px">
         <a class="cat-card" href="#!" data-go="Wedding">
           <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding gifts">
@@ -117,19 +153,99 @@
         </a>
       </div>
 
+      <!-- PRODUCT GRID (All/filtered) -->
       <div id="grid-all" class="grid"></div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- BESTSELLERS -->
+  <section class="section" id="bestsellers">
+    <div class="container">
+      <div class="section-head">
+        <h2>Bestsellers</h2>
+        <a class="badge" href="#signature">View all</a>
+      </div>
+      <div class="rail" id="rail-best"></div>
+    </div>
+  </section>
+
+  <!-- BUILD A BOX / CUSTOM GIFT -->
   <section class="section" id="custom">
     <div class="container">
-      <div class="banner ornate">
-        <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Boutique ribbon and stationery">
+      <div class="cta-banner">
+        <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Ribbon & stationery">
         <div class="bar">
-          <div style="font-weight:700; color:var(--brand);">Need custom wedding or corporate gifts?</div>
-          <a class="btn btn-primary" href="collections.html">Get a Quote</a>
+          <div style="font-weight:700; color:var(--brand);">Build a Box / Custom Gift</div>
+          <a class="btn btn-primary" href="collections.html">Start Building</a>
+          <a class="btn btn-outline" href="collections.html">Wedding & Corporate</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OCCASION GUIDES -->
+  <section class="section" id="occasions">
+    <div class="container">
+      <div class="section-head">
+        <h2>Occasion Guides</h2>
+      </div>
+      <div class="occasions">
+        <div class="occ">
+          <h4>For Bridesmaids</h4>
+          <p class="meta">Pearl whites & blush picks</p>
+          <a class="btn btn-outline" href="#signature" data-go="Wedding">Shop Wedding</a>
+        </div>
+        <div class="occ">
+          <h4>For Him</h4>
+          <p class="meta">Understated, practical minis</p>
+          <a class="btn btn-outline" href="#signature" data-go="Birthday">Shop Birthday</a>
+        </div>
+        <div class="occ">
+          <h4>For Her</h4>
+          <p class="meta">Romantic & photogenic</p>
+          <a class="btn btn-outline" href="#signature" data-go="Christmas">Shop Christmas</a>
+        </div>
+        <div class="occ">
+          <h4>For Colleagues</h4>
+          <p class="meta">Warm & friendly sets</p>
+          <a class="btn btn-outline" href="#signature" data-go="Summer">Shop Summer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW ARRIVALS / SEASONAL SPOTLIGHT -->
+  <section class="section" id="arrivals">
+    <div class="container">
+      <div class="section-head">
+        <h2>New Arrivals / Seasonal Spotlight</h2>
+        <a class="badge" href="#signature">View all</a>
+      </div>
+      <div class="rail" id="rail-new"></div>
+    </div>
+  </section>
+
+  <!-- FAQ rút gọn -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details open>
+          <summary>How fast do you ship?</summary>
+          <div class="a">We prepare within 24–48h and ship nationwide in 2–5 business days.</div>
+        </details>
+        <details>
+          <summary>Is gift wrapping included?</summary>
+          <div class="a">Yes. All sets come gift-ready with tissue & ribbon. Add a message at checkout.</div>
+        </details>
+        <details>
+          <summary>Do you do custom/corporate gifts?</summary>
+          <div class="a">Absolutely. Head to “Build a Box / Custom Gift” and tell us your budget & timeline.</div>
+        </details>
+        <details>
+          <summary>Return & exchange?</summary>
+          <div class="a">Unopened items can be exchanged within 7 days. Custom items are final-sale.</div>
+        </details>
       </div>
     </div>
   </section>
@@ -137,11 +253,12 @@
   <!-- FOOTER -->
   <footer>
     <div class="wrap container">
-      <div>© <span id="y"></span> Elegant Gift Shop — <em>“Gifts are the flowers of memory.”</em></div>
+      <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
       <div style="display:flex; gap:10px">
-        <a class="badge" href="#">Instagram</a>
-        <a class="badge" href="#">Facebook</a>
-        <a class="badge" href="#">Etsy</a>
+        <a class="badge" href="about.html">About</a>
+        <a class="badge" href="#">Shipping</a>
+        <a class="badge" href="#">Returns</a>
+        <a class="badge" href="#">Contact</a>
       </div>
     </div>
     <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
@@ -151,9 +268,8 @@
   <script src="assets/products.js"></script>
   <script>
     const $=(s,ctx=document)=>ctx.querySelector(s); const $$=(s,ctx=document)=>Array.from(ctx.querySelectorAll(s));
-    function getCart(){try{return JSON.parse(localStorage.getItem('cart')||'[]')}catch{return[]}}
-    function updateCartCount(){const c=getCart().reduce((s,it)=>s+it.qty,0); const el=$('#cart-count'); if(el) el.textContent=c;}
 
+    /* Render product grid (existing) */
     function renderProductsGrid(container, filterCat){
       if(!container||!window.PRODUCTS) return;
       const items = filterCat && filterCat!=='All' ? window.PRODUCTS.filter(p=>p.category===filterCat) : window.PRODUCTS;
@@ -172,13 +288,33 @@
         </article>`).join('');
     }
 
+    /* Helpers for rails (Bestsellers/New) */
+    function renderRail(container, ids){
+      if(!container||!window.PRODUCTS) return;
+      const map = new Map(window.PRODUCTS.map(p=>[p.id,p]));
+      const items = ids.map(id=>map.get(id)).filter(Boolean);
+      container.innerHTML = items.map(p=>`
+        <article class="card">
+          <a href="product.html?id=${encodeURIComponent(p.id)}"><img src="${p.image}" alt="${p.title}"></a>
+          <div class="info">
+            <div class="badge">${p.category}</div>
+            <h3>${p.title}</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span class="price">$${Number(p.price).toFixed(2)}</span>
+              <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
+            </div>
+          </div>
+        </article>`).join('');
+    }
+
+    /* Seasonal hero text */
     const THEME={
       "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
       "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Playful vibes & personalized charms" },
       "Christmas":{ cls:"season-christmas",title:"Christmas Holiday Gifts",    sub:"Cozy bundles & winter sparkle" },
       "Summer":   { cls:"season-summer",   title:"Summer & Friendship Gifts",  sub:"Beachy colors & sunny picks" },
-      "All":      { cls:"", title:"Premium Mini Gifts for Every Elegant Moment",
-                    sub:"Wedding • Birthday • Christmas • Summer — curated sets, boutique packaging." }
+      "All":      { cls:"", title:"Curated Mini Gifts for Elegant Moments",
+                    sub:"Wedding • Birthday • Christmas • Summer — gift-ready, beautifully packed." }
     };
     function setSeason(key){
       document.body.classList.remove('season-wedding','season-birthday','season-christmas','season-summer');
@@ -186,12 +322,15 @@
       const t=$('#hero-title'), s=$('#hero-sub'); if(t) t.textContent=conf.title; if(s) s.textContent=conf.sub;
     }
 
+    /* Boot */
     document.addEventListener('DOMContentLoaded', ()=>{
-      updateCartCount();
-      renderProductsGrid($('#grid-all'));
-      setSeason('Wedding'); // hiển thị nền ngay
+      // Hero default
+      setSeason('Wedding');
 
-      // filter chips
+      // Signature grid (all)
+      renderProductsGrid($('#grid-all'));
+
+      // Filter chips
       $$('.filter .chip').forEach(btn=>{
         btn.addEventListener('click', ()=>{
           $$('.filter .chip').forEach(b=>b.classList.remove('active'));
@@ -199,18 +338,26 @@
           const cat = btn.dataset.cat;
           renderProductsGrid($('#grid-all'), cat);
           setSeason(cat||'All');
-          document.getElementById('grid-all').scrollIntoView({behavior:'smooth', block:'start'});
         });
       });
 
-      // category cards = filter
-      $$('.cat-card').forEach(card=>{
-        card.addEventListener('click', (e)=>{
+      // Category cards & occasion buttons act like filters
+      $$('.cat-card,[data-go]').forEach(el=>{
+        el.addEventListener('click', (e)=>{
           e.preventDefault();
-          const cat = card.getAttribute('data-go');
+          const cat = el.getAttribute('data-go');
           const chip = document.querySelector('.filter .chip[data-cat="'+cat+'"]'); if(chip) chip.click();
+          document.getElementById('signature').scrollIntoView({behavior:'smooth'});
         });
       });
+
+      // Rails: pick some IDs từ catalog mẫu (Becca có thể đổi sau)
+      // (đã từng đặt trong products.js: wed-box, wed-candle, bday-gift, bday-cupcake, xmas-tree, sum-flower, v.v.)
+      const bestIDs = ['wed-box','wed-candle','bday-gift','xmas-tree','bday-cupcake','sum-flower','wed-flower','xmas-snow'];
+      const newIDs  = ['sum-drink','sum-shell','bday-candle','xmas-gift']; // thay theo sản phẩm mới
+
+      renderRail($('#rail-best'), bestIDs);
+      renderRail($('#rail-new'), newIDs);
     });
   </script>
 </body>
