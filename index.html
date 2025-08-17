@@ -172,6 +172,41 @@
       color:#fff;
       background:transparent;
     }
+    /* ===== CTA full-bleed ===== */
+.cta-bleed {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.cta-bleed .cta-banner {
+  border-radius: 0;          /* bỏ bo góc */
+  border: none;              /* bỏ viền */
+  box-shadow: none;          /* bỏ bóng */
+}
+.cta-bleed img {
+  width: 100%;
+  height: clamp(200px, 32vw, 360px);  /* cho responsive như hero */
+  object-fit: cover;
+  display: block;
+}
+.cta-bleed .bar {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  max-width: 1200px;
+  width: calc(100% - 32px);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+    
   </style>
 </head>
 
@@ -328,19 +363,17 @@
     </div>
   </section>
 
-  <!-- BUILD A BOX / CUSTOM GIFT -->
-  <section class="section" id="custom">
-    <div class="container">
-      <div class="cta-banner">
-        <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Ribbon & stationery">
-        <div class="bar">
-          <div style="font-weight:700; color:var(--brand);">Build a Box / Custom Gift</div>
-          <a class="btn btn-primary" href="collections.html">Start Building</a>
-          <a class="btn btn-outline" href="collections.html">Wedding & Corporate</a>
-        </div>
-      </div>
+ <!-- BUILD A BOX / CUSTOM GIFT -->
+<section class="cta-bleed" id="custom">
+  <div class="cta-banner">
+    <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Ribbon & stationery">
+    <div class="bar">
+      <div style="font-weight:700; color:var(--brand);">Build a Box / Custom Gift</div>
+      <a class="btn btn-primary" href="collections.html">Start Building</a>
+      <a class="btn btn-outline" href="collections.html">Wedding & Corporate</a>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- FAQ -->
   <section class="section" id="faq">
