@@ -451,15 +451,14 @@
 
       waitForProducts(()=>{
         /* signature product grid */
-        renderProductsGrid($('#grid-all'));
-
+    
         /* filter chips */
         $$('.filter').forEach(btn=>{
           btn.addEventListener('click', ()=>{
             $$('.filter').forEach(b=>b.classList.remove('active'));
             btn.classList.add('active');
             const cat = btn.dataset.cat;
-            renderProductsGrid($('#grid-all'), cat);
+        
             setSeason(cat||'All');
           });
         });
