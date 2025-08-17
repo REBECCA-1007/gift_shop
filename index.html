@@ -84,14 +84,7 @@
       .sig--birthday,.sig--christmas,.sig--summer{ grid-column:span 12; }
     }
 
-    /* ===== Product grid (All/filtered) ===== */
-    .grid{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
-    .grid .card{ grid-column: span 3; border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; box-shadow:var(--shadow); }
-    .grid .card img{ width:100%; height:200px; object-fit:cover; display:block; }
-    .grid .info{ padding:12px 14px; }
-    @media (max-width:1000px){ .grid .card{ grid-column: span 6; } }
-    @media (max-width:640px){ .grid .card{ grid-column: span 12; } }
-
+ 
     /* Filter chips */
     .chips{ display:flex; gap:8px; flex-wrap:wrap; }
     .chip{ background:var(--chip); border:1px solid var(--border); padding:8px 12px; border-radius:999px; cursor:pointer; }
