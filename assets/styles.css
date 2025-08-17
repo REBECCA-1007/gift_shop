@@ -108,3 +108,23 @@ footer .wrap{ display:flex; align-items:center; justify-content:space-between; g
 .occ h4{margin:0 0 6px;}
 @media (max-width:1000px){ .occ{grid-column:span 6} }
 @media (max-width:640px){ .occ{grid-column:span 12} .occ .pic{height:130px} }
+/* Ẩn thanh kéo ngang cho 2 carousel */
+#rail-best, #rail-new{
+  overflow-x:auto;
+  /* Ẩn scrollbar ở mọi engine */
+  scrollbar-width:none;          /* Firefox */
+  -ms-overflow-style:none;       /* IE/Edge cũ */
+}
+#rail-best::-webkit-scrollbar,
+#rail-new::-webkit-scrollbar{
+  display:none; height:0; width:0;
+}
+
+/* Đẩy phần “rãnh” scrollbar ra ngoài khung (Windows) */
+#rail-best, #rail-new{
+  padding-bottom:16px;           /* tạo đệm cho nội dung */
+  margin-bottom:-16px;           /* kéo thanh kéo ra ngoài viewport */
+}
+
+/* Đảm bảo không có bar ngang trên toàn trang */
+html, body{ overflow-x:hidden; }
