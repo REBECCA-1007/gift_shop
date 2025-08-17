@@ -46,3 +46,35 @@ footer{ margin-top:40px; border-top:1px solid var(--border); color:#fff; backgro
 footer .wrap{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:28px 20px }
 @media (max-width:1000px){ .hero{ grid-template-columns:1fr } .card{ grid-column: span 6 } .features{ grid-template-columns: repeat(2, 1fr) } }
 @media (max-width:640px){ .card{ grid-column: span 12 } .menu{ display:none } }
+/* Occasion tiles WITH image */
+.occasions{ 
+  display:grid; 
+  gap:14px; 
+  grid-template-columns:repeat(12,1fr); 
+}
+.occ{ 
+  grid-column: span 3; 
+  border:1px solid var(--border); 
+  border-radius:16px; 
+  background:#fff; 
+  box-shadow:var(--shadow); 
+  overflow:hidden; 
+  padding:0; 
+}
+.occ .pic{ 
+  height:150px; 
+  background:#f3f3f3 center/cover no-repeat; 
+}
+.occ .txt{ 
+  padding:16px; 
+}
+.occ h4{ 
+  margin:0 0 6px; 
+}
+@media (max-width:1000px){ 
+  .occ{ grid-column: span 6; } 
+}
+@media (max-width:640px){ 
+  .occ{ grid-column: span 12; } 
+  .occ .pic{ height:130px; } 
+}
