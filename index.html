@@ -21,11 +21,12 @@
       --shadow:0 10px 26px rgba(0,0,0,.06);
       --chip:#eef2f5;
       --pill-bg: rgba(255,255,255,.92);
+      --header-h:60px; /* sẽ được JS cập nhật chính xác */
     }
     html, body{ overflow-x:hidden; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";}
     .container{max-width:1200px; margin:0 auto; padding:0 16px;}
 
-    /* ===== Header (fixed on scroll) ===== */
+    /* ===== Header (ban đầu) ===== */
     header{
       position:sticky; top:0; z-index:20;
       backdrop-filter:saturate(180%) blur(6px);
@@ -149,11 +150,7 @@
       position:relative;
       background:#0e2b4a; color:#fff;
       margin:0; padding:0; overflow:hidden;
-
-      /* bleed ra khỏi container cha nếu có */
-      width:100vw;
-      left:50%; right:50%;
-      margin-left:-50vw; margin-right:-50vw;
+      width:100vw; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw;
     }
     footer.footer-bleed .footer__inner{
       max-width:1200px; margin:0 auto;
@@ -168,6 +165,18 @@
     }
     footer.footer-bleed a:hover{ border-color:#fff; }
     #faq + footer.footer-bleed{ margin-top:0; }
+
+    /* ====== PATCH: Header cố định (fixed) & chừa khoảng trống ====== */
+    /* Ghi đè lên rule header ở trên bằng block đặt CUỐI stylesheet */
+    header{
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;                 /* cao hơn nội dung */
+      background: rgba(255,255,255,.95);
+      backdrop-filter: saturate(180%) blur(6px);
+    }
+    body{ padding-top: var(--header-h); } /* chừa chỗ dưới header */
+    header.is-scrolled{ box-shadow: 0 8px 24px rgba(0,0,0,.08); }
   </style>
 </head>
 
@@ -458,6 +467,19 @@
         });
       });
     }
+
+    /* ===== Patch JS cho header fixed: set khoảng trống & shadow khi cuộn ===== */
+    function updateHeaderSpace(){
+      const header = document.querySelector('header');
+      if(!header) return;
+      document.documentElement.style.setProperty('--header-h', header.offsetHeight+'px');
+    }
+    window.addEventListener('load', updateHeaderSpace);
+    window.addEventListener('resize', updateHeaderSpace);
+    document.addEventListener('scroll', ()=>{
+      const h = document.querySelector('header');
+      if(h) h.classList.toggle('is-scrolled', window.scrollY > 2);
+    });
 
     document.addEventListener('DOMContentLoaded', ()=>{
       updateCartCount();
