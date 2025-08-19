@@ -177,8 +177,7 @@
     body{ padding-top: var(--header-h); }
     header.is-scrolled{ box-shadow: 0 8px 24px rgba(0,0,0,.08); }
 
-    /* ====== PATCH: FAQ không khung + canh thẳng với "FAQ" ====== */
-    /* Ghi đè các rule FAQ gốc để bỏ khung & bỏ padding trái */
+    /* ====== PATCH: FAQ không khung + canh thẳng với "FAQ" + phân cách nhẹ ====== */
     .faq{
       background: transparent !important;
       border: none !important;
@@ -190,17 +189,21 @@
       margin: 10px 0;
     }
     .faq details+details{
-      border-top: none !important;  /* bỏ đường kẻ ngăn */
+      border-top: none !important;  /* bỏ rule cũ */
+    }
+    .faq details:not(:last-child){
+      border-bottom:1px solid var(--border);
+      padding-bottom:10px;
     }
     .faq summary{
-      padding: 14px 0 !important;   /* bỏ padding trái để thẳng hàng với H2 */
+      padding: 14px 0 !important;  /* thẳng hàng với H2 */
       list-style: none;
       cursor: pointer;
       font-weight: 700;
       color:#0f2742;
     }
     .faq .a{
-      padding: 0 0 14px 0 !important; /* bỏ padding 2 bên */
+      padding: 0 0 14px 0 !important;
       color:#999;
     }
   </style>
