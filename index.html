@@ -146,32 +146,21 @@
     .section:last-of-type{ padding-bottom:16px; }
 
     /* ===== FOOTER (đã chỉnh) ===== */
-    footer{
-      background: var(--brand);  /* full-bleed */
-      color:#fff;
-      width:100%;
-    }
-    .footer-inner{
-      max-width:1200px;
-      margin:0 auto;
-      padding:18px 24px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      border-top:1px solid rgba(255,255,255,.2);
-    }
-    footer .links{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    footer .links a{
-      text-decoration:none;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.55);
-      color:#fff;
-      background:transparent;
-    }
+   /* Footer */
+.footer {
+  background: #0a2240;   /* navy */
+  width: 100%;           /* tràn hết chiều ngang */
+  margin: 0;             /* bỏ khoảng trắng ngoài */
+  padding: 40px 20px;    /* padding trong cho đẹp */
+  box-sizing: border-box;
+}
+
+.footer .container {
+  max-width: 1200px;     /* giữ nội dung gọn, vẫn căn giữa */
+  margin: 0 auto;        /* căn giữa nội dung */
+  padding: 0;            /* bỏ padding thừa */
+}
+
   </style>
 </head>
 
@@ -368,18 +357,18 @@
   </section>
 
   <!-- FOOTER (đã chỉnh) -->
-  <footer>
-    <div class="footer-inner">
-      <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
-      <div class="links">
-        <a href="about.html">About</a>
-        <a href="#">Shipping</a>
-        <a href="#">Returns</a>
-        <a href="#">Contact</a>
-      </div>
-    </div>
-    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-  </footer>
+<footer class="footer">
+  <div class="container">
+    <p>© 2025 Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></p>
+    <nav>
+      <a href="#">About</a>
+      <a href="#">Shipping</a>
+      <a href="#">Returns</a>
+      <a href="#">Contact</a>
+    </nav>
+  </div>
+</footer>
+
 
   <!-- SCRIPTS -->
   <script src="assets/products.js"></script>
