@@ -107,8 +107,7 @@
       width:38px; height:38px; border-radius:999px; border:1px solid var(--border);
       background:#fff; box-shadow:var(--shadow); display:grid; place-items:center; cursor:pointer;
     }
-    
-    .caro-btn.left{ left:8px; }   /* tránh tràn */
+    .caro-btn.left{ left:8px; }
     .caro-btn.right{ right:8px; }
     .caro-btn svg{ width:18px; height:18px; }
 
@@ -128,7 +127,7 @@
     @media (max-width:1000px){ .occ{ grid-column:span 6; } }
     @media (max-width:640px){ .occ{ grid-column:span 12; } }
 
-    /* ===== FAQ ===== */
+    /* ===== FAQ (gốc) ===== */
     .faq{ border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; }
     .faq details+details{ border-top:1px solid var(--border); }
     .faq summary{ cursor:pointer; padding:16px 18px; font-weight:700; list-style:none; color:#0f2742; }
@@ -168,16 +167,42 @@
     #faq + footer.footer-bleed{ margin-top:0; }
 
     /* ====== PATCH: Header cố định (fixed) & chừa khoảng trống ====== */
-    /* Ghi đè lên rule header ở trên bằng block đặt CUỐI stylesheet */
     header{
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 1000;                 /* cao hơn nội dung */
+      z-index: 1000;
       background: rgba(255,255,255,.95);
       backdrop-filter: saturate(180%) blur(6px);
     }
-    body{ padding-top: var(--header-h); } /* chừa chỗ dưới header */
+    body{ padding-top: var(--header-h); }
     header.is-scrolled{ box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+
+    /* ====== PATCH: FAQ không khung + canh thẳng với "FAQ" ====== */
+    /* Ghi đè các rule FAQ gốc để bỏ khung & bỏ padding trái */
+    .faq{
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      overflow: visible !important;
+    }
+    .faq details{
+      border: none !important;
+      margin: 10px 0;
+    }
+    .faq details+details{
+      border-top: none !important;  /* bỏ đường kẻ ngăn */
+    }
+    .faq summary{
+      padding: 14px 0 !important;   /* bỏ padding trái để thẳng hàng với H2 */
+      list-style: none;
+      cursor: pointer;
+      font-weight: 700;
+      color:#0f2742;
+    }
+    .faq .a{
+      padding: 0 0 14px 0 !important; /* bỏ padding 2 bên */
+      color:#999;
+    }
   </style>
 </head>
 
