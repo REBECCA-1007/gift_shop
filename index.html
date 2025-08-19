@@ -22,10 +22,10 @@
       --chip:#eef2f5;
       --pill-bg: rgba(255,255,255,.92);
     }
-    html, body{ overflow-x:hidden; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";}
+    html, body{ overflow-x:hidden; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";}
     .container{max-width:1200px; margin:0 auto; padding:0 16px;}
 
-    /* ===== Header (fixed) ===== */
+    /* ===== Header (fixed on scroll) ===== */
     header{
       position:sticky; top:0; z-index:20;
       backdrop-filter:saturate(180%) blur(6px);
@@ -65,7 +65,7 @@
     .section .section-head{ display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:16px; }
     .section h2{ margin:0; }
 
-    /* ===== Signature grid ===== */
+    /* ===== Signature LOOKBOOK grid (1 lớn + 2 nhỏ + Summer kéo dài) ===== */
     .sig-grid{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
     .sig{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); display:block; }
     .sig img{ width:100%; height:100%; object-fit:cover; display:block; }
@@ -82,16 +82,19 @@
       .sig--birthday,.sig--christmas,.sig--summer{ grid-column:span 12; }
     }
 
+    /* Filter chips */
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; }
+    .chip{ background:var(--chip); border:1px solid var(--border); padding:8px 12px; border-radius:999px; cursor:pointer; }
+    .chip.active{ background:#1a2140; color:#fff; border-color:#1a2140; }
+    
     /* ===== Carousel (Bestsellers / New Arrivals) ===== */
     .carousel-wrap{ position:relative; }
     .carousel{
       display:flex; gap:18px; overflow-x:auto; scroll-snap-type:inline mandatory; padding:4px 0 8px;
-      min-height:240px; /* giữ chiều cao ổn định khi có item */
+      -ms-overflow-style:none;             /* IE, Edge cũ */
+      scrollbar-width:none;                /* Firefox */
     }
-    .carousel:empty{
-      min-height:0;            /* rỗng thì không chiếm chỗ */
-      padding:0;
-    }
+    .carousel::-webkit-scrollbar{ display:none; } /* Chrome/Safari ẩn thanh kéo */
     .carousel .card{
       flex:0 0 clamp(240px, 26vw, 280px);
       scroll-snap-align:start;
@@ -104,15 +107,9 @@
       width:38px; height:38px; border-radius:999px; border:1px solid var(--border);
       background:#fff; box-shadow:var(--shadow); display:grid; place-items:center; cursor:pointer;
     }
-    /* tránh tràn ngang */
-    .caro-btn.left{ left:8px; }    /* trước là -6px */
-    .caro-btn.right{ right:8px; }
+    .caro-btn.left{ left:-6px; }
+    .caro-btn.right{ right:-6px; }
     .caro-btn svg{ width:18px; height:18px; }
-
-    /* Giấu nút khi không cần */
-    .carousel-wrap:has(.carousel:empty) .caro-btn,
-    .carousel-wrap[data-count="0"] .caro-btn,
-    .carousel-wrap[data-count="1"] .caro-btn{ display:none !important; }
 
     /* ===== Build-a-Box banner ===== */
     .cta-banner{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); }
@@ -144,42 +141,36 @@
     .btn-outline{ border:1px solid #1a2140; color:#1a2140; }
     .price{ font-weight:700; color:#1a2140; }
 
-    /* =========================
-       CHỈ THÊM 2 CỤM CSS DƯỚI ĐÂY
-       ========================= */
+    /* ===== Xoá khoảng trắng trước footer (nhẹ) ===== */
+    #faq.section{ padding-bottom:16px; }
+    .section:last-of-type{ padding-bottom:16px; }
 
-    /* (1) CTA full-bleed – không đổi HTML */
-    #custom .container{
-      max-width:100vw;          /* bỏ giới hạn container */
-      padding:0;                /* bỏ padding 2 bên */
-      margin:0;                 /* sát mép trang */
-    }
-    #custom .cta-banner{ border-radius:0; border:none; box-shadow:none; }
-    #custom .cta-banner img{
-      width:100%;
-      height:clamp(200px, 32vw, 360px);
-      object-fit:cover;
-      display:block;
-    }
-    #custom .cta-banner .bar{
-      position:absolute; left:50%; bottom:20px; transform:translateX(-50%);
-      width:calc(100% - 32px); max-width:1200px;
-      background:var(--pill-bg); border:1px solid var(--border); border-radius:14px; padding:12px 14px;
-    }
-
-    /* (2) Footer full-bleed – không đổi HTML */
-    footer{ background:var(--brand); color:#fff; width:100%; }
-    footer .wrap{
-      max-width:none;          /* bỏ giới hạn container */
-      width:100%;              /* kéo full chiều ngang */
-      padding-left:24px;       /* giữ khoảng cách đẹp */
-      padding-right:24px;
-      border-top:1px solid rgba(255,255,255,.2) !important; /* ghi đè inline border */
-    }
-    footer .badge{
-      background:transparent;
-      border:1px solid rgba(255,255,255,.5);
+    /* ===== FOOTER (đã chỉnh) ===== */
+    footer{
+      background: var(--brand);  /* full-bleed */
       color:#fff;
+      width:100%;
+    }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      padding:18px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      border-top:1px solid rgba(255,255,255,.2);
+    }
+    footer .links{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    footer .links a{
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.55);
+      color:#fff;
+      background:transparent;
     }
   </style>
 </head>
@@ -234,6 +225,7 @@
         </div>
       </div>
 
+      <!-- Lookbook layout -->
       <div class="sig-grid" style="margin-bottom:18px">
         <a class="sig sig--wedding" href="#signature" data-go="Wedding">
           <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding">
@@ -252,8 +244,6 @@
           <span class="lb">Summer</span>
         </a>
       </div>
-    </div>
-  </section>
 
   <!-- BESTSELLERS (carousel) -->
   <section class="section" id="bestsellers">
@@ -338,7 +328,7 @@
     </div>
   </section>
 
-  <!-- BUILD A BOX / CUSTOM GIFT (giữ nguyên HTML gốc) -->
+  <!-- BUILD A BOX / CUSTOM GIFT -->
   <section class="section" id="custom">
     <div class="container">
       <div class="cta-banner">
@@ -354,7 +344,7 @@
 
   <!-- FAQ -->
   <section class="section" id="faq">
-    <div class="container">
+    <div class="wrap">
       <h2>FAQ</h2>
       <div class="faq">
         <details open>
@@ -377,15 +367,15 @@
     </div>
   </section>
 
-  <!-- FOOTER (giữ nguyên HTML gốc) -->
+  <!-- FOOTER (đã chỉnh) -->
   <footer>
-    <div class="wrap container" style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:18px 24px; border-top:1px solid var(--border);">
+    <div class="footer-inner">
       <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
-      <div style="display:flex; gap:10px">
-        <a class="badge" href="about.html">About</a>
-        <a class="badge" href="#">Shipping</a>
-        <a class="badge" href="#">Returns</a>
-        <a class="badge" href="#">Contact</a>
+      <div class="links">
+        <a href="about.html">About</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact</a>
       </div>
     </div>
     <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
@@ -400,42 +390,111 @@
     function getCart(){ try{return JSON.parse(localStorage.getItem('cart')||'[]')}catch{return[]} }
     function updateCartCount(){ const c=getCart().reduce((s,it)=>s+it.qty,0); const el=$('#cart-count'); if(el) el.textContent=c; }
 
-    /* Đếm số item của từng carousel để ẩn/hiện nút điều hướng */
-    function markCarouselCount(){
-      $$('.carousel-wrap').forEach(wrap=>{
-        const caro = wrap.querySelector('.carousel');
-        const count = caro ? caro.children.length : 0;
-        wrap.setAttribute('data-count', String(count));
+    function renderProductsGrid(container, filterCat){
+      if(!container||!window.PRODUCTS) return;
+      const items = filterCat && filterCat!=='All' ? window.PRODUCTS.filter(p=>p.category===filterCat) : window.PRODUCTS;
+      container.innerHTML = items.map(p=>`
+        <article class="card">
+          <a href="product.html?id=${encodeURIComponent(p.id)}"><img src="${p.image}" alt="${p.title}"></a>
+          <div class="info">
+            <div class="badge">${p.category}</div>
+            <h3 style="margin:8px 0">${p.title}</h3>
+            <p class="meta" style="margin:0 0 10px; color:var(--muted)">${p.desc||''}</p>
+            <div style="display:flex; align-items:center; justify-content:space-between">
+              <span class="price">$${Number(p.price).toFixed(2)}</span>
+              <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
+            </div>
+          </div>
+        </article>`).join('');
+    }
+
+    function renderRail(container, ids){
+      if(!container||!window.PRODUCTS) return;
+      const map = new Map(window.PRODUCTS.map(p=>[p.id,p]));
+      const items = ids.map(id=>map.get(id)).filter(Boolean);
+      container.innerHTML = items.map(p=>`
+        <article class="card">
+          <a href="product.html?id=${encodeURIComponent(p.id)}"><img src="${p.image}" alt="${p.title}"></a>
+          <div class="info">
+            <div class="badge">${p.category}</div>
+            <h3 style="margin:8px 0">${p.title}</h3>
+            <div style="display:flex; align-items:center; justify-content:space-between">
+              <span class="price">$${Number(p.price).toFixed(2)}</span>
+              <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
+            </div>
+          </div>
+        </article>`).join('');
+    }
+
+    const THEME={
+      "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
+      "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Playful vibes & personalized charms" },
+      "Christmas":{ cls:"season-christmas",title:"Christmas Holiday Gifts",    sub:"Cozy bundles & winter sparkle" },
+      "Summer":   { cls:"season-summer",   title:"Summer & Friendship Gifts",  sub:"Beachy colors & sunny picks" },
+      "All":      { cls:"", title:"Curated Mini Gifts for Elegant Moments",
+                    sub:"Wedding • Birthday • Christmas • Summer — gift-ready, beautifully packed." }
+    };
+    function setSeason(key){
+      document.body.classList.remove('season-wedding','season-birthday','season-christmas','season-summer');
+      const conf=THEME[key]||THEME["All"]; if(conf.cls) document.body.classList.add(conf.cls);
+      const t=$('#hero-title'), s=$('#hero-sub'); if(t) t.textContent=conf.title; if(s) s.textContent=conf.sub;
+    }
+
+    function waitForProducts(cb, tries=40){
+      if (window.PRODUCTS && Array.isArray(window.PRODUCTS) && window.PRODUCTS.length){
+        cb();
+      } else if (tries>0){
+        setTimeout(()=>waitForProducts(cb, tries-1), 100);
+      } else {
+        console.warn('PRODUCTS chưa load. Kiểm tra assets/products.js');
+      }
+    }
+
+    function bindCarouselArrows(){
+      $$('.caro-btn').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const target = document.querySelector(btn.dataset.target);
+          if(!target) return;
+          const dir = btn.classList.contains('left') ? -1 : 1;
+          const delta = Math.round(target.clientWidth*0.8)*dir;
+          target.scrollBy({left:delta, behavior:'smooth'});
+        });
       });
     }
 
-    /* Ví dụ di chuyển carousel (nếu bạn muốn xài nút) */
-    function scrollCarousel(btn, dir){
-      const target = btn.getAttribute('data-target');
-      const el = document.querySelector(target);
-      if(!el) return;
-      const card = el.querySelector('.card');
-      const step = card ? card.getBoundingClientRect().width + 18 : 320;
-      el.scrollBy({ left: dir * step, behavior: 'smooth' });
-    }
-
-    document.addEventListener('click', (e)=>{
-      const b = e.target.closest('.caro-btn');
-      if(!b) return;
-      e.preventDefault();
-      scrollCarousel(b, b.classList.contains('left') ? -1 : 1);
-    });
-
     document.addEventListener('DOMContentLoaded', ()=>{
       updateCartCount();
-      markCarouselCount();  // nếu products.js render động, gọi lại sau khi append xong
-    });
+      setSeason('Wedding');
 
-    /* Gợi ý: sau khi bạn populate dữ liệu:
-       populate('#caro-new', itemsNew);
-       populate('#caro-best', itemsBest);
-       markCarouselCount();
-    */
+      waitForProducts(()=>{
+        /* (Nếu cần) renderProductsGrid($('#grid-all')); */
+
+        $$('.filter').forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            $$('.filter').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            const cat = btn.dataset.cat;
+            setSeason(cat||'All');
+          });
+        });
+
+        $$('.sig,[data-go]').forEach(el=>{
+          el.addEventListener('click', (e)=>{
+            e.preventDefault();
+            const cat = el.getAttribute('data-go');
+            const chip = document.querySelector('.filter[data-cat="'+cat+'"]');
+            if(chip) chip.click();
+            document.getElementById('signature').scrollIntoView({behavior:'smooth'});
+          });
+        });
+
+        const bestIDs = ['wed-candle','bday-gift','xmas-tree','sum-flower','wed-box','bday-cupcake'];
+        const newIDs  = ['xmas-red','sum-drink','bday-candle','wed-flower','xmas-snow','sum-shell'];
+        renderRail($('#caro-best'), bestIDs);
+        renderRail($('#caro-new'), newIDs);
+        bindCarouselArrows();
+      });
+    });
   </script>
 </body>
 </html>
