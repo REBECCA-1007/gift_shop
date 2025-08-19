@@ -192,13 +192,21 @@ footer.footer-bleed .footer__veil{
   backdrop-filter: blur(.25px);
 }
 
-/* nội dung căn giữa như container */
-footer.footer-bleed .footer__inner{
-  position: relative; z-index: 2;
-  max-width: 1200px; margin: 0 auto;
-  padding: clamp(18px, 2.4vw, 28px) 24px;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 14px; flex-wrap: wrap;
+/* Footer */
+.footer {
+  background: #0a2240;   /* navy */
+  width: 100%;           /* tràn hết chiều ngang */
+  margin: 0;             /* bỏ khoảng trắng ngoài */
+  padding: 40px 20px;    /* padding trong cho đẹp */
+  box-sizing: border-box;
+}
+
+.footer .container {
+  max-width: 1200px;     /* giữ nội dung gọn, vẫn căn giữa */
+  margin: 0 auto;        /* căn giữa nội dung */
+  padding: 0;            /* bỏ padding thừa */
+}
+
 }
 footer.footer-bleed .footer__links{
   display: flex; gap: 10px; flex-wrap: wrap;
@@ -416,21 +424,17 @@ footer.footer-bleed .footer__links a:hover{
   </section>
 
   <!-- FOOTER (đã chỉnh) -->
- <footer class="footer-bleed">
-  <div class="footer__bg"></div>
-  <div class="footer__veil"></div>
-
-  <div class="footer__inner">
-    <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
-
-    <nav class="footer__links">
-      <a href="about.html">About</a>
+ <footer class="footer">
+  <div class="container">
+    <p>© 2025 Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></p>
+    <nav>
+      <a href="#">About</a>
       <a href="#">Shipping</a>
       <a href="#">Returns</a>
       <a href="#">Contact</a>
     </nav>
   </div>
-
+</footer>
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </footer>
 
