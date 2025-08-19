@@ -86,6 +86,11 @@
     .carousel-wrap{ position:relative; }
     .carousel{
       display:flex; gap:18px; overflow-x:auto; scroll-snap-type:inline mandatory; padding:4px 0 8px;
+      min-height:240px; /* giữ chiều cao ổn định khi có item */
+    }
+    .carousel:empty{
+      min-height:0;            /* rỗng thì không chiếm chỗ */
+      padding:0;
     }
     .carousel .card{
       flex:0 0 clamp(240px, 26vw, 280px);
@@ -99,9 +104,15 @@
       width:38px; height:38px; border-radius:999px; border:1px solid var(--border);
       background:#fff; box-shadow:var(--shadow); display:grid; place-items:center; cursor:pointer;
     }
-    .caro-btn.left{ left:-6px; }
-    .caro-btn.right{ right:-6px; }
+    /* tránh tràn ngang */
+    .caro-btn.left{ left:8px; }    /* trước là -6px */
+    .caro-btn.right{ right:8px; }
     .caro-btn svg{ width:18px; height:18px; }
+
+    /* Giấu nút khi không cần */
+    .carousel-wrap:has(.carousel:empty) .caro-btn,
+    .carousel-wrap[data-count="0"] .caro-btn,
+    .carousel-wrap[data-count="1"] .caro-btn{ display:none !important; }
 
     /* ===== Build-a-Box banner ===== */
     .cta-banner{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); }
@@ -380,7 +391,7 @@
     <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
   </footer>
 
-  <!-- SCRIPTS (nếu bạn có) -->
+  <!-- SCRIPTS -->
   <script src="assets/products.js"></script>
   <script>
     const $=(s,ctx=document)=>ctx.querySelector(s);
@@ -389,9 +400,42 @@
     function getCart(){ try{return JSON.parse(localStorage.getItem('cart')||'[]')}catch{return[]} }
     function updateCartCount(){ const c=getCart().reduce((s,it)=>s+it.qty,0); const el=$('#cart-count'); if(el) el.textContent=c; }
 
-    /* Bạn giữ nguyên logic cũ của bạn ở đây (nếu có).
-       Mình không thay đổi gì thêm để đúng bản Becca yêu cầu. */
-    document.addEventListener('DOMContentLoaded', ()=>{ updateCartCount(); });
+    /* Đếm số item của từng carousel để ẩn/hiện nút điều hướng */
+    function markCarouselCount(){
+      $$('.carousel-wrap').forEach(wrap=>{
+        const caro = wrap.querySelector('.carousel');
+        const count = caro ? caro.children.length : 0;
+        wrap.setAttribute('data-count', String(count));
+      });
+    }
+
+    /* Ví dụ di chuyển carousel (nếu bạn muốn xài nút) */
+    function scrollCarousel(btn, dir){
+      const target = btn.getAttribute('data-target');
+      const el = document.querySelector(target);
+      if(!el) return;
+      const card = el.querySelector('.card');
+      const step = card ? card.getBoundingClientRect().width + 18 : 320;
+      el.scrollBy({ left: dir * step, behavior: 'smooth' });
+    }
+
+    document.addEventListener('click', (e)=>{
+      const b = e.target.closest('.caro-btn');
+      if(!b) return;
+      e.preventDefault();
+      scrollCarousel(b, b.classList.contains('left') ? -1 : 1);
+    });
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      updateCartCount();
+      markCarouselCount();  // nếu products.js render động, gọi lại sau khi append xong
+    });
+
+    /* Gợi ý: sau khi bạn populate dữ liệu:
+       populate('#caro-new', itemsNew);
+       populate('#caro-best', itemsBest);
+       markCarouselCount();
+    */
   </script>
 </body>
 </html>
