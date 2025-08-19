@@ -65,7 +65,7 @@
     .section .section-head{ display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:16px; }
     .section h2{ margin:0; }
 
-    /* ===== Signature LOOKBOOK grid (1 lớn + 2 nhỏ + Summer kéo dài) ===== */
+    /* ===== Signature LOOKBOOK grid ===== */
     .sig-grid{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
     .sig{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); display:block; }
     .sig img{ width:100%; height:100%; object-fit:cover; display:block; }
@@ -91,10 +91,9 @@
     .carousel-wrap{ position:relative; }
     .carousel{
       display:flex; gap:18px; overflow-x:auto; scroll-snap-type:inline mandatory; padding:4px 0 8px;
-      -ms-overflow-style:none;             /* IE, Edge cũ */
-      scrollbar-width:none;                /* Firefox */
+      -ms-overflow-style:none; scrollbar-width:none;
     }
-    .carousel::-webkit-scrollbar{ display:none; } /* Chrome/Safari ẩn thanh kéo */
+    .carousel::-webkit-scrollbar{ display:none; }
     .carousel .card{
       flex:0 0 clamp(240px, 26vw, 280px);
       scroll-snap-align:start;
@@ -107,8 +106,8 @@
       width:38px; height:38px; border-radius:999px; border:1px solid var(--border);
       background:#fff; box-shadow:var(--shadow); display:grid; place-items:center; cursor:pointer;
     }
-    .caro-btn.left{ left:-6px; }
-    .caro-btn.right{ right:-6px; }
+    .caro-btn.left{ left:8px; }   /* tránh tràn */
+    .caro-btn.right{ right:8px; }
     .caro-btn svg{ width:18px; height:18px; }
 
     /* ===== Build-a-Box banner ===== */
@@ -145,22 +144,30 @@
     #faq.section{ padding-bottom:16px; }
     .section:last-of-type{ padding-bottom:16px; }
 
-    /* ===== FOOTER (đã chỉnh) ===== */
-   /* Footer */
-.footer {
-  background: #0a2240;   /* navy */
-  width: 100%;           /* tràn hết chiều ngang */
-  margin: 0;             /* bỏ khoảng trắng ngoài */
-  padding: 40px 20px;    /* padding trong cho đẹp */
-  box-sizing: border-box;
-}
+    /* ====== PATCH: Footer full‑bleed navy (tràn 100%) ====== */
+    footer.footer-bleed{
+      position:relative;
+      background:#0e2b4a; color:#fff;
+      margin:0; padding:0; overflow:hidden;
 
-.footer .container {
-  max-width: 1200px;     /* giữ nội dung gọn, vẫn căn giữa */
-  margin: 0 auto;        /* căn giữa nội dung */
-  padding: 0;            /* bỏ padding thừa */
-}
-
+      /* bleed ra khỏi container cha nếu có */
+      width:100vw;
+      left:50%; right:50%;
+      margin-left:-50vw; margin-right:-50vw;
+    }
+    footer.footer-bleed .footer__inner{
+      max-width:1200px; margin:0 auto;
+      padding:clamp(20px,3.2vw,36px) 24px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; flex-wrap:wrap;
+    }
+    footer.footer-bleed a{
+      color:#fff; text-decoration:none;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.5); background:transparent;
+    }
+    footer.footer-bleed a:hover{ border-color:#fff; }
+    #faq + footer.footer-bleed{ margin-top:0; }
   </style>
 </head>
 
@@ -214,7 +221,6 @@
         </div>
       </div>
 
-      <!-- Lookbook layout -->
       <div class="sig-grid" style="margin-bottom:18px">
         <a class="sig sig--wedding" href="#signature" data-go="Wedding">
           <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding">
@@ -233,6 +239,8 @@
           <span class="lb">Summer</span>
         </a>
       </div>
+    </div>
+  </section>
 
   <!-- BESTSELLERS (carousel) -->
   <section class="section" id="bestsellers">
@@ -333,7 +341,7 @@
 
   <!-- FAQ -->
   <section class="section" id="faq">
-    <div class="wrap">
+    <div class="container">
       <h2>FAQ</h2>
       <div class="faq">
         <details open>
@@ -356,19 +364,19 @@
     </div>
   </section>
 
-  <!-- FOOTER (đã chỉnh) -->
-<footer class="footer">
-  <div class="container">
-    <p>© 2025 Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></p>
-    <nav>
-      <a href="#">About</a>
-      <a href="#">Shipping</a>
-      <a href="#">Returns</a>
-      <a href="#">Contact</a>
-    </nav>
-  </div>
-</footer>
-
+  <!-- FOOTER (full‑bleed navy) -->
+  <footer class="footer-bleed">
+    <div class="footer__inner">
+      <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
+      <nav>
+        <a href="about.html">About</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  </footer>
 
   <!-- SCRIPTS -->
   <script src="assets/products.js"></script>
@@ -456,8 +464,6 @@
       setSeason('Wedding');
 
       waitForProducts(()=>{
-        /* (Nếu cần) renderProductsGrid($('#grid-all')); */
-
         $$('.filter').forEach(btn=>{
           btn.addEventListener('click', ()=>{
             $$('.filter').forEach(b=>b.classList.remove('active'));
