@@ -53,6 +53,10 @@
       backdrop-filter: blur(.5px);
     }
     .hero__inner{ position:relative; z-index:2; }
+    /* Đẩy text HERO sang phải */
+    .hero .hero__inner{
+      padding-left: clamp(16px, 3vw, 48px);  /* tăng/giảm các giá trị để dịch sang phải nhiều/ít hơn */
+    }
     .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
 
     /* seasonal hero images */
