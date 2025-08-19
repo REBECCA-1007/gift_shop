@@ -55,7 +55,7 @@
     .hero__inner{ position:relative; z-index:2; }
     /* Đẩy text HERO sang phải */
     .hero .hero__inner{
-      padding-left: clamp(16px, 3vw, 48px);
+      padding-left: clamp(16px, 3vw, 48px);  /* tăng/giảm các giá trị để dịch sang phải nhiều/ít hơn */
     }
     .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
 
@@ -170,97 +170,42 @@
     footer.footer-bleed a:hover{ border-color:#fff; }
     #faq + footer.footer-bleed{ margin-top:0; }
 
-    /* ====== Boutique Luxury Theme (palette + typo + hover) ====== */
-    /* Tổng thể */
-    body{
-      background:#ffffff;
-      color:#0f2742;
-      font-family:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    }
-
-    /* Header: giữ sticky top:0 như bản 6; chỉ tinh chỉnh màu/viền */
+    /* ====== PATCH: Header cố định (fixed) & chừa khoảng trống ====== */
     header{
-      background:rgba(255,255,255,0.92);
-      border-bottom:1px solid rgba(0,0,0,0.05);
-      backdrop-filter:saturate(180%) blur(6px);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: saturate(180%) blur(6px);
     }
+    body{ padding-top: var(--header-h); }
+    header.is-scrolled{ box-shadow: 0 8px 24px rgba(0,0,0,.08); }
 
-    /* Menu hover vàng ánh kim */
-    .menu a{
-      transition:color .25s ease;
-    }
-    .menu a:hover{
-      color:#d4af37;
-      background:transparent;
-    }
-
-    /* Hero typography sang trọng hơn */
-    .hero{
-      padding-top: max( clamp(28px,4.5vw,48px), 48px );
-      padding-bottom: clamp(28px,4.5vw,64px);
-    }
-    .hero__inner h1{
-      font-size:clamp(28px, 4.2vw, 44px);
-      font-weight:700;
-      color:#0f2742;
-      letter-spacing:.2px;
-      margin:0 0 8px;
-    }
-    .hero__inner .lead{
-      font-size:clamp(14px, 1.6vw, 18px);
-      font-weight:400;
-      color:#555;
-      margin:0 0 12px;
-    }
-
-    /* Nút CTA vàng ánh kim */
-    .btn{
-      padding:12px 28px;
-      border-radius:999px;
-      font-weight:600;
-      transition:all .25s ease;
-    }
-    .btn-primary{
-      background:#d4af37;
-      color:#fff;
-      border:none;
-      box-shadow:0 4px 10px rgba(0,0,0,.08);
-    }
-    .btn-primary:hover{
-      background:#c6a438;
-      transform:translateY(-1px);
-    }
-    .btn-outline{
-      background:#fff;
-      border:2px solid #0f2742;
-      color:#0f2742;
-    }
-    .btn-outline:hover{
-      border-color:#d4af37;
-      color:#d4af37;
-      transform:translateY(-1px);
-    }
-
-    /* FAQ tinh tế hơn nhưng vẫn giữ khung hiện tại của bản 6 */
+    /* ====== PATCH: FAQ không khung + canh thẳng với "FAQ" ====== */
+    /* Ghi đè các rule FAQ gốc để bỏ khung & bỏ padding trái */
     .faq{
-      margin:60px auto;              /* thêm khoảng thở */
-      max-width:800px;               /* hẹp để sang trọng */
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      overflow: visible !important;
     }
-    .faq summary:hover{
-      color:#d4af37;                 /* vàng ánh kim khi hover câu hỏi */
+    .faq details{
+      border: none !important;
+      margin: 10px 0;
     }
-
-    /* Footer: link vàng ánh kim */
-    footer.footer-bleed a{
-      border-color:rgba(255,255,255,.5);
+    .faq details+details{
+      border-top: none !important;  /* bỏ đường kẻ ngăn */
     }
-    footer.footer-bleed nav a{
-      color:#d4af37;
-      border-color:rgba(255,255,255,.35);
+    .faq summary{
+      padding: 14px 0 !important;   /* bỏ padding trái để thẳng hàng với H2 */
+      list-style: none;
+      cursor: pointer;
+      font-weight: 700;
+      color:#0f2742;
     }
-    footer.footer-bleed nav a:hover{
-      color:#ffffff;
-      border-color:#ffffff;
+    .faq .a{
+      padding: 0 0 14px 0 !important; /* bỏ padding 2 bên */
+      color:#999;
     }
   </style>
 </head>
