@@ -146,33 +146,80 @@
     .section:last-of-type{ padding-bottom:16px; }
 
     
-    /* ===== FOOTER (đã chỉnh) ===== */
-    footer{
-      background: var(--brand); /* full-bleed */
-      color:#fff;
-      width:100%;
-    }
-    footer .footer-inner{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 18px 24px;
-      display: flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 14px;
-      border-top:1px solid rgba(255,255,255,.2);
-    }
-    footer .links{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    footer .links a{
-      text-decoration:none;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.55);
-      color:#fff;
-      background:transparent;
-    }
+   /* ====== HERO (full-bleed, giữ như hiện tại) ====== */
+/* bạn đã có các class .hero.hero--bleed, .hero__bg, .hero__veil, .hero__inner */
+
+/* Gợi ý đồng bộ chiều cao hero (tuỳ chọn): */
+.hero.hero--bleed{
+  min-height: clamp(120px, 18vw, 240px);
+  padding: clamp(28px, 4.5vw, 48px) 0;
+}
+.hero__bg, .hero__veil{ position:absolute; inset:0; }
+.hero__bg{ background-size:cover; background-position:center; }
+.hero__veil{
+  background:
+    radial-gradient(1200px 600px at -10% 50%, rgba(0,0,0,.10), transparent 60%),
+    radial-gradient(1200px 600px at 110% 50%, rgba(0,0,0,.10), transparent 60%),
+    linear-gradient(90deg, rgba(255,255,255,.78), rgba(255,255,255,.18));
+  backdrop-filter: blur(.5px);
+}
+.hero__inner{ position:relative; z-index:2; }
+
+/* ====== FOOTER (full-bleed navy, cùng cấu trúc bg + veil + inner) ====== */
+footer.footer-bleed{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  color: #fff;
+  /* chiều cao linh hoạt như hero để đồng bộ cảm giác */
+  min-height: clamp(100px, 12vw, 180px);
+  padding: 0; /* nội dung sẽ padding trong .footer__inner */
+}
+
+/* lớp nền & veil */
+footer.footer-bleed .footer__bg,
+footer.footer-bleed .footer__veil{ position: absolute; inset: 0; }
+
+/* nền NAVY full-bleed (không dùng ảnh) */
+footer.footer-bleed .footer__bg{
+  background: #0e2b4a;           /* navy đồng bộ --brand */
+}
+
+/* veil nhẹ giúp chữ/link nổi hơn trên nền */
+footer.footer-bleed .footer__veil{
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18));
+  backdrop-filter: blur(.25px);
+}
+
+/* nội dung căn giữa như container */
+footer.footer-bleed .footer__inner{
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto;
+  padding: clamp(18px, 2.4vw, 28px) 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; flex-wrap: wrap;
+}
+footer.footer-bleed .footer__links{
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+footer.footer-bleed .footer__links a{
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.5);
+  color: #fff; background: transparent;
+}
+footer.footer-bleed .footer__links a:hover{
+  border-color: #fff;
+}
+
+/* Mobile xếp dọc gọn gàng */
+@media (max-width: 640px){
+  footer.footer-bleed .footer__inner{
+    flex-direction: column; align-items: flex-start;
+  }
+}
   </style>
 </head>
 
@@ -369,18 +416,24 @@
   </section>
 
   <!-- FOOTER (đã chỉnh) -->
-  <footer>
-    <div class="footer-inner">
-      <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
-      <div class="links">
-        <a href="about.html">About</a>
-        <a href="#">Shipping</a>
-        <a href="#">Returns</a>
-        <a href="#">Contact</a>
-      </div>
-    </div>
-    <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-  </footer>
+ <footer class="footer-bleed">
+  <div class="footer__bg"></div>
+  <div class="footer__veil"></div>
+
+  <div class="footer__inner">
+    <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
+
+    <nav class="footer__links">
+      <a href="about.html">About</a>
+      <a href="#">Shipping</a>
+      <a href="#">Returns</a>
+      <a href="#">Contact</a>
+    </nav>
+  </div>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</footer>
+
 
   <!-- SCRIPTS -->
   <script src="assets/products.js"></script>
