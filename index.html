@@ -145,20 +145,22 @@
     #faq.section{ padding-bottom:16px; }
     .section:last-of-type{ padding-bottom:16px; }
 
+    
     /* ===== FOOTER (đã chỉnh) ===== */
     footer{
-      background: #0a1f44; /* navy */
+      background: var(--brand); /* full-bleed */
       color:#fff;
       width:100%;
     }
     footer .footer-inner{
       max-width: 1200px;
       margin: 0 auto;
-      padding: clamp(28px,4vw,48px) 24px;
+      padding: 18px 24px;
       display: flex;
+      align-items:center;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 14px;
+      border-top:1px solid rgba(255,255,255,.2);
     }
     footer .links{
       display:flex; gap:10px; flex-wrap:wrap;
