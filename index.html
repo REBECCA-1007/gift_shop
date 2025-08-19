@@ -3,17 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rebecca’s Choice — Signature Gifts</title>
-  <meta name="description" content="Curated mini gifts for Wedding, Birthday, Christmas and Summer. Boutique packaging, handcrafted details.">
+  <title>Collections — Rebecca’s Choice</title>
+  <meta name="description" content="Browse curated mini-gift collections by family: Wedding, Birthday, Christmas, Summer.">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Satisfy&display=swap" rel="stylesheet">
 
-  <!-- Base styles -->
+  <!-- Base styles (shared) -->
   <link rel="stylesheet" href="assets/styles.css">
 
   <style>
-    /* ==== Global tweaks ==== */
     :root{
       --brand:#0e2b4a;
       --muted:#5a6a7a;
@@ -21,389 +20,154 @@
       --shadow:0 10px 26px rgba(0,0,0,.06);
       --chip:#eef2f5;
       --pill-bg: rgba(255,255,255,.92);
-      --header-h:60px; /* sẽ được JS cập nhật chính xác */
+      --header-h:60px;
     }
-    html, body{ overflow-x:hidden; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";}
-    .container{max-width:1200px; margin:0 auto; padding:0 16px;}
+    html,body{ margin:0; overflow-x:hidden; font-family:Inter, system-ui, -apple-system,"Segoe UI", Roboto, "Helvetica Neue", Arial,"Noto Sans"; }
+    .container{ max-width:1200px; margin:0 auto; padding:0 16px; }
 
-    /* ===== Header (ban đầu) ===== */
+    /* Header (giống trang chủ bản 6: fixed + chừa khoảng) */
     header{
-      position:sticky; top:0; z-index:20;
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      background:rgba(255,255,255,.95);
       backdrop-filter:saturate(180%) blur(6px);
-      background:rgba(255,255,255,.92);
       border-bottom:1px solid var(--border);
     }
+    body{ padding-top: var(--header-h); }
     header .nav{ display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:60px; }
     .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--brand); }
-    .brand .title{ font-family:"Satisfy", cursive; font-size:28px; line-height:1; font-weight:700; text-decoration:none; }
+    .brand .title{ font-family:"Satisfy",cursive; font-size:28px; font-weight:700; line-height:1; }
     .menu{ display:flex; gap:16px; flex-wrap:wrap; }
-    .menu a{ color:var(--brand); text-decoration:none; padding:8px 10px; border-radius:999px; font-weight: 600; }
+    .menu a{ color:var(--brand); text-decoration:none; padding:8px 10px; border-radius:999px; font-weight:600; }
     .menu a:hover{ background:var(--chip); }
     .tools .chip{ background:var(--chip); padding:8px 12px; border-radius:999px; text-decoration:none; color:var(--brand); }
 
-    /* ===== HERO (mỏng, full width) ===== */
-    .hero.hero--bleed{ position:relative; width:100%; margin:0; border:0; border-radius:0; box-shadow:none; overflow:hidden; min-height:clamp(120px,18vw,240px); padding:clamp(28px,4.5vw,48px) 0; }
-    .hero__bg,.hero__veil{ position:absolute; inset:0; }
-    .hero__bg{ background-size:cover; background-position:center; filter:saturate(106%) contrast(104%) brightness(100%); }
-    .hero__veil{
-      background:
-        radial-gradient(1200px 600px at -10% 50%, rgba(0,0,0,.10), transparent 60%),
-        radial-gradient(1200px 600px at 110% 50%, rgba(0,0,0,.10), transparent 60%),
-        linear-gradient(90deg, rgba(255,255,255,.78), rgba(255,255,255,.18));
-      backdrop-filter: blur(.5px);
-    }
-    .hero__inner{ position:relative; z-index:2; }
-    /* Đẩy text HERO sang phải */
-    .hero .hero__inner{
-      padding-left: clamp(16px, 3vw, 48px);  /* tăng/giảm các giá trị để dịch sang phải nhiều/ít hơn */
-    }
-    .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
+    /* Page head */
+    .page-head{ padding:28px 0 16px; }
+    .page-head h1{ margin:0 0 6px; color:var(--brand); }
+    .crumbs{ color:var(--muted); font-size:14px; }
 
-    /* seasonal hero images */
-    body.season-wedding  .hero__bg{  background-image:url('assets/images/wedding/wedding_candle.jpg');  background-position:30% 35%; }
-    body.season-birthday .hero__bg{  background-image:url('assets/images/birthday/birthday_gift.jpg');   background-position:40% 40%; }
-    body.season-christmas .hero__bg{ background-image:url('assets/images/christmas/christmas_tree.jpg');  background-position:60% 45%; }
-    body.season-summer   .hero__bg{  background-image:url('assets/images/summer/summer_shell.jpg');       background-position:50% 35%; }
-
-    /* ===== Section base ===== */
-    .section{ padding:54px 0; }
-    .section .section-head{ display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:16px; }
-    .section h2{ margin:0; }
-
-    /* ===== Signature LOOKBOOK grid ===== */
-    .sig-grid{ display:grid; gap:18px; grid-template-columns:repeat(12,1fr); }
-    .sig{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); display:block; }
-    .sig img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .sig .lb{ position:absolute; left:14px; bottom:14px; background:var(--pill-bg); border:1px solid var(--border); border-radius:999px; padding:8px 12px; font-weight:700; color:#1a2140; }
-    .sig--wedding{ grid-column:span 6; grid-row:span 2; min-height:520px; }
-    .sig--birthday{ grid-column:span 3; min-height:250px; }
-    .sig--christmas{ grid-column:span 3; min-height:250px; }
-    .sig--summer{ grid-column:7 / span 6; min-height:250px; }
-    @media (max-width:1000px){
-      .sig--wedding{ grid-column:span 12; grid-row:auto; min-height:360px;}
-      .sig--birthday,.sig--christmas,.sig--summer{ grid-column:span 6; min-height:220px; }
-    }
-    @media (max-width:640px){
-      .sig--birthday,.sig--christmas,.sig--summer{ grid-column:span 12; }
+    /* Layout: sidebar + grid */
+    .layout{ display:grid; grid-template-columns: 240px 1fr; gap:24px; padding:8px 0 48px; }
+    @media (max-width:920px){
+      .layout{ grid-template-columns:1fr; }
     }
 
-    /* Filter chips */
-    .chips{ display:flex; gap:8px; flex-wrap:wrap; }
-    .chip{ background:var(--chip); border:1px solid var(--border); padding:8px 12px; border-radius:999px; cursor:pointer; }
-    .chip.active{ background:#1a2140; color:#fff; border-color:#1a2140; }
-    
-    /* ===== Carousel (Bestsellers / New Arrivals) ===== */
-    .carousel-wrap{ position:relative; }
-    .carousel{
-      display:flex; gap:18px; overflow-x:auto; scroll-snap-type:inline mandatory; padding:4px 0 8px;
-      -ms-overflow-style:none; scrollbar-width:none;
+    /* Sidebar (Family) */
+    .sidebar{
+      position:sticky; top:calc(var(--header-h) + 12px);
+      align-self:start;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:14px;
     }
-    .carousel::-webkit-scrollbar{ display:none; }
-    .carousel .card{
-      flex:0 0 clamp(240px, 26vw, 280px);
-      scroll-snap-align:start;
-      border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow);
+    .sidebar h3{ margin:4px 0 10px; font-size:16px; color:var(--brand); }
+    .sidebar ul{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+    .sidebar a{
+      display:block; text-decoration:none;
+      color:var(--muted); padding:10px 12px;
+      border-radius:10px;
     }
-    .carousel .card img{ width:100%; height:190px; object-fit:cover; display:block; }
-    .carousel .info{ padding:12px 14px; }
-    .caro-btn{
-      position:absolute; top:30%; transform:translateY(-50%);
-      width:38px; height:38px; border-radius:999px; border:1px solid var(--border);
-      background:#fff; box-shadow:var(--shadow); display:grid; place-items:center; cursor:pointer;
-    }
-    .caro-btn.left{ left:8px; }
-    .caro-btn.right{ right:8px; }
-    .caro-btn svg{ width:18px; height:18px; }
-
-    /* ===== Build-a-Box banner ===== */
-    .cta-banner{ position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); }
-    .cta-banner img{ width:100%; height:260px; object-fit:cover; display:block; }
-    .cta-banner .bar{
-      position:absolute; left:16px; right:16px; bottom:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      background:var(--pill-bg); border:1px solid var(--border); border-radius:14px; padding:12px 14px;
+    .sidebar a:hover{ background:var(--chip); color:var(--brand); }
+    .sidebar a.active{
+      color:#fff; background:var(--brand);
     }
 
-    /* ===== Occasion WITH image ===== */
-    .occasions{ display:grid; gap:14px; grid-template-columns:repeat(12,1fr); }
-    .occ{ grid-column: span 3; border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; box-shadow:var(--shadow); }
-    .occ .pic{ height:140px; background-size:cover; background-position:center; }
-    .occ .txt{ padding:12px 14px; }
-    @media (max-width:1000px){ .occ{ grid-column:span 6; } }
-    @media (max-width:640px){ .occ{ grid-column:span 12; } }
+    /* On mobile: chuyển sidebar thành thanh ngang cuộn */
+    @media (max-width:920px){
+      .sidebar{ position:static; padding:10px; }
+      .sidebar ul{ grid-auto-flow:column; grid-auto-columns:max-content; overflow:auto; gap:8px; }
+      .sidebar a{ white-space:nowrap; border:1px solid var(--border); background:#fff; }
+      .sidebar a.active{ background:var(--brand); border-color:var(--brand); }
+    }
 
-    /* ===== FAQ (gốc) ===== */
-    .faq{ border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; }
-    .faq details+details{ border-top:1px solid var(--border); }
-    .faq summary{ cursor:pointer; padding:16px 18px; font-weight:700; list-style:none; color:#0f2742; }
-    .faq summary::-webkit-details-marker{ display:none; }
-    .faq .a{ padding:0 18px 18px; color:#999; }
+    /* Toolbar above grid */
+    .toolbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;
+      flex-wrap:wrap;
+    }
+    .pill{ padding:6px 10px; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--muted); }
 
-    /* Buttons & badges */
-    .badge{ display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid var(--border); color:var(--brand); text-decoration:none; }
+    /* Grid of cards (giữ style đồng bộ) */
+    .grid{ display:grid; gap:18px; grid-template-columns: repeat(12,1fr); }
+    .card{ grid-column: span 3; border:1px solid var(--border); border-radius:16px; background:#fff; box-shadow:var(--shadow); overflow:hidden; }
+    .card img{ width:100%; height:190px; object-fit:cover; display:block; }
+    .card .info{ padding:12px 14px; }
+    .badge{ display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid var(--border); color:var(--brand); text-decoration:none; font-size:12px; }
+    .price{ font-weight:700; color:#1a2140; }
     .btn{ display:inline-block; padding:10px 14px; border-radius:999px; text-decoration:none; }
     .btn-primary{ background:#c5a020; color:#1a2140; font-weight:700; }
-    .btn-outline{ border:1px solid #1a2140; color:#1a2140; }
-    .price{ font-weight:700; color:#1a2140; }
+    @media (max-width:1200px){ .card{ grid-column: span 4; } }
+    @media (max-width:820px){ .card{ grid-column: span 6; } }
+    @media (max-width:520px){ .card{ grid-column: span 12; } }
 
-    /* ===== Xoá khoảng trắng trước footer (nhẹ) ===== */
-    #faq.section{ padding-bottom:16px; }
-    .section:last-of-type{ padding-bottom:16px; }
-
-    /* ====== PATCH: Footer full‑bleed navy (tràn 100%) ====== */
+    /* Footer full‑bleed navy (đồng bộ bản 6) */
     footer.footer-bleed{
-      position:relative;
-      background:#0e2b4a; color:#fff;
-      margin:0; padding:0; overflow:hidden;
+      position:relative; background:#0e2b4a; color:#fff; margin:0; padding:0; overflow:hidden;
       width:100vw; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw;
     }
     footer.footer-bleed .footer__inner{
-      max-width:1200px; margin:0 auto;
-      padding:clamp(20px,3.2vw,36px) 24px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px; flex-wrap:wrap;
+      max-width:1200px; margin:0 auto; padding:clamp(20px,3.2vw,36px) 24px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
     }
     footer.footer-bleed a{
-      color:#fff; text-decoration:none;
-      padding:8px 12px; border-radius:999px;
+      color:#fff; text-decoration:none; padding:8px 12px; border-radius:999px;
       border:1px solid rgba(255,255,255,.5); background:transparent;
     }
     footer.footer-bleed a:hover{ border-color:#fff; }
-    #faq + footer.footer-bleed{ margin-top:0; }
-
-    /* ====== PATCH: Header cố định (fixed) & chừa khoảng trống ====== */
-    header{
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: saturate(180%) blur(6px);
-    }
-    body{ padding-top: var(--header-h); }
-    header.is-scrolled{ box-shadow: 0 8px 24px rgba(0,0,0,.08); }
-
-    /* ====== PATCH: FAQ không khung + canh thẳng với "FAQ" ====== */
-    /* Ghi đè các rule FAQ gốc để bỏ khung & bỏ padding trái */
-    .faq{
-      background: transparent !important;
-      border: none !important;
-      border-radius: 0 !important;
-      overflow: visible !important;
-    }
-    .faq details{
-      border: none !important;
-      margin: 10px 0;
-    }
-    .faq details+details{
-      border-top: none !important;  /* bỏ đường kẻ ngăn */
-    }
-    .faq summary{
-      padding: 14px 0 !important;   /* bỏ padding trái để thẳng hàng với H2 */
-      list-style: none;
-      cursor: pointer;
-      font-weight: 700;
-      color:#0f2742;
-    }
-    .faq .a{
-      padding: 0 0 14px 0 !important; /* bỏ padding 2 bên */
-      color:#999;
-    }
   </style>
 </head>
-
-<body class="season-wedding">
+<body>
   <!-- HEADER -->
   <header>
     <div class="container nav">
-      <a class="brand" href="#">
-        <div class="title">Rebecca’s Choice</div>
-      </a>
-
+      <a class="brand" href="index.html"><div class="title">Rebecca’s Choice</div></a>
       <nav class="menu">
-        <a href="#signature">Collections</a>
-        <a href="#bestsellers">Bestsellers</a>
-        <a href="#occasions">Occasions</a>
-        <a href="#arrivals">New Arrivals</a>
+        <a href="index.html#signature">Collections</a>
+        <a href="index.html#bestsellers">Bestsellers</a>
+        <a href="index.html#occasions">Occasions</a>
+        <a href="index.html#arrivals">New Arrivals</a>
         <a href="about.html">Why Rebecca’s Choice</a>
       </nav>
-
       <div class="tools">
-        <a class="chip" href="#">Cart <span id="cart-count">0</span></a>
+        <a class="chip" href="cart.html">Cart <span id="cart-count">0</span></a>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero hero--bleed" id="hero">
-    <div class="hero__bg"></div>
-    <div class="hero__veil"></div>
-    <div class="container hero__inner">
-      <h1 id="hero-title">Curated Mini Gifts for Elegant Moments</h1>
-      <p class="lead" id="hero-sub">Wedding • Birthday • Christmas • Summer — gift-ready, beautifully packed.</p>
-      <div class="hero__buttons">
-        <a class="btn btn-primary" href="#signature">Shop Collections</a>
-        <a class="btn btn-outline"  href="#arrivals">Seasonal Spotlight</a>
-      </div>
+  <main class="container">
+    <div class="page-head">
+      <div class="crumbs"><a href="index.html" style="color:var(--muted); text-decoration:none;">Home</a> · Collections</div>
+      <h1>All Collections</h1>
     </div>
-  </section>
 
-  <!-- SIGNATURE COLLECTIONS -->
-  <section class="section" id="signature">
-    <div class="container">
-      <div class="section-head">
-        <h2>Signature Collections</h2>
-        <div class="chips">
-          <button class="chip filter active" data-cat="All">All</button>
-          <button class="chip filter" data-cat="Wedding">Wedding</button>
-          <button class="chip filter" data-cat="Birthday">Birthday</button>
-          <button class="chip filter" data-cat="Christmas">Christmas</button>
-          <button class="chip filter" data-cat="Summer">Summer</button>
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <h3>Families</h3>
+        <ul id="family-list">
+          <li><a href="#" class="active" data-cat="All">All</a></li>
+          <li><a href="#" data-cat="Wedding">Wedding</a></li>
+          <li><a href="#" data-cat="Birthday">Birthday</a></li>
+          <li><a href="#" data-cat="Christmas">Christmas</a></li>
+          <li><a href="#" data-cat="Summer">Summer</a></li>
+        </ul>
+      </aside>
+
+      <!-- CONTENT -->
+      <section>
+        <div class="toolbar">
+          <div class="pill" id="count-pill">0 items</div>
+          <div class="pill" id="active-cat">Showing: All</div>
         </div>
-      </div>
 
-      <div class="sig-grid" style="margin-bottom:18px">
-        <a class="sig sig--wedding" href="#signature" data-go="Wedding">
-          <img src="assets/images/wedding/wedding_box.jpg" alt="Wedding">
-          <span class="lb">Wedding Collection</span>
-        </a>
-        <a class="sig sig--birthday" href="#signature" data-go="Birthday">
-          <img src="assets/images/birthday/birthday_cupcake.jpg" alt="Birthday">
-          <span class="lb">Birthday</span>
-        </a>
-        <a class="sig sig--christmas" href="#signature" data-go="Christmas">
-          <img src="assets/images/christmas/christmas_tree.jpg" alt="Christmas">
-          <span class="lb">Christmas</span>
-        </a>
-        <a class="sig sig--summer" href="#signature" data-go="Summer">
-          <img src="assets/images/summer/summer_flower.jpg" alt="Summer">
-          <span class="lb">Summer</span>
-        </a>
-      </div>
+        <div class="grid" id="grid"></div>
+      </section>
     </div>
-  </section>
+  </main>
 
-  <!-- BESTSELLERS (carousel) -->
-  <section class="section" id="bestsellers">
-    <div class="container">
-      <div class="section-head">
-        <h2>Bestsellers</h2>
-        <a class="badge" href="#signature">View all</a>
-      </div>
-
-      <div class="carousel-wrap">
-        <button class="caro-btn left" data-target="#caro-best" aria-label="Prev">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M14.5 6l-5 6 5 6" stroke="#1a2140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="carousel" id="caro-best"></div>
-        <button class="caro-btn right" data-target="#caro-best" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M9.5 6l5 6-5 6" stroke="#1a2140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- OCCASION GUIDES -->
-  <section class="section" id="occasions">
-    <div class="container">
-      <div class="section-head">
-        <h2>Occasion Guides</h2>
-      </div>
-      <div class="occasions">
-        <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/wedding/wedding_flower.jpg')"></div>
-          <div class="txt">
-            <h4>For Bridesmaids</h4>
-            <p class="meta">Pearl whites & blush picks</p>
-            <a class="btn btn-outline" href="#signature" data-go="Wedding">Shop Wedding</a>
-          </div>
-        </div>
-        <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/summer/summer_drink.jpg')"></div>
-          <div class="txt">
-            <h4>For Him</h4>
-            <p class="meta">Understated, practical minis</p>
-            <a class="btn btn-outline" href="#signature" data-go="Birthday">Shop Birthday</a>
-          </div>
-        </div>
-        <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/christmas/christmas_red_gift.jpg')"></div>
-          <div class="txt">
-            <h4>For Her</h4>
-            <p class="meta">Romantic & photogenic</p>
-            <a class="btn btn-outline" href="#signature" data-go="Christmas">Shop Christmas</a>
-          </div>
-        </div>
-        <div class="occ">
-          <div class="pic" style="background-image:url('assets/images/birthday/birthday_gift.jpg')"></div>
-          <div class="txt">
-            <h4>For Colleagues</h4>
-            <p class="meta">Warm & friendly sets</p>
-            <a class="btn btn-outline" href="#signature" data-go="Summer">Shop Summer</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NEW ARRIVALS (carousel) -->
-  <section class="section" id="arrivals">
-    <div class="container">
-      <div class="section-head">
-        <h2>New Arrivals / Seasonal Spotlight</h2>
-        <a class="badge" href="#signature">View all</a>
-      </div>
-
-      <div class="carousel-wrap">
-        <button class="caro-btn left" data-target="#caro-new" aria-label="Prev">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M14.5 6l-5 6 5 6" stroke="#1a2140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="carousel" id="caro-new"></div>
-        <button class="caro-btn right" data-target="#caro-new" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M9.5 6l5 6-5 6" stroke="#1a2140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- BUILD A BOX / CUSTOM GIFT -->
-  <section class="section" id="custom">
-    <div class="container">
-      <div class="cta-banner">
-        <img src="assets/images/christmas/christmas_red_gift.jpg" alt="Ribbon & stationery">
-        <div class="bar">
-          <div style="font-weight:700; color:var(--brand);">Build a Box / Custom Gift</div>
-          <a class="btn btn-primary" href="collections.html">Start Building</a>
-          <a class="btn btn-outline" href="collections.html">Wedding & Corporate</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="container">
-      <h2>FAQ</h2>
-      <div class="faq">
-        <details open>
-          <summary>How fast do you ship?</summary>
-          <div class="a">We prepare within 24–48h and ship nationwide in 2–5 business days.</div>
-        </details>
-        <details>
-          <summary>Is gift wrapping included?</summary>
-          <div class="a">Yes. All sets come gift-ready with tissue & ribbon. Add a message at checkout.</div>
-        </details>
-        <details>
-          <summary>Do you do custom/corporate gifts?</summary>
-          <div class="a">Absolutely. Head to “Build a Box / Custom Gift” and tell us your budget & timeline.</div>
-        </details>
-        <details>
-          <summary>Return & exchange?</summary>
-          <div class="a">Unopened items can be exchanged within 7 days. Custom items are final-sale.</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER (full‑bleed navy) -->
+  <!-- FOOTER -->
   <footer class="footer-bleed">
     <div class="footer__inner">
       <div>© <span id="y"></span> Rebecca’s Choice — <em>“Gifts are the flowers of memory.”</em></div>
@@ -417,7 +181,7 @@
     <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
   </footer>
 
-  <!-- SCRIPTS -->
+  <!-- DATA & SCRIPTS -->
   <script src="assets/products.js"></script>
   <script>
     const $=(s,ctx=document)=>ctx.querySelector(s);
@@ -425,122 +189,63 @@
 
     function getCart(){ try{return JSON.parse(localStorage.getItem('cart')||'[]')}catch{return[]} }
     function updateCartCount(){ const c=getCart().reduce((s,it)=>s+it.qty,0); const el=$('#cart-count'); if(el) el.textContent=c; }
+    function setHeaderSpace(){ const h=document.querySelector('header'); if(h) document.documentElement.style.setProperty('--header-h', h.offsetHeight+'px'); }
 
-    function renderProductsGrid(container, filterCat){
-      if(!container||!window.PRODUCTS) return;
-      const items = filterCat && filterCat!=='All' ? window.PRODUCTS.filter(p=>p.category===filterCat) : window.PRODUCTS;
-      container.innerHTML = items.map(p=>`
+    function renderGrid(cat="All"){
+      if(!window.PRODUCTS) return;
+      const list = (cat && cat!=="All") ? window.PRODUCTS.filter(p=>p.category===cat) : window.PRODUCTS.slice();
+      const grid = $('#grid');
+      grid.innerHTML = list.map(p=>`
         <article class="card">
           <a href="product.html?id=${encodeURIComponent(p.id)}"><img src="${p.image}" alt="${p.title}"></a>
           <div class="info">
             <div class="badge">${p.category}</div>
             <h3 style="margin:8px 0">${p.title}</h3>
-            <p class="meta" style="margin:0 0 10px; color:var(--muted)">${p.desc||''}</p>
+            <p class="meta" style="margin:0 0 10px; color:var(--muted)">${p.desc||""}</p>
             <div style="display:flex; align-items:center; justify-content:space-between">
               <span class="price">$${Number(p.price).toFixed(2)}</span>
               <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
             </div>
           </div>
-        </article>`).join('');
+        </article>
+      `).join('');
+      $('#count-pill').textContent = `${list.length} item${list.length!==1?'s':''}`;
+      $('#active-cat').textContent = `Showing: ${cat||'All'}`;
     }
 
-    function renderRail(container, ids){
-      if(!container||!window.PRODUCTS) return;
-      const map = new Map(window.PRODUCTS.map(p=>[p.id,p]));
-      const items = ids.map(id=>map.get(id)).filter(Boolean);
-      container.innerHTML = items.map(p=>`
-        <article class="card">
-          <a href="product.html?id=${encodeURIComponent(p.id)}"><img src="${p.image}" alt="${p.title}"></a>
-          <div class="info">
-            <div class="badge">${p.category}</div>
-            <h3 style="margin:8px 0">${p.title}</h3>
-            <div style="display:flex; align-items:center; justify-content:space-between">
-              <span class="price">$${Number(p.price).toFixed(2)}</span>
-              <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
-            </div>
-          </div>
-        </article>`).join('');
-    }
-
-    const THEME={
-      "Wedding":  { cls:"season-wedding",  title:"Elegant Wedding Gifts",      sub:"Pearl whites, blush accents & gold details" },
-      "Birthday": { cls:"season-birthday", title:"Birthday Celebration Gifts", sub:"Playful vibes & personalized charms" },
-      "Christmas":{ cls:"season-christmas",title:"Christmas Holiday Gifts",    sub:"Cozy bundles & winter sparkle" },
-      "Summer":   { cls:"season-summer",   title:"Summer & Friendship Gifts",  sub:"Beachy colors & sunny picks" },
-      "All":      { cls:"", title:"Curated Mini Gifts for Elegant Moments",
-                    sub:"Wedding • Birthday • Christmas • Summer — gift-ready, beautifully packed." }
-    };
-    function setSeason(key){
-      document.body.classList.remove('season-wedding','season-birthday','season-christmas','season-summer');
-      const conf=THEME[key]||THEME["All"]; if(conf.cls) document.body.classList.add(conf.cls);
-      const t=$('#hero-title'), s=$('#hero-sub'); if(t) t.textContent=conf.title; if(s) s.textContent=conf.sub;
-    }
-
-    function waitForProducts(cb, tries=40){
-      if (window.PRODUCTS && Array.isArray(window.PRODUCTS) && window.PRODUCTS.length){
-        cb();
-      } else if (tries>0){
-        setTimeout(()=>waitForProducts(cb, tries-1), 100);
-      } else {
-        console.warn('PRODUCTS chưa load. Kiểm tra assets/products.js');
-      }
-    }
-
-    function bindCarouselArrows(){
-      $$('.caro-btn').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          const target = document.querySelector(btn.dataset.target);
-          if(!target) return;
-          const dir = btn.classList.contains('left') ? -1 : 1;
-          const delta = Math.round(target.clientWidth*0.8)*dir;
-          target.scrollBy({left:delta, behavior:'smooth'});
-        });
+    function applyCatFromURL(){
+      const u=new URL(location.href);
+      const cat=u.searchParams.get('cat');
+      if(!cat) return "All";
+      // Chọn link active trong sidebar
+      $$('#family-list a').forEach(a=>{
+        a.classList.toggle('active', a.dataset.cat===cat);
       });
+      return cat;
     }
-
-    /* ===== Patch JS cho header fixed: set khoảng trống & shadow khi cuộn ===== */
-    function updateHeaderSpace(){
-      const header = document.querySelector('header');
-      if(!header) return;
-      document.documentElement.style.setProperty('--header-h', header.offsetHeight+'px');
-    }
-    window.addEventListener('load', updateHeaderSpace);
-    window.addEventListener('resize', updateHeaderSpace);
-    document.addEventListener('scroll', ()=>{
-      const h = document.querySelector('header');
-      if(h) h.classList.toggle('is-scrolled', window.scrollY > 2);
-    });
 
     document.addEventListener('DOMContentLoaded', ()=>{
       updateCartCount();
-      setSeason('Wedding');
+      setHeaderSpace();
+      window.addEventListener('resize', setHeaderSpace);
 
-      waitForProducts(()=>{
-        $$('.filter').forEach(btn=>{
-          btn.addEventListener('click', ()=>{
-            $$('.filter').forEach(b=>b.classList.remove('active'));
-            btn.classList.add('active');
-            const cat = btn.dataset.cat;
-            setSeason(cat||'All');
-          });
+      // Bind sidebar
+      $$('#family-list a').forEach(a=>{
+        a.addEventListener('click', e=>{
+          e.preventDefault();
+          $$('#family-list a').forEach(x=>x.classList.remove('active'));
+          a.classList.add('active');
+          const cat=a.dataset.cat||'All';
+          const url=new URL(location.href);
+          url.searchParams.set('cat', cat);
+          history.replaceState({}, '', url);
+          renderGrid(cat);
         });
-
-        $$('.sig,[data-go]').forEach(el=>{
-          el.addEventListener('click', (e)=>{
-            e.preventDefault();
-            const cat = el.getAttribute('data-go');
-            const chip = document.querySelector('.filter[data-cat="'+cat+'"]');
-            if(chip) chip.click();
-            document.getElementById('signature').scrollIntoView({behavior:'smooth'});
-          });
-        });
-
-        const bestIDs = ['wed-candle','bday-gift','xmas-tree','sum-flower','wed-box','bday-cupcake'];
-        const newIDs  = ['xmas-red','sum-drink','bday-candle','wed-flower','xmas-snow','sum-shell'];
-        renderRail($('#caro-best'), bestIDs);
-        renderRail($('#caro-new'), newIDs);
-        bindCarouselArrows();
       });
+
+      // Đọc cat từ URL nếu có (?cat=Wedding ...)
+      const initialCat = applyCatFromURL();
+      renderGrid(initialCat);
     });
   </script>
 </body>
